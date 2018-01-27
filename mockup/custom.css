@@ -1,0 +1,43 @@
+.page-topbar {
+    background-color: #111;
+}
+
+.badge-accent {
+    background-color: #f0373c;
+}
+
+#main-menu-wrapper li a:hover {
+    border-left: 4px solid #f0373c;
+}
+
+#main-menu-wrapper li.open a {
+    border-left: 4px solid #f0373c;
+}
+
+.label-accent {
+    background-color: #f0373c;
+}
+
+.page-title h1 {
+    text-transform: none;
+}
+
+.btn, .btn.btn-primary {
+    background: #f0373c;
+    color: #fff;
+    padding: 10px 30px;
+}
+
+section header .title {
+    font-size: 1.5em;
+    text-transform: none;
+}
+
+.page-title h1 {
+    font-size: 24px;
+}
+
+
+.form-label {
+    font-weight: bold;
+}
