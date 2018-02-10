@@ -1,0 +1,18 @@
+<h2> Services Available </h2>
+<ul class="services">
+  <li *ngFor="let service of service"
+      [class.selected]="service === selectedService"
+      (click)="onSelect(service)">
+      <span class="badge"> {{service.id}} </span>
+      {{service.name}}
+  </li>
+</ul>
+
+<div *ngIf="selectedService">
+
+  <h2>{{ selectedService.name }}</h2>
+  <div><span>id: </span>{{selectedService.id}}</div>
+  <div>{{selectedService.name}}</div>
+  <div>{{selectedService.description}}</div>
+
+</div>
