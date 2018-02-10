@@ -1,0 +1,97 @@
+<h1>Service Page</h1>
+
+
+<section id="main-content" class=" ">
+  <section class="wrapper main-wrapper row" style=''>
+
+    <div class='col-xs-12'>
+      <div class="page-title">
+
+        <div class="pull-left">
+          <h1 class="title">Create Service Contract</h1>
+        </div>
+
+        <div class="pull-right hidden-xs">
+          <ol class="breadcrumb">
+            <li>
+              <a href="index.html"><i class="fa fa-gears"></i>Services</a>
+            </li>
+            <li>
+              <a href="general.html">ACES Provider</a>
+            </li>
+            <li class="active">
+              <strong>Ethereum Contract Deployment Service</strong>
+            </li>
+          </ol>
+        </div>
+
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <!-- MAIN CONTENT AREA STARTS -->
+
+    <div class="col-xs-12">
+      <section class="box ">
+        <header class="panel_header">
+          <h2 class="title pull-left">Ethereum Contract Deployment Service</h2>
+        </header>
+        <div class="content-body">
+          <div class="row">
+            <div class="col-md-12">
+
+
+              <div class="form-group">
+                <label class="form-label" >Ethereum Contract ABI Json (Interface)</label>
+                <span class="desc"></span>
+                <div class="controls">
+                  <textarea class="form-control" cols="5" ></textarea>
+                </div>
+                <div class="help-block">
+                  Enter API json data output by your solidity compiler.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label"> Ethereum Contract Params Json</label>
+                <span class="desc">e.g. ["Param 1", "Param 2"]</span>
+                <div class="controls">
+                  <textarea class="form-control" cols="5" ></textarea>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label"> Ethereum Contract Code (Bytecode)</label>
+                <span class="desc">e.g. 0x298749832......</span>
+                <div class="controls">
+                  <textarea class="form-control" cols="5" ></textarea>
+                </div>
+                <div class="help-block">
+                  Enter compiled code data output by your solidity compiler.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="field-3"> Gas Limit</label>
+                <span class="desc">e.g. "50000"</span>
+                <div class="controls">
+                  <input type="text" class="form-control" id="field-3">
+                </div>
+                <div class="help-block">
+                  Enter the maximum amount of gas that should be used when deploying your code contract. If the contract deployment runs out of gas, it will fail. You should run a gas estimator to find out the deployment cost of your ethereum contract.
+                </div>
+
+              </div>
+
+
+              <p><button type="submit" class="btn btn-large">Create Contract</button></p>
+            </div>
+          </div>
+
+
+        </div>
+      </section></div>
+
+
+    <!-- MAIN CONTENT AREA ENDS -->
+  </section>
+</section>
