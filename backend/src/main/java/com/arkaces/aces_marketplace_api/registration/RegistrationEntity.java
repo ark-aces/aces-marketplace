@@ -13,16 +13,13 @@ public class RegistrationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long pid;
     
-    String contactEmailAddress;
+    String id;
     
-    String emailAddressVerificationCode;
-
-    Boolean isEmailAddressVerified;
-
     LocalDateTime createdAt;
 
-    @OneToOne
-    AccountEntity createdAccountEntity;
+    @OneToOne(cascade = CascadeType.ALL)
+    AccountEntity accountEntity;
+    
 }

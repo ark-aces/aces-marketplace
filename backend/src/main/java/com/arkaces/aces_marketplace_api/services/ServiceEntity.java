@@ -1,29 +1,28 @@
-package com.arkaces.aces_marketplace_api.user;
+package com.arkaces.aces_marketplace_api.services;
 
 import com.arkaces.aces_marketplace_api.account.AccountEntity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "users")
-public class UserEntity {
+@Table(name = "services")
+public class ServiceEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pid;
     
     private String id;
     
-    private String name;
+    private String url;
     
-    private String emailAddress;
-
-    private Boolean isEmailAddressVerified;
-
-    private String passwordHash;
+    private String serviceInfo;
+    
+    private LocalDateTime createdAt;
     
     @ManyToOne
     private AccountEntity accountEntity;
-
 }
