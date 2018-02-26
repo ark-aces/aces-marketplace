@@ -11,6 +11,5 @@ public class Account {
     private Boolean isContactEmailAddressVerified;
     private String arkWalletAddress;
     private String createdAt;
-    private List<ApiKey> apiKeys;
     private List<User> users;
 }

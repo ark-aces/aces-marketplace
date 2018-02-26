@@ -24,6 +24,7 @@ public class UserEntity {
     private String passwordHash;
     
     @ManyToOne
+    @JoinColumn(name="account_id", nullable = false)
     private AccountEntity accountEntity;
 
 }

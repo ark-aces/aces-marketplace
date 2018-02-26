@@ -19,7 +19,7 @@ public class RegistrationEntity {
     
     LocalDateTime createdAt;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     AccountEntity accountEntity;
     
 }

@@ -1,5 +1,6 @@
 package com.arkaces.aces_marketplace_api.account;
 
+import com.arkaces.aces_marketplace_api.registration.RegistrationEntity;
 import com.arkaces.aces_marketplace_api.services.ServiceEntity;
 import com.arkaces.aces_marketplace_api.user.UserEntity;
 import lombok.Data;
@@ -29,13 +30,13 @@ public class AccountEntity {
     
     private LocalDateTime createdAt;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "accountEntity")
+    private RegistrationEntity registrationEntity;
+    
+    @OneToMany(mappedBy = "accountEntity")
     private List<UserEntity> userEntities;
     
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<ApiKeyEntity> apiKeyEntities;
-    
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "accountEntity")
     private List<ServiceEntity> serviceEntities;
     
 }
