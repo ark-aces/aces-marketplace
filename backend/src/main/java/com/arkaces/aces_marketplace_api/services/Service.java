@@ -6,5 +6,9 @@ import lombok.Data;
 public class Service {
     private String id;
     private String url;
-    private String serviceInfo;
+    private String name;
+    private String version;
+    private String description;
+    private String websiteUrl;
+    private String createdAt;
 }

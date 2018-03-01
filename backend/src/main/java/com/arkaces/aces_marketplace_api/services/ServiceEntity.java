@@ -16,10 +16,11 @@ public class ServiceEntity {
     private Long pid;
     
     private String id;
-    
     private String url;
-    
-    private String serviceInfo;
+    private String name;
+    private String version;
+    private String description;
+    private String websiteUrl;
     
     private LocalDateTime createdAt;
     

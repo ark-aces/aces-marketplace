@@ -5,9 +5,9 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class Page<T> {
+public class PageView<T> {
     private Integer pageSize;
     private Integer page;
-    private Integer totalItems;
+    private Long totalItems;
     private List<T> items;
 }
