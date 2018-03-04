@@ -4,6 +4,7 @@ import com.arkaces.aces_marketplace_api.account.AccountEntity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -23,8 +24,10 @@ public class UserEntity {
 
     private String passwordHash;
     
+    private LocalDateTime createdAt;
+    
     @ManyToOne
-    @JoinColumn(name="account_id", nullable = false)
+    @JoinColumn(name="account_pid", nullable = false)
     private AccountEntity accountEntity;
 
 }

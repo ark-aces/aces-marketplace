@@ -25,5 +25,6 @@ public class ServiceEntity {
     private LocalDateTime createdAt;
     
     @ManyToOne
+    @JoinColumn(name = "account_pid")
     private AccountEntity accountEntity;
 }

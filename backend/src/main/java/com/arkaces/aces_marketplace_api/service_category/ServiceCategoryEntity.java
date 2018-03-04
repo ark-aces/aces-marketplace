@@ -11,7 +11,7 @@ public class ServiceCategoryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long pid;
     
     private String name;
     

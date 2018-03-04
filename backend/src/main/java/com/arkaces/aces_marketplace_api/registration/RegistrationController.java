@@ -40,6 +40,7 @@ public class RegistrationController {
         accountEntity.setContactEmailAddress(createRegistrationRequest.getContactEmailAddress());
         accountEntity.setEmailAddressVerificationCode(emailAddressVerificationCode);
         accountEntity.setIsContactEmailAddressVerified(false);
+        accountEntity.setCreatedAt(LocalDateTime.now());
         accountEntity.setId(identifierGenerator.generate());
         accountRepository.save(accountEntity);
 
@@ -49,6 +50,7 @@ public class RegistrationController {
         userEntity.setEmailAddress(createRegistrationRequest.getUserEmailAddress());
         userEntity.setIsEmailAddressVerified(false);
         userEntity.setPasswordHash(passwordHash);
+        userEntity.setCreatedAt(LocalDateTime.now());
         userEntity.setAccountEntity(accountEntity);
         userRepository.save(userEntity);
 

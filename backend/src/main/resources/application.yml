@@ -6,10 +6,20 @@ oauth2:
   secret: "secret"
   tokenValiditySeconds: 3600
 
+#spring:
+#  datasource:
+#    url: "jdbc:h2:/tmp/marketplace.db;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE"
+#    driver-class-name: "org.h2.Driver"
+#  jpa:
+#    hibernate:
+#      ddl-auto: "update"
+
 spring:
   datasource:
-    url: "jdbc:h2:/tmp/marketplace.db;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE"
-    driver-class-name: "org.h2.Driver"
+    platform: "postgres"
+    url: "jdbc:postgresql://localhost:15432/aces_marketplace"
+    username: "postgres"
+    password: "password"
   jpa:
     hibernate:
-      ddl-auto: "update"
+      ddl-auto: "validate"

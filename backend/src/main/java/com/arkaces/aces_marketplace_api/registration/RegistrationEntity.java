@@ -20,6 +20,7 @@ public class RegistrationEntity {
     LocalDateTime createdAt;
 
     @OneToOne
+    @JoinColumn(name ="account_pid")
     AccountEntity accountEntity;
     
 }
