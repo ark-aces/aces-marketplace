@@ -14,6 +14,7 @@ import {DashboardPageComponent} from './dashboard-page/dashboard-page.component'
 import {HttpClientModule} from '@angular/common/http';
 import {ApiClient} from './api-client/api-client.component';
 import {AppConfigModule} from './app-config-module';
+import {ServiceFormComponent} from './service-form/service-form.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {AppConfigModule} from './app-config-module';
     DashboardPageComponent,
     SidebarMenuComponent,
     ServicePageComponent,
-    ServicesComponent
+    ServicesComponent,
+    ServiceFormComponent
   ],
   imports: [
     BrowserModule,
