@@ -1,0 +1,138 @@
+.page-topbar {
+  background-color: #17191B;
+}
+
+#main-menu-wrapper li.open a {
+  background-color: rgba(33, 33, 33, 0.1);
+  border-left: 4px solid #f0373c;
+}
+
+#main-menu-wrapper li a:hover {
+  background-color: rgba(124, 124, 124, 0.1);;
+  border-left: 4px solid #f0373c;
+}
+
+#main-menu-wrapper li.open .sub-menu a.active,
+#main-menu-wrapper li.open .sub-menu a:hover,
+#main-menu-wrapper li .sub-menu a:hover {
+  background-color: rgba(124, 124, 124, 0.1);;
+  border-left: 4px solid #f0373c;
+}
+
+.label-accent {
+  background-color: #f0373c;
+}
+
+.pace .pace-progress {
+  background: #f0373c;
+  height: 3px;
+}
+.pace .pace-activity {
+  top: 15px;
+  right: 15px;
+  width: 17px;
+  height: 17px;
+  border: solid 3px transparent;
+  border-top-color: #f0373c;
+  border-left-color: #f0373c;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+.pace .pace-progress-inner {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px #f0373c, 0 0 5px #f0373c;
+  opacity: 1.0;
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+  -moz-transform: rotate(3deg) translate(0px, -4px);
+  -ms-transform: rotate(3deg) translate(0px, -4px);
+  -o-transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+
+.pagination>.active>a,
+.pagination>.active>span,
+.pagination>.active>a:hover,
+.pagination>.active>span:hover,
+.pagination>.active>a:focus,
+.pagination>.active>span:focus {
+  color: #fff;
+  background-color: #f0373c;
+  border-color: #f0373c;
+}
+
+
+.btn.btn-primary {
+  background: #f0373c;
+  color: #ffffff;
+}
+
+section header .title {
+  text-transform: none;
+  color: #333;
+}
+
+
+.main-wrapper {
+  padding: 25px 35px;
+}
+
+.page-title {
+  marging: 0;
+}
+
+section header {
+  min-height: 0;
+}
+
+
+section header .title, section .content-body {
+  padding-left: 20px;
+  padding-top: 10px;
+}
+section .content-body {
+  padding-bottom: 15px;
+}
+
+section header .title {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+
+
+.btn-primary.active.focus,
+.btn-primary.active:focus,
+/*.btn-primary.active:hover, */
+.btn-primary:active.focus,
+.btn-primary:active:focus,
+.btn-primary:active:hover,
+.open>.dropdown-toggle.btn-primary.focus,
+.open>.dropdown-toggle.btn-primary:focus,
+.open>.dropdown-toggle.btn-primary:hover {
+  color: #fff;
+  background-color: #f0373c;
+  border-color: #000;
+}
+
+.page-title h1 {
+  color: #333;
+  text-transform: none;
+}
+
+section a:visited, section a:link {
+  color: #f0373c;
+}
+
+body, input[text], button {
+  color: #333;
+}
+
+h1.version {
+  color: #999;
+}

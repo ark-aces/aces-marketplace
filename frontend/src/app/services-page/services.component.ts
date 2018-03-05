@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Service } from '../service';
-import { SERVICES } from '../mock-services';
+import {ApiClient, Service} from '../api-client/api-client.component';
 
 @Component({
   selector: 'app-services',
@@ -9,17 +8,19 @@ import { SERVICES } from '../mock-services';
 })
 export class ServicesComponent implements OnInit {
 
-  service = SERVICES;
+  servicesPage;
+  services: Array<Service> = [];
 
-  selectedService: Service;
-
-  onSelect(service: Service): void {
-    this.selectedService = service;
-  }
-
-  constructor() { }
+  constructor(private apiClient: ApiClient) { }
 
   ngOnInit() {
+    this.apiClient.getServices()
+      .subscribe(response => {
+        this.services = response.items;
+        console.log(response.items);
+        // todo: pagination
+        // todo: error modal
+      } );
   }
 
 }

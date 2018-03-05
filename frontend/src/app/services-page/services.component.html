@@ -1,18 +1,39 @@
-<h2> Services Available </h2>
-<ul class="services">
-  <li *ngFor="let service of service"
-      [class.selected]="service === selectedService"
-      (click)="onSelect(service)">
-      <span class="badge"> {{service.id}} </span>
-      {{service.name}}
-  </li>
-</ul>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="page-title">
+      <div class="pull-left">
+        <h1 class="title">Services</h1>
+      </div>
+    </div>
+  </div>
+</div>
 
-<div *ngIf="selectedService">
+<div class="row">
+  <div class="col-lg-4" *ngFor="let service of services">
+    <section class="box ">
+      <header class="panel_header">
+        <h2 class="title pull-left">{{service.name}}</h2>
+      </header>
+      <div class="content-body">
+        <div class="service-description">
+          {{service.description}}
+        </div>
+        <div class="team-info ">
+          <h4><a [routerLink]="['/services', service.id]" class="btn btn-primary">Run Service</a></h4>
+        </div>
+        <div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
 
-  <h2>{{ selectedService.name }}</h2>
-  <div><span>id: </span>{{selectedService.id}}</div>
-  <div>{{selectedService.name}}</div>
-  <div>{{selectedService.description}}</div>
-
+<div class="row">
+  <div class="col-lg-12">
+    <ul class="pagination">
+      <!--<li><a href="#">&lt;</a></li>-->
+      <li class="active"><a href="#">1</a></li>
+      <li><a href="#">&gt;</a></li>
+    </ul>
+  </div>
 </div>
