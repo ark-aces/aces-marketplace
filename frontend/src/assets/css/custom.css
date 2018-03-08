@@ -75,6 +75,7 @@
 section header .title {
   text-transform: none;
   color: #333;
+  font-weight: 700;
 }
 
 
@@ -135,4 +136,14 @@ body, input[text], button {
 
 h1.version {
   color: #999;
+}
+
+section.box {
+  background-color: #ffffff;
+  margin: 15px 0;
+  box-shadow: 0 1px 3px rgba(33,33,33,.2);
+  -webkit-box-shadow: 2px 3px 3px 0 rgba(0,0,0,.2);
+  -moz-box-shadow: 2px 3px 3px 0 rgba(0,0,0,.2);
+  -o-box-shadow: 2px 3px 3px 0 rgba(0,0,0,.2);
+  -ms-box-shadow: 2px 3px 3px 0 rgba(0,0,0,.2);
 }
