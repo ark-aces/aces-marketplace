@@ -147,3 +147,8 @@ section.box {
   -o-box-shadow: 2px 3px 3px 0 rgba(0,0,0,.2);
   -ms-box-shadow: 2px 3px 3px 0 rgba(0,0,0,.2);
 }
+
+.btn-default.active, .btn-default:hover, .btn-default:active, .btn-default:focus {
+  background: #f0373c;
+  color: #333333;
+}
