@@ -20,8 +20,8 @@ import {ServiceFormComponent} from './service-form/service-form.component';
   declarations: [
     AppComponent,
     TopNavComponent,
-    DashboardPageComponent,
     SidebarMenuComponent,
+    DashboardPageComponent,
     ServicePageComponent,
     ServicesComponent,
     ServiceFormComponent

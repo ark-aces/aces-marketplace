@@ -1,29 +1,29 @@
 <div class="page-sidebar fixedscroll">
   <div class="page-sidebar-wrapper" id="main-menu-wrapper">
 
-    <ul class='open' style="padding-top:1em">
-      <li class="open">
-        <a href="">
+    <ul style="padding-top:1em">
+      <li routerLinkActive="open">
+        <a routerLink="/dashboard" routerLinkActive="active">
           <i class="fa fa-dashboard"></i>
           <span class="title">Dashboard</span>
         </a>
       </li>
-      <li class="">
-        <a href="javascript:;">
+      <li routerLinkActive="open">
+        <a routerLink="/services/browse" routerLinkActive="active">
           <i class="fa fa-gears"></i>
           <span class="title">Services</span>
           <span class="arrow "></span>
         </a>
-        <ul class="sub-menu open" >
+        <ul class="sub-menu" routerLinkActive="open">
           <li>
-            <a class="" href="services" >Browse</a>
+            <a routerLink="/services/browse" routerLinkActive="active">Browse</a>
           </li>
-          <li>
-            <a class="" href="services" >
-              <span class="label label-accent">5</span>
-              New
-            </a>
-          </li>
+          <!--<li>-->
+            <!--<a routerLink="/services/new" routerLinkActive="active">-->
+              <!--<span class="label label-accent">5</span>-->
+              <!--New-->
+            <!--</a>-->
+          <!--</li>-->
           <!--<li>-->
             <!--<a class="" href="soc-mail-compose.html" >Recent</a>-->
           <!--</li>-->

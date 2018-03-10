@@ -5,8 +5,12 @@ import {ServicePageComponent} from './service-page/service-page.component';
 import {DashboardPageComponent} from './dashboard-page/dashboard-page.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardPageComponent },
-  { path: 'services', component: ServicesComponent },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardPageComponent },
+  { path: 'services', component: ServicesComponent},
+  { path: 'services', redirectTo: '/services/browse', pathMatch: 'full' },
+  { path: 'services/browse', component: ServicesComponent},
+  { path: 'services/new', component: ServicesComponent},
   { path: 'services/:id', component: ServicePageComponent },
 ];
 
