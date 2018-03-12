@@ -4,12 +4,14 @@ import com.arkaces.aces_marketplace_api.registration.RegistrationEntity;
 import com.arkaces.aces_marketplace_api.services.ServiceEntity;
 import com.arkaces.aces_marketplace_api.user.UserEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(of = "pid")
 @Entity
 @Table(name = "accounts")
 public class AccountEntity {

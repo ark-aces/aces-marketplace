@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   apiEndpoint: 'http://localhost:8081',
-  recaptchaSiteKey: 'change-me'
+  recaptchaSiteKey: '6Le05UsUAAAAAMUscgkaq_uUP8DPqtMlgRTVozAD'
 };

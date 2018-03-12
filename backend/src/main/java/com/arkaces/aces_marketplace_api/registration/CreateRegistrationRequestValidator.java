@@ -3,6 +3,8 @@ package com.arkaces.aces_marketplace_api.registration;
 import com.arkaces.aces_marketplace_api.error.FieldErrorCodes;
 import com.arkaces.aces_marketplace_api.error.ValidatorException;
 import com.arkaces.aces_marketplace_api.recaptcha.RecaptchaService;
+import com.arkaces.aces_marketplace_api.user.UserEntity;
+import com.arkaces.aces_marketplace_api.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.validator.routines.EmailValidator;
 
@@ -20,6 +22,7 @@ public class CreateRegistrationRequestValidator {
     
     private final EmailValidator emailValidator;
     private final RecaptchaService recaptchaService;
+    private final UserRepository userRepository;
     
     private static final Integer minUserPasswordLength = 8;
 
@@ -29,18 +32,19 @@ public class CreateRegistrationRequestValidator {
         String contactEmailAddress = createRegistrationRequest.getContactEmailAddress();
         if (StringUtils.isEmpty(contactEmailAddress)) {
             bindingResult.rejectValue("contactEmailAddress", FieldErrorCodes.REQUIRED, "Email address required.");
-        } else {
-            if (! emailValidator.isValid(contactEmailAddress)) {
-                bindingResult.rejectValue("contactEmailAddress", FieldErrorCodes.INVALID_EMAIL_ADDRESS, "Invalid email address");
-            }
+        } else if (! emailValidator.isValid(contactEmailAddress)) {
+            bindingResult.rejectValue("contactEmailAddress", FieldErrorCodes.INVALID_EMAIL_ADDRESS, "Invalid email address");
         }
         
         String userEmailAddress = createRegistrationRequest.getUserEmailAddress();
         if (StringUtils.isEmpty(userEmailAddress)) {
             bindingResult.rejectValue("userEmailAddress", FieldErrorCodes.REQUIRED, "Email address required.");
+        } else if (! emailValidator.isValid(userEmailAddress)) {
+            bindingResult.rejectValue("userEmailAddress", FieldErrorCodes.INVALID_EMAIL_ADDRESS, "Invalid email address");
         } else {
-            if (! emailValidator.isValid(userEmailAddress)) {
-                bindingResult.rejectValue("userEmailAddress", FieldErrorCodes.INVALID_EMAIL_ADDRESS, "Invalid email address");
+            UserEntity existingUserEntity = userRepository.findOneByEmailAddress(contactEmailAddress);
+            if (existingUserEntity != null) {
+                bindingResult.rejectValue("userEmailAddress", FieldErrorCodes.EMAIL_ADDRESS_EXISTS, "A user with this email address already exists.");
             }
         }
 

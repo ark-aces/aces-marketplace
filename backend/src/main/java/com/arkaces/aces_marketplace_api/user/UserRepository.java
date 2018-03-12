@@ -8,4 +8,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     UserEntity findOneById(String id);
     
     List<UserEntity> findAllByEmailAddressVerificationCode(String emailAddressVerificationCode);
+    
+    UserEntity findOneByEmailAddress(String emailAddress);
 }

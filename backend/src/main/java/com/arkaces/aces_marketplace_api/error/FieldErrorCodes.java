@@ -5,6 +5,7 @@ public class FieldErrorCodes {
     public static final String MAX_LENGTH_EXCEEDED = "maxLengthExceeded";
     public static final String MIN_LENGTH_REQUIRED = "minLengthRequired";
     public static final String INVALID_EMAIL_ADDRESS = "invalidEmailAddress";
+    public static final String EMAIL_ADDRESS_EXISTS = "emailAddressExists";
     public static final String INVALID_ARK_ADDRESS_CHECKSUM = "invalidArkAddressChecksum";
     public static final String INVALID_ARK_ADDRESS = "invalidArkAddress";
     public static final String INVALID_IP_ADDRESS = "invalidIpAddress";
