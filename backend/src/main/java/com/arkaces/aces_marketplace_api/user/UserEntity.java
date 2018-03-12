@@ -20,6 +20,8 @@ public class UserEntity {
     
     private String emailAddress;
 
+    private String emailAddressVerificationCode;
+
     private Boolean isEmailAddressVerified;
 
     private String passwordHash;

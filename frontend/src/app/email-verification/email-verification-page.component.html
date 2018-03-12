@@ -1,0 +1,29 @@
+<div *ngIf="!loading">
+  <div class="row">
+    <div class='col-xs-12'>
+      <div class="page-title">
+        <div class="pull-left">
+          <h1 class="title">Email Verification</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <section class="box ">
+        <header class="panel_header"></header>
+        <div class="content-body">
+          <h3>Success</h3>
+          <div *ngIf="successful">
+            Your email address was verified successfully! You may now continue to <a routerLink="/sign-in">sign in</a>.
+          </div>
+
+          <div *ngIf="!successful" class="alert alert-danger">
+            An error occurred verifying user email. Please try again later.
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

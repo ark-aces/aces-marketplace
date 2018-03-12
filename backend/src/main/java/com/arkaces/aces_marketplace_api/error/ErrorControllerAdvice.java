@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestControllerAdvice
 @Slf4j
 public class ErrorControllerAdvice {
@@ -35,6 +38,28 @@ public class ErrorControllerAdvice {
         validationError.setFieldErrors(validationException.getFieldErrors());
 
         return validationError;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ValidatorException.class)
+    public ValidationError handleValidatorException(ValidatorException validatorException) {
+        ValidationError response = new ValidationError();
+        List<FieldError> fieldErrors = new ArrayList<>();
+        validatorException.getBindingResult().getFieldErrors().stream()
+            .forEach(error -> {
+                FieldError fieldError = new FieldError();
+                fieldError.setCode(error.getCode());
+                fieldError.setField(error.getField());
+                fieldError.setMessage(error.getDefaultMessage());
+                fieldErrors.add(fieldError);
+            }
+        );
+        
+        response.setCode(ErrorCodes.VALIDATION_ERROR);
+        response.setMessage("The request is invalid.");
+        response.setFieldErrors(fieldErrors);
+        
+        return response;
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -72,6 +97,6 @@ public class ErrorControllerAdvice {
 
         return generalError;
     }
-    
+
 
 }

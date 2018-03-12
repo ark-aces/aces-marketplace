@@ -1,9 +1,8 @@
 package com.arkaces.aces_marketplace_api.services;
 
-import com.arkaces.aces_marketplace_api.PageViewMapper;
+import com.arkaces.aces_marketplace_api.common.PageViewMapper;
 import com.arkaces.aces_marketplace_api.common.PageView;
 import com.arkaces.aces_marketplace_api.error.ErrorCodes;
-import com.arkaces.aces_marketplace_api.error.GeneralError;
 import com.arkaces.aces_marketplace_api.error.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

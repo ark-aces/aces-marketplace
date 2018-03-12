@@ -7,4 +7,5 @@ public class FieldError {
     private String field;
     private String code;
     private String message;
+    private Object[] messageArguments;
 }

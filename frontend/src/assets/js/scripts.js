@@ -419,7 +419,8 @@ jQuery(function($) {
             if ($(this).next().hasClass('sub-menu') === false) {
               parent.children('li').children('.sub-menu').slideUp(200);
               parent.children('li').children('a').children('.arrow').removeClass('open');
-              parent.children('li').removeClass('open');
+              // parent.children('li').removeClass('open');
+              $(this).addClass('active');
               return;
             }
 

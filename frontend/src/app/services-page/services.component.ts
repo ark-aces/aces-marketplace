@@ -8,6 +8,7 @@ import {ApiClient, Service} from '../api-client/api-client.component';
 })
 export class ServicesComponent implements OnInit {
 
+  loading = true;
   servicesPage;
   services: Array<Service> = [];
 
@@ -20,6 +21,7 @@ export class ServicesComponent implements OnInit {
         console.log(response.items);
         // todo: pagination
         // todo: error modal
+        this.loading = false;
       } );
   }
 

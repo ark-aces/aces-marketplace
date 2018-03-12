@@ -1,6 +1,5 @@
-package com.arkaces.aces_marketplace_api;
+package com.arkaces.aces_marketplace_api.common;
 
-import com.arkaces.aces_marketplace_api.common.PageView;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 

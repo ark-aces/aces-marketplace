@@ -54,6 +54,18 @@
   transform: rotate(3deg) translate(0px, -4px);
 }
 
+body.pace-done, input[text], button {
+  color: #333;
+  font-size: 14px;
+}
+body.page-running, input[text], button {
+  color: #333;
+  font-size: 14px;
+}
+body, input[text], button {
+  color: #333;
+  font-size: 14px;
+}
 
 .pagination>.active>a,
 .pagination>.active>span,
@@ -93,11 +105,11 @@ section header {
 
 
 section header .title, section .content-body {
-  padding-left: 20px;
-  padding-top: 10px;
+  padding-left: 30px;
+  padding-top: 20px;
 }
 section .content-body {
-  padding-bottom: 15px;
+  padding-bottom: 30px;
 }
 
 section header .title {
@@ -151,4 +163,93 @@ section.box {
 .btn-default.active, .btn-default:hover, .btn-default:active, .btn-default:focus {
   background: #f0373c;
   color: #ffffff;
+}
+
+.form-description {
+  margin-bottom: 2.5em;
+}
+
+.form-label {
+  font-weight: bold;
+  color: #555555;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 30px;
+}
+
+h1.title,
+section.box h3:first-of-type
+{
+  margin-top: 0px;
+}
+
+
+.form-check label {
+  font-weight: normal;
+  color: #555555;
+  padding-left: 5px;
+}
+
+
+body, input[text], button {
+  color: #555;
+  font-family: Cambria, Georgia;
+}
+
+
+.form-control {
+  padding: 20px 10px;
+  font-size: 16px;
+}
+
+.form-control::-webkit-input-placeholder { color: #bbb; }  /* WebKit, Blink, Edge */
+.form-control:-moz-placeholder { color: #bbb; }  /* Mozilla Firefox 4 to 18 */
+.form-control::-moz-placeholder { color: #bbb; }  /* Mozilla Firefox 19+ */
+.form-control:-ms-input-placeholder { color: #bbb; }  /* Internet Explorer 10-11 */
+.form-control::-ms-input-placeholder { color: #bbb; }  /* Microsoft Edge */
+
+.form-control:focus, .has-focus .form-control {
+  background: #fff;
+  border-color: #666;
+  outline: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.help-block {
+  color: #666;
+  font-style: italic;
+}
+
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+  outline: 2px auto #a00;
+  outline-offset: -2px;
+}
+
+.btn-primary.disabled, .btn-primary.disabled.active, .btn-primary.disabled.focus, .btn-primary.disabled:active, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary[disabled], .btn-primary[disabled].active, .btn-primary[disabled].focus, .btn-primary[disabled]:active, .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary.active, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
+  background-color: #f0373c;
+  background-image: none;
+}
+
+
+.has-error .help-block {
+  color: #666;
+}
+.has-error ul {
+  color: #f0373c;
+}
+
+ul.validation-errors {
+  padding: 10px 20px;
+}
+
+.alert-danger, .alert-error {
+  background-color: #f0373c;
+}
+
+.alert-icon {
+  width: 20px;
 }

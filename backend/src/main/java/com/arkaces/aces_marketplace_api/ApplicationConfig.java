@@ -1,14 +1,15 @@
 package com.arkaces.aces_marketplace_api;
 
-import com.arkaces.aces_marketplace_api.common.IdentifierGenerator;
+import com.arkaces.aces_marketplace_api.common.ResourceService;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.ModelMapper;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -72,5 +73,20 @@ public class ApplicationConfig {
                     .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
             }
         };
+    }
+    
+    @Bean
+    public EmailValidator emailValidator() {
+        return EmailValidator.getInstance();
+    }
+    
+    @Bean
+    public String verificationEmailTemplate(ResourceService resourceService) {
+        return resourceService.read("email-templates/verification-email.text.mustache");
+    }
+    
+    @Bean
+    public String baseUrl(Environment environment) {
+        return environment.getProperty("baseUrl");
     }
 }

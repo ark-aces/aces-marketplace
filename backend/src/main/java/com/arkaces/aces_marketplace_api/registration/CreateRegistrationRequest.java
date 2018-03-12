@@ -9,4 +9,6 @@ public class CreateRegistrationRequest {
     private String userEmailAddress;
     private String userPassword;
     private String arkWalletAddress;
+    private String recaptchaCode;
+    private Boolean agreeToTerms;
 }

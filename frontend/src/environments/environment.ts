@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'http://localhost:8081'
+  apiEndpoint: 'http://localhost:8081',
+  recaptchaSiteKey: 'change-me'
 };

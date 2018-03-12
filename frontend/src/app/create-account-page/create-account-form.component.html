@@ -1,0 +1,99 @@
+<form *ngIf="!isSuccess" (ngSubmit)="onSubmit()" #createAccountForm="ngForm">
+
+  <div *ngIf="hasErrors" class="alert alert-error">
+    <span class="glyphicon glyphicon-alert alert-icon" aria-hidden="true"></span>
+    Please correct the errors below.
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="form-group" [class.has-error]="emailAddressHasError">
+        <label>Email Address:</label>
+        <input [(ngModel)]="model.emailAddress" id="emailAddress" name="emailAddress"
+            class="form-control" type="text" placeholder="Enter email address"
+            required />
+        <ul class="validation-errors" *ngIf="emailAddressHasError">
+          <li *ngFor="let fieldError of emailAddressFieldErrors">
+            {{fieldError.message}}
+          </li>
+        </ul>
+        <p class="help-block">Email address must be verified
+          before account is activated. This address is used for account notifications
+          and password recovery.</p>
+      </div>
+
+      <div class="form-group" [class.has-error]="passwordHasError">
+        <label>Password:</label>
+        <input [(ngModel)]="model.password" id="password" name="password" class="form-control" type="password" required />
+        <ul class="validation-errors" *ngIf="passwordHasError">
+          <li *ngFor="let fieldError of passwordFieldErrors">
+            {{fieldError.message}}
+          </li>
+        </ul>
+      </div>
+
+      <div class="form-group" [class.has-error]="nameHasError">
+        <label>Name:</label>
+        <input [(ngModel)]="model.name" id="name" name="name" class="form-control" type="text" placeholder="Enter your name"
+             required />
+        <ul class="validation-errors" *ngIf="nameHasError">
+          <li *ngFor="let fieldError of nameFieldErrors">
+            {{fieldError.message}}
+          </li>
+        </ul>
+        <p class="help-block">Enter your name for display purposes.</p>
+      </div>
+
+      <div class="form-group" [class.has-error]="arkWalletAddressHasError">
+        <label>Ark Wallet Address:</label>
+        <input [(ngModel)]="model.arkWalletAddress" id="arkWalletAddress" name="arkWalletAddress"
+             class="form-control" type="text" placeholder="Enter your password"/>
+        <ul class="validation-errors" *ngIf="arkWalletAddressHasError">
+          <li *ngFor="let fieldError of arkWalletAddressFieldErrors">
+            {{fieldError.message}}
+          </li>
+        </ul>
+        <p class="help-block">The Ark wallet address is used for contract payments.</p>
+      </div>
+
+      <div class="form-group" [class.has-error]="recaptchaCodeHasError">
+        <label>Verification:</label>
+        <re-captcha name="recaptchaCode" [(ngModel)]="model.recaptchaCode"
+                    siteKey="{{recaptchaSiteKey}}"
+                    #captchaControl="ngModel" required></re-captcha>
+        <ul class="validation-errors" *ngIf="recaptchaCodeHasError">
+          <li *ngFor="let fieldError of recaptchaCodeFieldErrors">
+            {{fieldError.message}}
+          </li>
+        </ul>
+      </div>
+
+      <div class="form-group" [class.has-error]="agreeToTermsHasError">
+        <label>Agree to Terms:</label>
+
+        <div class="form-check">
+          <input [(ngModel)]="model.agreeToTerms" id="agreeToTerms" name="agreeToTerms" class="form-check-input"
+                 type="checkbox" value="" required>
+          <label for="agreeToTerms">I agree to the <a routerLink="/terms" target="_blank">Terms of Service</a>.</label>
+        </div>
+        <ul class="validation-errors" *ngIf="agreeToTermsHasError">
+          <li *ngFor="let fieldError of agreeToTermsFieldErrors">
+            {{fieldError.message}}
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="! canSubmit">
+    Create Account
+  </button>
+
+</form>
+
+<div *ngIf="isSuccess">
+  <h3>Success</h3>
+  <p>An email has been sent to {{model.emailAddress}}. Please follow the
+    link in the email to active your account and sign in.</p>
+</div>

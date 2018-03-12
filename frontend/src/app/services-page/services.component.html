@@ -1,39 +1,42 @@
-<div class="row">
-  <div class="col-xs-12">
-    <div class="page-title">
-      <div class="pull-left">
-        <h1 class="title">Services</h1>
+<div *ngIf="!loading">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="page-title">
+        <div class="pull-left">
+          <h1 class="title">Services</h1>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-lg-4" *ngFor="let service of services">
-    <section class="box ">
-      <header class="panel_header">
-        <h2 class="title pull-left">{{service.name}}</h2>
-      </header>
-      <div class="content-body">
-        <div class="service-description">
-          {{service.description}}
+  <div class="row">
+    <div class="col-lg-4" *ngFor="let service of services">
+      <section class="box ">
+        <header class="panel_header">
+          <h2 class="title pull-left">{{service.name}}</h2>
+        </header>
+        <div class="content-body">
+          <div class="service-description">
+            {{service.description}}
+          </div>
+          <div class="team-info ">
+            <h4><a [routerLink]="['/services', service.id]" class="btn btn-default">Use</a></h4>
+          </div>
+          <div>
+          </div>
         </div>
-        <div class="team-info ">
-          <h4><a [routerLink]="['/services', service.id]" class="btn btn-default">Use</a></h4>
-        </div>
-        <div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
-</div>
 
-<!--<div class="row">-->
+  <!--<div class="row">-->
   <!--<div class="col-lg-12">-->
-    <!--<ul class="pagination">-->
-      <!--&lt;!&ndash;<li><a href="#">&lt;</a></li>&ndash;&gt;-->
-      <!--<li class="active"><a href="#">1</a></li>-->
-      <!--<li><a href="#">&gt;</a></li>-->
-    <!--</ul>-->
+  <!--<ul class="pagination">-->
+  <!--&lt;!&ndash;<li><a href="#">&lt;</a></li>&ndash;&gt;-->
+  <!--<li class="active"><a href="#">1</a></li>-->
+  <!--<li><a href="#">&gt;</a></li>-->
+  <!--</ul>-->
   <!--</div>-->
-<!--</div>-->
+  <!--</div>-->
+
+</div>

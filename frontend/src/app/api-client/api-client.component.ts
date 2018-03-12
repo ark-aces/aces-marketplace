@@ -19,6 +19,32 @@ export interface ServicesResponse {
   items: Array<Service>;
 }
 
+export interface CreateAccountRequest {
+  contactEmailAddress: string;
+  userEmailAddress: string;
+  userName: string;
+  userPassword: string;
+  arkWalletAddress: string;
+  agreeToTerms: boolean;
+  recaptchaCode: string;
+}
+
+export interface EmailVerificationRequest {
+  code: string;
+}
+
+export interface FieldError {
+  field: string;
+  code: string;
+  message: string;
+}
+
+export interface ValidationError {
+  code: string;
+  message: string;
+  fieldErrors: Array<FieldError>;
+}
+
 @Injectable()
 export class ApiClient {
 
@@ -34,6 +60,14 @@ export class ApiClient {
 
   getService(id: string) {
     return this.http.get<Service>(this.config.apiEndpoint + '/services/' + id);
+  }
+
+  postAccount(createAccountRequest: CreateAccountRequest) {
+    return this.http.post(this.config.apiEndpoint + '/registrations', createAccountRequest);
+  }
+
+  postEmailVerification(emailVerificationRequest: EmailVerificationRequest) {
+    return this.http.post(this.config.apiEndpoint + '/emailVerifications', emailVerificationRequest);
   }
 
 }
