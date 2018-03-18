@@ -15,12 +15,12 @@ public class AuthenticatedUser extends User {
     private Long accountPid;
     
     public AuthenticatedUser(
-        String userId, 
+        String emailAddress, 
         String password, Collection<? extends GrantedAuthority> authorities, 
         Long accountPid,
         Long userPid
     ) {
-        super(userId, password, authorities);
+        super(emailAddress, password, authorities);
         this.accountPid = accountPid;
         this.userPid = userPid;
     }

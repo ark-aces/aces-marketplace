@@ -84,7 +84,12 @@ public class ApplicationConfig {
     public String verificationEmailTemplate(ResourceService resourceService) {
         return resourceService.read("email-templates/verification-email.text.mustache");
     }
-    
+
+    @Bean
+    public String resetPasswordEmailTemplate(ResourceService resourceService) {
+        return resourceService.read("email-templates/reset-password-email.text.mustache");
+    }
+
     @Bean
     public String baseUrl(Environment environment) {
         return environment.getProperty("baseUrl");

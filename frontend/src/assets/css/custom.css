@@ -253,3 +253,30 @@ ul.validation-errors {
 .alert-icon {
   width: 20px;
 }
+
+.username {
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration:none;
+  color: white;
+  text-transform: none;
+}
+
+
+.page-topbar .message-toggle-wrapper, .page-topbar .notify-toggle-wrapper, .page-topbar .searchform, .page-topbar li.profile {
+  opacity: 100;
+}
+
+#main-menu-wrapper li ul.sub-menu {
+  display: block;
+  list-style-type: none;
+  font-size: 14px;
+  width: 100%;
+}
+
+#main-menu-wrapper li .sub-menu a {
+  color: #333;
+  margin-bottom: 1px;
+  padding-left: 55px;
+  border-left: 4px solid transparent;
+}

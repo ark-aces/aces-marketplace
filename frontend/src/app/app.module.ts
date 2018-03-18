@@ -19,6 +19,17 @@ import {CreateAccountFormComponent} from './create-account-page/create-account-f
 import {RecaptchaModule} from 'ng-recaptcha';
 import {EmailVerificationPageComponent} from './email-verification/email-verification-page.component';
 import {RecaptchaFormsModule} from 'ng-recaptcha/forms';
+import {SignOutPageComponent} from './sign-out-page/sign-out-page.component';
+import {SignOutSuccessPageComponent} from './sign-out-success-page/sign-out-success-page.component';
+import {Ng2Webstorage} from 'ngx-webstorage';
+import { CookieService } from 'ngx-cookie-service';
+import {AuthService} from './auth/auth-service.component';
+import {ContractsPageComponent} from './contracts-page.component.ts/contracts-page.component';
+import {SettingsPageComponent} from './settings-page/settings-page.component';
+import {ResetPasswordPageComponent} from './reset-password-page/reset-password-page.component';
+import {ResetPasswordRequestPageComponent} from './reset-password-page/reset-password-request-page.component';
+import {ResetPasswordRequestFormComponent} from './reset-password-page/reset-password-request-form.component';
+import {ResetPasswordFormComponent} from './reset-password-page/reset-password-form.component';
 
 @NgModule({
   declarations: [
@@ -31,9 +42,17 @@ import {RecaptchaFormsModule} from 'ng-recaptcha/forms';
     ServiceFormComponent,
     CreateAccountPageComponent,
     SignInPageComponent,
+    SignOutPageComponent,
+    SignOutSuccessPageComponent,
     TermsPageComponent,
     CreateAccountFormComponent,
-    EmailVerificationPageComponent
+    EmailVerificationPageComponent,
+    ContractsPageComponent,
+    SettingsPageComponent,
+    ResetPasswordPageComponent,
+    ResetPasswordRequestPageComponent,
+    ResetPasswordFormComponent,
+    ResetPasswordRequestFormComponent
   ],
   imports: [
     BrowserModule,
@@ -42,10 +61,13 @@ import {RecaptchaFormsModule} from 'ng-recaptcha/forms';
     HttpClientModule,
     AppConfigModule,
     RecaptchaModule.forRoot(),
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    Ng2Webstorage
   ],
   providers: [
-    ApiClient
+    ApiClient,
+    AuthService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

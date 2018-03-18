@@ -7,6 +7,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableResourceServer
@@ -20,10 +21,10 @@ public class Oauth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
         http.authorizeRequests().antMatchers("/oauth/token").anonymous();
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/**").permitAll();
 
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/account/**")
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/account/**", "/user/**")
             .access("#oauth2.hasScope('read')");
 
-        http.authorizeRequests().antMatchers(HttpMethod.POST,"/account/**")
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/account/**", "/user/**")
             .access("#oauth2.hasScope('write')");
     }
 

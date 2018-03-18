@@ -8,6 +8,7 @@
           <span class="title">Dashboard</span>
         </a>
       </li>
+
       <li routerLinkActive="open">
         <a routerLink="/services/browse" routerLinkActive="active">
           <i class="fa fa-gears"></i>
@@ -32,25 +33,28 @@
           <!--</li>-->
         </ul>
       </li>
-      <!--<li class="">-->
-      <!--<a href="javascript:;">-->
-      <!--<i class="fa fa-file"></i>-->
-      <!--<span class="title">Contracts</span>-->
-      <!--<span class="arrow "></span><span class="label label-accent">4</span>-->
-      <!--</a>-->
-      <!--<ul class="sub-menu" >-->
-      <!--<li>-->
-      <!--<a class="" href="soc-mail-inbox.html" >Active</a>-->
-      <!--<span class="arrow "></span><span class="label label-accent">4</span>-->
-      <!--</li>-->
-      <!--<li>-->
-      <!--<a class="" href="soc-mail-compose.html" >Completed</a>-->
-      <!--</li>-->
-      <!--<li>-->
-      <!--<a class="" href="soc-mail-compose.html" >Failed</a>-->
-      <!--</li>-->
-      <!--</ul>-->
-      <!--</li>-->
+
+      <li *ngIf="authService.isAuthenticated" routerLinkActive="open">
+        <a routerLink="/contracts/active" routerLinkActive="active">
+          <i class="fa fa-file"></i>
+          <span class="title">Contracts</span>
+          <span class="arrow "></span>
+          <!--<span class="label label-accent">4</span>-->
+        </a>
+        <ul class="sub-menu" routerLinkActive="open">
+          <li>
+            <a routerLink="/contracts/active" routerLinkActive="active">Active</a>
+            <!--<span class="arrow "></span>-->
+            <!--<span class="label label-accent">4</span>-->
+          </li>
+          <li>
+            <a routerLink="/contracts/completed" routerLinkActive="active">Completed</a>
+          </li>
+          <li>
+            <a routerLink="/contracts/failed" routerLinkActive="active">Failed</a>
+          </li>
+        </ul>
+      </li>
 
       <!--<li class="">-->
       <!--<a href="javascript:;">-->
@@ -96,12 +100,13 @@
       <!--<span class="title">Funds</span>-->
       <!--</a>-->
       <!--</li>-->
-      <!--<li class="">-->
-      <!--<a href="soc-account-settings.html">-->
-      <!--<i class="fa fa-cogs"></i>-->
-      <!--<span class="title">Settings</span>-->
-      <!--</a>-->
-      <!--</li>-->
+
+      <li *ngIf="authService.isAuthenticated" routerLinkActive="open">
+        <a routerLink="/settings" routerLinkActive="active">
+          <i class="fa fa-gear"></i>
+          <span class="title">Settings</span>
+        </a>
+      </li>
     </ul>
 
   </div>

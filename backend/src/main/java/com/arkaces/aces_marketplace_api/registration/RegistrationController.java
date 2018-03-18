@@ -1,6 +1,5 @@
 package com.arkaces.aces_marketplace_api.registration;
 
-import com.arkaces.aces_marketplace_api.recaptcha.RecaptchaService;
 import com.arkaces.aces_marketplace_api.user.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ public class RegistrationController {
     private final RegistrationService registrationService;
     private final UserCreatedService userCreatedService;
     private final CreateRegistrationRequestValidator createRegistrationRequestValidator;
-    private final RecaptchaService recaptchaService;
     
     @PostMapping("registrations")
     public Registration post(@RequestBody CreateRegistrationRequest createRegistrationRequest, HttpServletRequest httpServletRequest) {

@@ -5,6 +5,8 @@
 
 export const environment = {
   production: false,
+  cookieDomain: 'localhost',
+  useSecureCookie: false,
   apiEndpoint: 'http://localhost:8081',
   recaptchaSiteKey: '6Le05UsUAAAAAMUscgkaq_uUP8DPqtMlgRTVozAD'
 };

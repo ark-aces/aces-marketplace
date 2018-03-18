@@ -1,10 +1,12 @@
 package com.arkaces.aces_marketplace_api.user;
 
 import com.arkaces.aces_marketplace_api.account.AccountEntity;
+import com.arkaces.aces_marketplace_api.reset_password.UserResetPasswordRequestEntity;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -31,5 +33,8 @@ public class UserEntity {
     @ManyToOne
     @JoinColumn(name="account_pid", nullable = false)
     private AccountEntity accountEntity;
+
+    @OneToMany(mappedBy = "userEntity")
+    private List<UserResetPasswordRequestEntity> userPasswordResetEntities;
 
 }

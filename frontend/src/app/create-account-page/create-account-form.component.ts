@@ -129,8 +129,4 @@ export class CreateAccountFormComponent {
       );
   }
 
-  onRecaptcha(code) {
-    this.model.recaptchaCode = code;
-  }
-
 }
