@@ -6,5 +6,5 @@ import {AuthService} from './auth/auth-service.component';
   templateUrl: 'top-nav.component.html'
 })
 export class TopNavComponent {
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
 }

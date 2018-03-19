@@ -7,6 +7,6 @@ import {AuthService} from './auth/auth-service.component';
 })
 export class SidebarMenuComponent {
 
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
 
 }
