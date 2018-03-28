@@ -11,7 +11,7 @@ import {DashboardPageComponent} from './dashboard-page/dashboard-page.component'
 import {HttpClientModule} from '@angular/common/http';
 import {ApiClient} from './api-client/api-client.component';
 import {AppConfigModule} from './app-config-module';
-import {ServiceFormComponent} from './service-form/service-form.component';
+import {ServiceFormComponent} from './service-page/service-form.component';
 import {CreateAccountPageComponent} from './create-account-page/create-account-page.component';
 import {SignInPageComponent} from './sign-in-page/sign-in-page.component';
 import {TermsPageComponent} from './terms-page/terms-page.component';
@@ -30,6 +30,11 @@ import {ResetPasswordPageComponent} from './reset-password-page/reset-password-p
 import {ResetPasswordRequestPageComponent} from './reset-password-page/reset-password-request-page.component';
 import {ResetPasswordRequestFormComponent} from './reset-password-page/reset-password-request-form.component';
 import {ResetPasswordFormComponent} from './reset-password-page/reset-password-form.component';
+import {FormOptionalComponent} from './form-components/form-optional-component';
+import {ContractPageComponent} from './contract-page.component.ts/contract-page.component';
+import {ModalModule} from 'ngx-bootstrap';
+import {ErrorModalComponent} from './app-components/error-modal.component';
+import {ErrorModalService} from './app-components/error-modal-service.compoennt';
 
 @NgModule({
   declarations: [
@@ -48,27 +53,34 @@ import {ResetPasswordFormComponent} from './reset-password-page/reset-password-f
     CreateAccountFormComponent,
     EmailVerificationPageComponent,
     ContractsPageComponent,
+    ContractPageComponent,
     SettingsPageComponent,
     ResetPasswordPageComponent,
     ResetPasswordRequestPageComponent,
     ResetPasswordFormComponent,
-    ResetPasswordRequestFormComponent
+    ResetPasswordRequestFormComponent,
+    ServiceFormComponent,
+    FormOptionalComponent,
+    ErrorModalComponent
   ],
   imports: [
+    ModalModule.forRoot(),
+    RecaptchaModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
     AppConfigModule,
-    RecaptchaModule.forRoot(),
     RecaptchaFormsModule,
-    Ng2Webstorage
+    Ng2Webstorage,
   ],
   providers: [
     ApiClient,
     AuthService,
-    CookieService
+    CookieService,
+    ErrorModalService
   ],
+  entryComponents: [ErrorModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

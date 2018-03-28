@@ -8,4 +8,5 @@ public class ErrorCodes {
     public final static String AUTHORIZATION_REQUIRED_ERROR = "authorizationRequired";
     public final static String BAD_CREDENTIALS_ERROR = "badCredentials";
     public final static String SERVICE_INFO_REQUEST_FAILED = "serviceInfoRequestFailed";
+    public final static String SERVICE_CONTRACT_REQUEST_FAILED = "serviceContractRequestFailed";
 }

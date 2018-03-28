@@ -1,49 +1,74 @@
-<div class="row">
-  <div class="col-xs-12">
-    <div class="page-title">
-      <div class="pull-left">
-        <h1 class="title">{{service.name}}</h1>
-      </div>
-      <div class="pull-right">
-        <h1 class="version">Version: {{service.version}}</h1>
+<div *ngIf="! isLoading">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="page-title">
+        <h1 class="title">
+          {{service.name}}
+          <span class="service-version">{{service.version}}</span>
+        </h1>
       </div>
     </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <section class="box ">
-      <header class="panel_header">
-        <h2 class="title pull-left">Description</h2>
-      </header>
-      <div class="content-body">
-          {{service.description}}
-      </div>
-    </section>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-6">
-    <section class="box ">
-      <header class="panel_header">
-        <h2 class="title pull-left">Service URL</h2>
-      </header>
-      <div class="content-body">
-        <a href="{{service.url}}">{{service.url}}</a>
-      </div>
-    </section>
+  <div class="row">
+    <div class="col-xs-12">
+      <section class="box ">
+        <header class="panel_header">
+          <h2 class="title pull-left">Description</h2>
+        </header>
+        <div class="content-body">
+            {{service.description}}
+        </div>
+      </section>
+    </div>
   </div>
 
-  <div class="col-xs-6">
-    <section class="box ">
-      <header class="panel_header">
-        <h2 class="title pull-left">Website URL</h2>
-      </header>
-      <div class="content-body">
-        <a href="{{service.websiteUrl}}">{{service.websiteUrl}}</a>
-      </div>
-    </section>
+  <div class="row">
+    <div class="col-xs-6">
+      <section class="box ">
+        <header class="panel_header">
+          <h2 class="title pull-left">Service URL</h2>
+        </header>
+        <div class="content-body">
+          <a href="{{service.url}}">{{service.url}}</a>
+        </div>
+      </section>
+    </div>
+
+    <div class="col-xs-6">
+      <section class="box ">
+        <header class="panel_header">
+          <h2 class="title pull-left">Website URL</h2>
+        </header>
+        <div class="content-body">
+          <a href="{{service.websiteUrl}}">{{service.websiteUrl}}</a>
+        </div>
+      </section>
+    </div>
   </div>
+
+  <h3>Create Contract</h3>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <section class="box ">
+        <header class="panel_header">
+        </header>
+        <div class="content-body" *ngIf="! canCreateContracts">
+          To submit contracts, please <a routerLink="sign-in">Sign In</a>.
+        </div>
+
+        <div class="content-body" *ngIf="canCreateContracts">
+          <div *ngIf="isLoadingForm" class="loading-indicator">
+            <i class='fa fa-circle-o-notch fa-spin'></i>
+            Loading...
+          </div>
+
+          <app-service-form *ngIf="! isLoadingForm" [serviceId]="serviceId" [serviceInfo]="serviceInfo"></app-service-form>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
 </div>

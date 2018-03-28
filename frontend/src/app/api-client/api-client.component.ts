@@ -71,6 +71,25 @@ export interface PasswordResetRequest {
   password: string;
 }
 
+export interface CreateContractRequest {
+  arguments: object;
+}
+
+export interface Contract {
+  id: string;
+  status: string;
+  createdAt: string;
+  results: object;
+  serviceId: string;
+}
+
+export interface ContractsResponse {
+  pageSize: number;
+  page: number;
+  totalItems: number;
+  items: Array<Contract>;
+}
+
 @Injectable()
 export class ApiClient {
 
@@ -101,6 +120,37 @@ export class ApiClient {
 
   getService(id: string) {
     return this.http.get<Service>(this.config.apiEndpoint + '/services/' + id);
+  }
+
+  getServiceInfo(id: string) {
+    return this.http.get(this.config.apiEndpoint + '/services/' + id + '/info');
+  }
+
+  createContract(serviceId: string, createContractRequest: CreateContractRequest) {
+    return this.http.post<Contract>(this.config.apiEndpoint + '/services/' + serviceId + '/contracts', createContractRequest,
+      {
+        headers: new HttpHeaders({
+          'Authorization': 'Bearer ' + this.authService.accessToken
+        })
+      });
+  }
+
+  getContract(contractId: string) {
+    return this.http.get<Contract>(this.config.apiEndpoint + '/account/contracts/' + contractId,
+      {
+        headers: new HttpHeaders({
+          'Authorization': 'Bearer ' + this.authService.accessToken
+        })
+      });
+  }
+
+  getContracts() {
+    return this.http.get<ContractsResponse>(this.config.apiEndpoint + '/account/contracts',
+      {
+        headers: new HttpHeaders({
+          'Authorization': 'Bearer ' + this.authService.accessToken
+        })
+      });
   }
 
   postAccount(createAccountRequest: CreateAccountRequest) {

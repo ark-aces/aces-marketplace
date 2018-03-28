@@ -1,29 +1,116 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {ApiClient, Service} from '../api-client/api-client.component';
+import {AuthService} from '../auth/auth-service.component';
 
 @Component({
   templateUrl: './service-page.component.html'
 })
-export class ServicePageComponent implements OnInit, OnDestroy {
+export class ServicePageComponent implements OnInit {
 
-  id: string;
-  private sub: any;
+  isLoading = true;
+  serviceId: string;
   service: Service;
 
-  constructor(private route: ActivatedRoute, private apiClient: ApiClient) {}
+  canCreateContracts = false;
+  isLoadingForm = false;
+  serviceInfo;
+
+
+  private stub = {
+    'name' : 'Testnet Aces ARK-BTC Channel Service',
+    'description' : 'Testnet ACES ARK to BTC Channel service for value transfers',
+    'version' : '1.0.0',
+    'websiteUrl' : 'https://arkaces.com',
+    'instructions' : 'After this contract is executed, any ARK sent to depositArkAddress will be exchanged for BTC and sent directly to the given recipientBtcAddress less service fees.\n',
+    'capacities' : [ {
+      'value' : 50.00,
+      'unit' : 'BTC',
+      'displayValue' : '50 BTC'
+    } ],
+    'flatFee' : '0',
+    'percentFee' : '0.00%',
+    'inputSchema' : {
+      'type' : 'object',
+      'properties' : {
+        'recipientBtcAddress' : {
+          'title': 'Recipient BTC Address',
+          'description': 'Enter a valid BTC address to receive transfers',
+          'type' : 'string'
+        }
+      },
+      'required' : [ 'recipientBtcAddress' ]
+    },
+    'outputSchema' : {
+      'type' : 'object',
+      'properties' : {
+        'depositArkAddress' : {
+          'type' : 'string'
+        },
+        'recipientBtcAddress' : {
+          'type' : 'string'
+        },
+        'transfers' : {
+          'type' : 'array',
+          'properties' : {
+            'arkAmount' : {
+              'type' : 'string'
+            },
+            'arkToBtcRate' : {
+              'type' : 'string'
+            },
+            'arkFlatFee' : {
+              'type' : 'string'
+            },
+            'arkPercentFee' : {
+              'type' : 'string'
+            },
+            'arkTotalFee' : {
+              'type' : 'string'
+            },
+            'btcSendAmount' : {
+              'type' : 'string'
+            },
+            'btcTransactionId' : {
+              'type' : 'string'
+            },
+            'createdAt' : {
+              'type' : 'string'
+            }
+          }
+        }
+      }
+    }
+  };
+
+  constructor(
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private apiClient: ApiClient
+  ) {}
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      this.id = params['id'];
-      this.apiClient.getService(this.id).subscribe(data => {
+    this.route.params.subscribe(params => {
+      this.serviceId = params['id'];
+      this.apiClient.getService(this.serviceId).subscribe(data => {
         this.service = data;
+        this.isLoading = false;
       });
-    });
-  }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
+      if (this.authService.isAuthenticated) {
+        this.canCreateContracts = true;
+        this.isLoadingForm = true;
+
+
+        // this.apiClient.getServiceInfo(this.serviceId).subscribe(data => {
+        //   this.serviceInfo = data;
+        //   this.isLoadingForm = false;
+        // });
+
+        this.serviceInfo = this.stub;
+        this.isLoadingForm = false;
+      }
+    });
   }
 
 }

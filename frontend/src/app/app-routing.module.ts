@@ -13,6 +13,7 @@ import {ContractsPageComponent} from './contracts-page.component.ts/contracts-pa
 import {SettingsPageComponent} from './settings-page/settings-page.component';
 import {ResetPasswordRequestPageComponent} from './reset-password-page/reset-password-request-page.component';
 import {ResetPasswordPageComponent} from './reset-password-page/reset-password-page.component';
+import {ContractPageComponent} from './contract-page.component.ts/contract-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -28,7 +29,9 @@ const routes: Routes = [
   { path: 'create-account', component: CreateAccountPageComponent },
   { path: 'terms', component: TermsPageComponent },
   { path: 'email-verification', component: EmailVerificationPageComponent },
-  { path: 'contracts/:status', component: ContractsPageComponent },
+  { path: 'contracts/browse', component: ContractsPageComponent },
+  { path: 'contracts', component: ContractsPageComponent },
+  { path: 'contracts/:id', component: ContractPageComponent },
   { path: 'settings', component: SettingsPageComponent },
   { path: 'reset-password-request', component: ResetPasswordRequestPageComponent },
   { path: 'reset-password', component: ResetPasswordPageComponent }

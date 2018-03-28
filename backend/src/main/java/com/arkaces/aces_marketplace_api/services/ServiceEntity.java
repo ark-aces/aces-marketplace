@@ -1,10 +1,12 @@
 package com.arkaces.aces_marketplace_api.services;
 
 import com.arkaces.aces_marketplace_api.account.AccountEntity;
+import com.arkaces.aces_marketplace_api.contract.ContractEntity;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -27,4 +29,7 @@ public class ServiceEntity {
     @ManyToOne
     @JoinColumn(name = "account_pid")
     private AccountEntity accountEntity;
+
+    @OneToMany(mappedBy = "serviceEntity")
+    private List<ContractEntity> contractEntities;
 }

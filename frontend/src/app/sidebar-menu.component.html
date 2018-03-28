@@ -35,13 +35,16 @@
       </li>
 
       <li *ngIf="authService.isAuthenticated" routerLinkActive="open">
-        <a routerLink="/contracts/active" routerLinkActive="active">
+        <a routerLink="/contracts" routerLinkActive="active">
           <i class="fa fa-file"></i>
           <span class="title">Contracts</span>
           <span class="arrow "></span>
           <!--<span class="label label-accent">4</span>-->
         </a>
         <ul class="sub-menu" routerLinkActive="open">
+          <li>
+            <a routerLink="/contracts/browse" routerLinkActive="active">Browse</a>
+          </li>
           <li>
             <a routerLink="/contracts/active" routerLinkActive="active">Active</a>
             <!--<span class="arrow "></span>-->

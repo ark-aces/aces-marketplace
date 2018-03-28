@@ -19,14 +19,14 @@ export class AuthService implements OnInit {
     this.loadCookie();
   }
 
-  persistCookie() {
-    this.setCookie('isAuthenticated', this.isAuthenticated ? 'true' : 'false');
-    this.setCookie('user', JSON.stringify(this.user));
-    this.setCookie('accessToken', this.accessToken);
+  persistCookie(expireDate) {
+    this.setCookie('isAuthenticated', this.isAuthenticated ? 'true' : 'false', expireDate);
+    this.setCookie('user', JSON.stringify(this.user), expireDate);
+    this.setCookie('accessToken', this.accessToken, expireDate);
   }
 
-  private setCookie(name: string, value: string) {
-    this.cookieService.set(name, value, null, '/', this.appConfig.cookieDomain, this.appConfig.useSecureCookie);
+  private setCookie(name: string, value: string, expireDate) {
+    this.cookieService.set(name, value, expireDate, '/', this.appConfig.cookieDomain, this.appConfig.useSecureCookie);
   }
 
   private deleteCookie(name: string) {
@@ -46,6 +46,6 @@ export class AuthService implements OnInit {
     this.deleteCookie('isAuthenticated');
     this.deleteCookie('user');
     this.deleteCookie('accessToken');
-    this.persistCookie();
+    this.persistCookie(null);
   }
 }

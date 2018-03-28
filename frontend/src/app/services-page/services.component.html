@@ -10,19 +10,16 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-4" *ngFor="let service of services">
+    <div class="col-xs-12" *ngFor="let service of services">
       <section class="box ">
         <header class="panel_header">
-          <h2 class="title pull-left">{{service.name}}</h2>
+          <a [routerLink]="['/services', service.id]" >
+            <h2 class="title pull-left">{{service.name}}</h2>
+          </a>
         </header>
         <div class="content-body">
           <div class="service-description">
             {{service.description}}
-          </div>
-          <div class="team-info ">
-            <h4><a [routerLink]="['/services', service.id]" class="btn btn-default">Use</a></h4>
-          </div>
-          <div>
           </div>
         </div>
       </section>

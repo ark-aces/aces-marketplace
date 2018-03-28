@@ -1,24 +1,27 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
+import {ApiClient, Contract} from '../api-client/api-client.component';
 
 @Component({
   templateUrl: './contracts-page.component.html'
 })
-export class ContractsPageComponent implements OnInit, OnDestroy {
-  status = 'Active';
-  sub: Subscription;
+export class ContractsPageComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) {}
+  isLoading = true;
+  contracts: Array<Contract> = [];
+
+  constructor(private route: ActivatedRoute, private apiClient: ApiClient) {}
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      this.status = params['status'].charAt(0).toUpperCase() + params['status'].slice(1);
-    });
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.apiClient.getContracts().subscribe(
+      data => {
+        this.contracts = data.items;
+      },
+      error => {
+        // todo: alert error
+        console.log(error);
+      }
+    );
   }
 
 }

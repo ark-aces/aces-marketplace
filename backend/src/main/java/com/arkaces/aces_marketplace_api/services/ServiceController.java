@@ -4,6 +4,8 @@ import com.arkaces.aces_marketplace_api.common.PageViewMapper;
 import com.arkaces.aces_marketplace_api.common.PageView;
 import com.arkaces.aces_marketplace_api.error.ErrorCodes;
 import com.arkaces.aces_marketplace_api.error.NotFoundException;
+import com.arkaces.aces_marketplace_api.service_client.ServiceClient;
+import com.arkaces.aces_marketplace_api.service_client.ServiceResponse;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ public class ServiceController {
     private final ServiceRepository serviceRepository;
     private final ModelMapper modelMapper;
     private final PageViewMapper pageViewMapper;
+    private final ServiceClient serviceClient;
     
     @GetMapping("/services")
     public PageView<Service> getServices(Pageable pageable) {
@@ -39,4 +42,16 @@ public class ServiceController {
         }
         return modelMapper.map(serviceEntity, Service.class);
     }
+    
+    @GetMapping("/services/{id}/info")
+    public ServiceResponse getServiceInfo(@PathVariable String id) {
+        ServiceEntity serviceEntity = serviceRepository.findOneById(id);
+        if (serviceEntity == null) {
+            throw new NotFoundException(ErrorCodes.NOT_FOUND, "Service not found.");
+        }
+        
+        String baseUrl = serviceEntity.getUrl();
+        return serviceClient.getServiceInfo(baseUrl);
+    }
+
 }

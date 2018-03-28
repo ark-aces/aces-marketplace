@@ -125,6 +125,7 @@ export class CreateAccountFormComponent {
           }
 
           this.isSubmitted = false;
+          window.scrollTo(0, 0);
         }
       );
   }

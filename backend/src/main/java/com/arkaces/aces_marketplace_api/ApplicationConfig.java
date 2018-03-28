@@ -61,6 +61,8 @@ public class ApplicationConfig {
         // todo: restrict to json
         // todo: add a marketplace instance header
         return new RestTemplateBuilder()
+            .setConnectTimeout(2000)
+            .setReadTimeout(60000) // todo: reduce timeout
             .build();
     }
 

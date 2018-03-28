@@ -70,7 +70,7 @@ public class CreateRegistrationRequestValidator {
         }
 
         String arkWalletAddress = createRegistrationRequest.getArkWalletAddress();
-        if (arkWalletAddress != null) {
+        if (! StringUtils.isEmpty(arkWalletAddress)) {
             try {
                 Base58.decodeChecked(arkWalletAddress);
             } catch (AddressFormatException exception) {

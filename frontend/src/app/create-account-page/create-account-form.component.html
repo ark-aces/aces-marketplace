@@ -46,6 +46,7 @@
 
       <div class="form-group" [class.has-error]="arkWalletAddressHasError">
         <label>Ark Wallet Address:</label>
+        <app-form-optional></app-form-optional>
         <input [(ngModel)]="model.arkWalletAddress" id="arkWalletAddress" name="arkWalletAddress"
              class="form-control" type="text" placeholder="Enter your password"/>
         <ul class="validation-errors" *ngIf="arkWalletAddressHasError">
@@ -86,8 +87,12 @@
     </div>
   </div>
 
-  <button type="submit" class="btn btn-primary" [disabled]="! canSubmit">
+  <button *ngIf="!isSubmitted" type="submit" class="btn btn-primary">
     Create Account
+  </button>
+  <button *ngIf="isSubmitted" type="submit" class="btn btn-primary" disabled>
+    <i class='fa fa-circle-o-notch fa-spin'></i>
+    Creating Account...
   </button>
 
 </form>

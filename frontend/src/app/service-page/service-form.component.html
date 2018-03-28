@@ -1,0 +1,42 @@
+<form (ngSubmit)="onSubmit()">
+
+  <div *ngIf="hasErrors" class="alert alert-error">
+    <span class="glyphicon glyphicon-alert alert-icon" aria-hidden="true"></span>
+    Please correct the errors below.
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <div *ngFor="let formInput of formInputs">
+
+        <div class="form-group" [class.has-error]="formInput.hasErrors" [ngSwitch]="formInput.type">
+          <label for="{{formInput.id}}">{{formInput.label}}:</label>
+          <app-form-optional *ngIf="formInput.isOptional"></app-form-optional>
+
+          <textarea *ngSwitchCase="'text'" [(ngModel)]="formInput.value" id="{{formInput.id}}" name="{{formInput.id}}"
+                 class="form-control" placeholder="{{formInput.placeholder}}"></textarea>
+
+          <input *ngSwitchDefault [(ngModel)]="formInput.value" id="{{formInput.id}}" name="{{formInput.id}}"
+                 class="form-control" type="{{formInput.type}}" placeholder="{{formInput.placeholder}}"/>
+
+          <ul class="validation-errors" *ngIf="formInput.hasErrors">
+            <li *ngFor="let fieldError of formInput.fieldErrors">
+              {{fieldError.message}}
+            </li>
+          </ul>
+          <p class="help-block">{{formInput.description}}</p>
+        </div>
+      </div>
+
+      <button *ngIf="!isSubmitted" type="submit" class="btn btn-primary">
+        Create Contract
+      </button>
+      <button *ngIf="isSubmitted" type="submit" class="btn btn-primary" disabled>
+        <i class='fa fa-circle-o-notch fa-spin'></i>
+        Submitting...
+      </button>
+
+    </div>
+  </div>
+
+</form>

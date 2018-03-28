@@ -4,6 +4,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {APP_CONFIG, AppConfig} from '../app-config-module';
 import {AuthService} from '../auth/auth-service.component';
+import {ErrorModalService} from '../app-components/error-modal-service.compoennt';
 
 class SignInForm {
   emailAddress: string;
@@ -25,7 +26,8 @@ export class SignInPageComponent implements OnInit {
     private apiClient: ApiClient,
     private authService: AuthService,
     private router: Router,
-    @Inject(APP_CONFIG) private config: AppConfig
+    @Inject(APP_CONFIG) private config: AppConfig,
+    private errorModalService: ErrorModalService
   ) {}
 
   ngOnInit(): void {
@@ -48,16 +50,18 @@ export class SignInPageComponent implements OnInit {
             .subscribe(
               user => {
                 this.authService.user = user;
-                this.authService.persistCookie();
+                // const expireDate = new Date().getTime() + (1000 * result.expires_in);
+                const expireDateDays = 1;
+                this.authService.persistCookie(expireDateDays);
 
-                // todo: set expire data for refresh
-                const expireDate = new Date().getTime() + (1000 * result.expires_in);
                 this.router.navigate(['/dashboard']);
               },
               userError => {
-                // todo: modal alert unexpected error
-                console.log('An unexpected error occurred getting current user information');
                 console.log(userError);
+                this.errorModalService.showError(
+                  'Unexpected Error',
+                  'An unexpected error occurred getting current user information. Please try again later.'
+                );
                 this.isSuccess = false;
                 this.isSubmitted = false;
               }
@@ -65,14 +69,14 @@ export class SignInPageComponent implements OnInit {
 
         },
         (response: HttpErrorResponse)  => {
-          console.log('error');
-          console.log(response);
           if (response.status === 401 || response.status === 400) {
             this.hasErrors = true;
           } else {
-            // todo: modal alert unexpected error
-            console.log('An unexpected error occurred');
             console.log(response);
+            this.errorModalService.showError(
+              'Unexpected Error',
+              'An unexpected error occurred getting current user information. Please try again later.'
+            );
           }
           this.isSuccess = false;
           this.isSubmitted = false;
