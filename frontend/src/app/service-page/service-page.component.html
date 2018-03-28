@@ -47,34 +47,28 @@
     </div>
   </div>
 
-  <div *ngIf="canCreateContracts && ! isLoadingContractForm">
-    <h3>Create Contract</h3>
+  <h3>Create Contract</h3>
 
-    <div class="row">
-      <div class="col-xs-12">
-        <section class="box ">
-          <header class="panel_header">
-          </header>
+  <div class="row">
+    <div class="col-xs-12">
+      <section class="box ">
+        <header class="panel_header">
+        </header>
 
-          <div class="content-body" *ngIf="! canCreateContracts">
-            To submit contracts, please <a routerLink="sign-in">Sign In</a>.
+        <div class="content-body" *ngIf="! canCreateContracts">
+          To submit contracts, please <a routerLink="/sign-in">sign in</a>.
+        </div>
+
+        <div class="content-body" *ngIf="canCreateContracts">
+          <div *ngIf="isLoadingContractForm" class="loading-indicator">
+            <i class='fa fa-circle-o-notch fa-spin'></i>
+            Loading...
           </div>
+          <app-service-form *ngIf="serviceInfo" [serviceId]="serviceId" [serviceInfo]="serviceInfo"></app-service-form>
+        </div>
 
-          <div class="content-body" *ngIf="canCreateContracts">
-            <div *ngIf="isLoadingContractForm" class="loading-indicator">
-              <i class='fa fa-circle-o-notch fa-spin'></i>
-              Loading...
-            </div>
-            <app-service-form *ngIf="serviceInfo" [serviceId]="serviceId" [serviceInfo]="serviceInfo"></app-service-form>
-          </div>
-
-          <div *ngIf="! canCreateContracts">
-            To create service contracts, please <a routerLink="/sign-in">sign in</a>.
-          </div>
-        </section>
-      </div>
+      </section>
     </div>
-
   </div>
 
 </div>
