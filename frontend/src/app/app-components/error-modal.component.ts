@@ -10,7 +10,7 @@ import { BsModalRef } from 'ngx-bootstrap';
         <span class="glyphicon glyphicon-alert alert-icon" aria-hidden="true"></span>
         {{title}}
       </h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -18,7 +18,7 @@ import { BsModalRef } from 'ngx-bootstrap';
       {{message}}
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+      <button type="button" class="btn btn-default" (click)="close()">Close</button>
     </div>
   `,
   providers: [BsModalService]
@@ -27,8 +27,16 @@ import { BsModalRef } from 'ngx-bootstrap';
 export class ErrorModalComponent {
 
   @Input() title = 'Unexpected Error';
-  @Input() message = 'Please try again later.';
+  @Input() message = 'An unexpected error occurred. Please try again later.';
+  @Input() reloadOnClose = false;
 
   constructor(public bsModalRef: BsModalRef) { }
+
+  close() {
+    this.bsModalRef.hide();
+    if (this.reloadOnClose) {
+      location.reload();
+    }
+  }
 
 }

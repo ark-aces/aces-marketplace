@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ApiClient, Service} from '../api-client/api-client.component';
 import {AuthService} from '../auth/auth-service.component';
+import {ErrorModalService} from '../app-components/error-modal-service.compoennt';
 
 @Component({
   templateUrl: './service-page.component.html'
@@ -13,10 +14,10 @@ export class ServicePageComponent implements OnInit {
   service: Service;
 
   canCreateContracts = false;
-  isLoadingForm = false;
+  isLoadingContractForm = false;
   serviceInfo;
 
-
+  private useStubData = false;
   private stub = {
     'name' : 'Testnet Aces ARK-BTC Channel Service',
     'description' : 'Testnet ACES ARK to BTC Channel service for value transfers',
@@ -86,29 +87,45 @@ export class ServicePageComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
-    private apiClient: ApiClient
+    private apiClient: ApiClient,
+    private errorModalService: ErrorModalService
   ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.serviceId = params['id'];
-      this.apiClient.getService(this.serviceId).subscribe(data => {
-        this.service = data;
-        this.isLoading = false;
-      });
+      this.apiClient.getService(this.serviceId).subscribe(
+        data => {
+          this.service = data;
+          this.isLoading = false;
+        },
+        error => {
+          console.log(error);
+          this.errorModalService.showDefaultError();
+          this.isLoading = false;
+        }
+      );
 
       if (this.authService.isAuthenticated) {
         this.canCreateContracts = true;
-        this.isLoadingForm = true;
+        this.isLoadingContractForm = true;
 
+        if (this.useStubData === true) {
+          this.serviceInfo = this.stub;
+        } else {
+          this.apiClient.getServiceInfo(this.serviceId).subscribe(
+            data => {
+              this.serviceInfo = data;
+              this.isLoadingContractForm = false;
+            },
+            error => {
+              console.log(error);
+              this.errorModalService.showDefaultError();
+            }
+          );
+        }
 
-        // this.apiClient.getServiceInfo(this.serviceId).subscribe(data => {
-        //   this.serviceInfo = data;
-        //   this.isLoadingForm = false;
-        // });
-
-        this.serviceInfo = this.stub;
-        this.isLoadingForm = false;
+        this.isLoadingContractForm = false;
       }
     });
   }

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {ApiClient, FieldError, ValidationError} from '../api-client/api-client.component';
 import {APP_CONFIG, AppConfig} from '../app-config-module';
 import {HttpErrorResponse} from '@angular/common/http';
+import {ErrorModalService} from '../app-components/error-modal-service.compoennt';
 
 class ResetPasswordForm {
   emailAddress: string;
@@ -33,6 +34,7 @@ export class ResetPasswordRequestFormComponent {
   constructor(
     private router: Router,
     private apiClient: ApiClient,
+    private errorModalService: ErrorModalService,
     @Inject(APP_CONFIG) private config: AppConfig
   ) {
     this.recaptchaSiteKey = config.recaptchaSiteKey;
@@ -72,16 +74,13 @@ export class ResetPasswordRequestFormComponent {
             }
             this.model.recaptchaCode = '';
           } else {
-            // todo: alert unexpected error
+            console.log(response);
+            this.errorModalService.showDefaultError();
           }
 
           this.isSubmitted = false;
         }
       );
-  }
-
-  onRecaptcha(code) {
-    this.model.recaptchaCode = code;
   }
 
 }

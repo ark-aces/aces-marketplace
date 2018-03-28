@@ -1,25 +1,41 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ApiClient, Contract} from '../api-client/api-client.component';
+import {ErrorModalService} from '../app-components/error-modal-service.compoennt';
 
 @Component({
   templateUrl: './contracts-page.component.html'
 })
 export class ContractsPageComponent implements OnInit {
 
+  selectedStatus: string;
   isLoading = true;
   contracts: Array<Contract> = [];
 
-  constructor(private route: ActivatedRoute, private apiClient: ApiClient) {}
+  constructor(
+    private route: ActivatedRoute,
+    private apiClient: ApiClient,
+    private errorModalService: ErrorModalService
+  ) {}
 
   ngOnInit() {
-    this.apiClient.getContracts().subscribe(
+    this.route.queryParams.subscribe(params => {
+      this.selectedStatus = params['status'];
+      this.fetchPage(params);
+    });
+  }
+
+  fetchPage(params) {
+    this.isLoading = true;
+    this.apiClient.getContracts(params).subscribe(
       data => {
         this.contracts = data.items;
+        this.isLoading = false;
       },
       error => {
-        // todo: alert error
         console.log(error);
+        this.errorModalService.showDefaultError();
+        this.isLoading = false;
       }
     );
   }

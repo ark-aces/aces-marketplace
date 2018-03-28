@@ -16,7 +16,7 @@
           </a>
         </li>
       </ul>
-      <ul *ngIf="authService.isAuthenticated" class="info-menu right-links list-inline list-unstyled">
+      <ul *ngIf="authService.user" class="info-menu right-links list-inline list-unstyled">
         <li class="username">
             {{authService.user.name}}
         </li>

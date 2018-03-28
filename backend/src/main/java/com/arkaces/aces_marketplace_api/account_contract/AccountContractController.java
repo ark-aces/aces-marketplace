@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -39,13 +38,16 @@ public class AccountContractController {
         @RequestParam(required = false) String status, 
         Pageable pageable
     ) {
-        // todo: add account to repository query
-        // todo: add status to repository query
+        AccountEntity accountEntity = accountRepository.findOne(authenticatedUser.getAccountPid());
+
+        ContractSpecificationCriteria contractSpecificationCriteria = new ContractSpecificationCriteria();
+        contractSpecificationCriteria.setAccountEntity(accountEntity);
+        contractSpecificationCriteria.setStatus(status);
+        ContractSpecification contractSpecification = new ContractSpecification(contractSpecificationCriteria);
         
-        int pageSize = 20;
-        PageRequest queryPageRequest = new PageRequest(pageable.getPageNumber(), pageSize);
-        Page<ContractListView> page = contractRepository.findAll(queryPageRequest)
+        Page<ContractListView> page = contractRepository.findAll(contractSpecification, pageable)
             .map(contractEntity -> modelMapper.map(contractEntity, ContractListView.class));
+        
         return pageViewMapper.map(page, ContractListView.class);
     }
 

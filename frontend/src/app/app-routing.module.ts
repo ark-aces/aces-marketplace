@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'terms', component: TermsPageComponent },
   { path: 'email-verification', component: EmailVerificationPageComponent },
   { path: 'contracts/browse', component: ContractsPageComponent },
-  { path: 'contracts', component: ContractsPageComponent },
+  { path: 'contracts', component: ContractsPageComponent},
   { path: 'contracts/:id', component: ContractPageComponent },
   { path: 'settings', component: SettingsPageComponent },
   { path: 'reset-password-request', component: ResetPasswordRequestPageComponent },

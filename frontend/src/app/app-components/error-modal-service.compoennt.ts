@@ -10,6 +10,15 @@ export class ErrorModalService {
   constructor(private modalService: BsModalService) {
   }
 
+  public showDefaultError() {
+    this.modalRef = this.modalService.show(ErrorModalComponent, {
+      animated: true,
+      keyboard: true,
+      backdrop: true,
+      ignoreBackdropClick: false
+    });
+  }
+
   public showError(title?: string, message?: string) {
     this.modalRef = this.modalService.show(ErrorModalComponent, {
       animated: true,
@@ -18,7 +27,7 @@ export class ErrorModalService {
       ignoreBackdropClick: false,
       initialState: {
         'title': title,
-        'message': message
+        'message': message,
       }
     });
   }

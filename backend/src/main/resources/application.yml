@@ -4,7 +4,7 @@ server:
 oauth2:
   clientId: "marketplace"
   secret: "secret"
-  tokenValiditySeconds: 3600
+  tokenValiditySeconds: 86400
 
 spring:
   datasource:

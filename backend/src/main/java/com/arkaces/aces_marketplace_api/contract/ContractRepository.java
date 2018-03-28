@@ -1,10 +1,11 @@
 package com.arkaces.aces_marketplace_api.contract;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface ContractRepository extends JpaRepository<ContractEntity, Long> {
+public interface ContractRepository extends JpaRepository<ContractEntity, Long>, JpaSpecificationExecutor<ContractEntity> {
     
     @Query(
         "select c, a, s from ContractEntity c " +
@@ -13,4 +14,5 @@ public interface ContractRepository extends JpaRepository<ContractEntity, Long> 
         "where a.pid = :accountPid and c.id = :contractId"
     )
     ContractEntity findOne(@Param("accountPid") Long accountPid, @Param("contractId") String contractId);
+
 }
