@@ -121,11 +121,11 @@ export class ServicePageComponent implements OnInit {
             error => {
               console.log(error);
               this.errorModalService.showDefaultError();
+              this.isLoadingContractForm = false;
             }
           );
         }
 
-        this.isLoadingContractForm = false;
       }
     });
   }

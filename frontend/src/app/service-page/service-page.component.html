@@ -64,7 +64,7 @@
             <i class='fa fa-circle-o-notch fa-spin'></i>
             Loading...
           </div>
-          <app-service-form *ngIf="serviceInfo" [serviceId]="serviceId" [serviceInfo]="serviceInfo"></app-service-form>
+          <app-service-form *ngIf="! isLoadingContractForm" [serviceId]="serviceId" [serviceInfo]="serviceInfo"></app-service-form>
         </div>
 
       </section>
