@@ -305,3 +305,7 @@ h1 .service-version {
   color: #aaa;
   padding-left: 8px;
 }
+
+.modal-title.alert-danger {
+  border: none;
+}
