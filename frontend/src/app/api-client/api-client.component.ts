@@ -144,9 +144,10 @@ export class ApiClient {
       });
   }
 
-  getContracts() {
+  getContracts(queryParams) {
     return this.http.get<ContractsResponse>(this.config.apiEndpoint + '/account/contracts',
       {
+        params: queryParams,
         headers: new HttpHeaders({
           'Authorization': 'Bearer ' + this.authService.accessToken
         })

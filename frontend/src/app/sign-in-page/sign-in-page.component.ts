@@ -50,8 +50,10 @@ export class SignInPageComponent implements OnInit {
             .subscribe(
               user => {
                 this.authService.user = user;
-                // const expireDate = new Date().getTime() + (1000 * result.expires_in);
-                const expireDateDays = 1;
+
+                const d = new Date();
+                d.setDate(d.getDate() + 1);
+                const expireDateDays = d;
                 this.authService.persistCookie(expireDateDays);
 
                 this.router.navigate(['/dashboard']);

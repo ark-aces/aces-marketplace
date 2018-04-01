@@ -54,21 +54,21 @@
       <section class="box ">
         <header class="panel_header">
         </header>
+
         <div class="content-body" *ngIf="! canCreateContracts">
-          To submit contracts, please <a routerLink="sign-in">Sign In</a>.
+          To submit contracts, please <a routerLink="/sign-in">sign in</a>.
         </div>
 
         <div class="content-body" *ngIf="canCreateContracts">
-          <div *ngIf="isLoadingForm" class="loading-indicator">
+          <div *ngIf="isLoadingContractForm" class="loading-indicator">
             <i class='fa fa-circle-o-notch fa-spin'></i>
             Loading...
           </div>
-
-          <app-service-form *ngIf="! isLoadingForm" [serviceId]="serviceId" [serviceInfo]="serviceInfo"></app-service-form>
+          <app-service-form *ngIf="! isLoadingContractForm" [serviceId]="serviceId" [serviceInfo]="serviceInfo"></app-service-form>
         </div>
+
       </section>
     </div>
-
   </div>
 
 </div>

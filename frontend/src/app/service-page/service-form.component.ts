@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ApiClient, FieldError} from '../api-client/api-client.component';
 import {Router} from '@angular/router';
+import {ErrorModalService} from '../app-components/error-modal-service.compoennt';
 
 class FormInput {
   public id: string;
@@ -20,7 +21,7 @@ class FormInput {
 })
 export class ServiceFormComponent implements OnInit {
 
-  constructor(private apiClient: ApiClient, private router: Router) {}
+  constructor(private apiClient: ApiClient, private router: Router, private errorModalService: ErrorModalService) {}
 
   @Input()
   serviceInfo;
@@ -87,15 +88,12 @@ export class ServiceFormComponent implements OnInit {
       })
       .subscribe(
         data => {
-          console.log('success');
-          console.log(data);
           this.router.navigate(['/contracts', data.id]);
         },
         error => {
-          console.log('error');
+          // todo: report server timeout errors more specifically
           console.log(error);
-
-          // todo: show an error modal
+          this.errorModalService.showDefaultError();
           this.hasErrors = true;
           this.isSubmitted = false;
         }

@@ -46,7 +46,8 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
             .accessTokenValiditySeconds(tokenValiditySeconds)
             .scopes("read", "write")
             .authorizedGrantTypes("password", "refresh_token")
-            .resourceIds("account");
+            .resourceIds("account")
+            .accessTokenValiditySeconds(86400);
     }
 
     @Bean

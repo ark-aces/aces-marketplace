@@ -1,9 +1,9 @@
-<div *ngIf="isLoading">
+<div *ngIf="! isLoading">
   <div class="row">
     <div class="col-xs-12">
       <div class="page-title">
         <div class="pull-left">
-          <h1 class="title">Contracts</h1>
+          <h1 class="title">{{selectedStatus | titlecase}} Contracts</h1>
         </div>
       </div>
     </div>
@@ -12,6 +12,7 @@
   <div class="row">
     <div class="col-xs-12">
       <section class="box ">
+        <header class="panel_header"></header>
         <div class="content-body">
           <table *ngIf="contracts.length > 0" class="table table-sm">
             <thead>
@@ -36,7 +37,7 @@
             </tbody>
           </table>
 
-          <div *ngIf="contracts.length == 0" class="content-body">
+          <div *ngIf="contracts.length == 0">
             No matching contracts.
           </div>
 

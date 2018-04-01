@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {ApiClient, FieldError, ValidationError} from '../api-client/api-client.component';
 import {HttpErrorResponse} from '@angular/common/http';
+import {ErrorModalService} from '../app-components/error-modal-service.compoennt';
 
 class ResetPasswordForm {
   password: string;
@@ -15,8 +16,6 @@ export class ResetPasswordFormComponent {
 
   @Input()
   code: string;
-
-  recaptchaSiteKey: string;
 
   isSubmitted = false;
   canSubmit = true;
@@ -33,7 +32,8 @@ export class ResetPasswordFormComponent {
 
   constructor(
     private router: Router,
-    private apiClient: ApiClient
+    private apiClient: ApiClient,
+    private errorModalService: ErrorModalService
   ) {
   }
 
@@ -70,7 +70,8 @@ export class ResetPasswordFormComponent {
               }
             }
           } else {
-            // todo: alert unexpected error
+            console.log(response);
+            this.errorModalService.showDefaultError();
           }
 
           this.isSubmitted = false;

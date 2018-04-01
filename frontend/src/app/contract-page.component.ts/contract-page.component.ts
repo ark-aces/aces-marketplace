@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ApiClient, Contract} from '../api-client/api-client.component';
+import {ErrorModalService} from '../app-components/error-modal-service.compoennt';
 
 class ResultRow {
   name: string;
@@ -23,7 +24,11 @@ export class ContractPageComponent implements OnInit {
   resultArrays: Array<ResultArray> = [];
   isLoading = true;
 
-  constructor(private route: ActivatedRoute, private apiClient: ApiClient) {}
+  constructor(
+    private route: ActivatedRoute,
+    private apiClient: ApiClient,
+    private errorModalService: ErrorModalService
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -66,9 +71,8 @@ export class ContractPageComponent implements OnInit {
           this.isLoading = false;
         },
         error => {
-          // todo: show error modal
-          console.log('error occurred');
           console.log(error);
+          this.errorModalService.showDefaultError();
           this.isLoading = false;
         }
       );
