@@ -21,8 +21,14 @@ public class ContractSpecification implements Specification<ContractEntity> {
 
         Join<ContractEntity, AccountEntity> accountEntityJoin = root.join("accountEntity", JoinType.INNER);
 
+        predicates.add(cb.notEqual(root.get("status"), "new"));
+
         if (! StringUtils.isEmpty(criteria.getStatus())) {
-            predicates.add(cb.equal(root.get("status"), criteria.getStatus()));
+            if (criteria.getStatus().startsWith("pending")) {
+                predicates.add(cb.like(root.get("status"), "pending%"));
+            } else {
+                predicates.add(cb.equal(root.get("status"), criteria.getStatus()));
+            }
         }
 
         if (criteria.getAccountEntity() != null) {
