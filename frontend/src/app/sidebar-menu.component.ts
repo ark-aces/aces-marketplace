@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {AuthService} from './auth/auth-service.component';
 
@@ -7,14 +7,15 @@ import {AuthService} from './auth/auth-service.component';
   selector: 'app-sidebar-menu',
   templateUrl: 'sidebar-menu.component.html'
 })
-export class SidebarMenuComponent {
+export class SidebarMenuComponent implements OnInit {
 
   topLevelRoute: string;
 
   constructor(public authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
     // Subscribe to route changes and assign the top-level route to the parentRoute variable
     this.router.events.subscribe(() => {
-      this.topLevelRoute = this.router.url.split('/')[1];
+      const re = /\/|\?/;
+      this.topLevelRoute = this.router.url.split(re)[1];
     });
   }
 
