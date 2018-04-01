@@ -26,6 +26,7 @@
     "ng-recaptcha": "^3.0.3",
     "ngx-bootstrap": "^2.0.3",
     "ngx-cookie-service": "^1.0.10",
+    "ngx-markdown": "^1.5.2",
     "ngx-webstorage": "^2.0.1",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"

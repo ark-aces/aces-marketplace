@@ -11,19 +11,6 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-12">
-      <section class="box ">
-        <header class="panel_header">
-          <h2 class="title pull-left">Description</h2>
-        </header>
-        <div class="content-body">
-            {{service.description}}
-        </div>
-      </section>
-    </div>
-  </div>
-
-  <div class="row">
     <div class="col-xs-6">
       <section class="box ">
         <header class="panel_header">
@@ -42,6 +29,34 @@
         </header>
         <div class="content-body">
           <a href="{{service.websiteUrl}}">{{service.websiteUrl}}</a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <section class="box ">
+        <header class="panel_header">
+          <h2 class="title pull-left">Description</h2>
+        </header>
+        <div class="content-body">
+          {{service.description}}
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <section class="box ">
+        <header class="panel_header">
+          <h2 class="title pull-left">Instructions</h2>
+        </header>
+        <div class="content-body">
+          <markdown>
+            {{serviceInfo.instructions}}
+          </markdown>
         </div>
       </section>
     </div>

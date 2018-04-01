@@ -35,6 +35,7 @@ import {ContractPageComponent} from './contract-page.component.ts/contract-page.
 import {ModalModule} from 'ngx-bootstrap';
 import {ErrorModalComponent} from './app-components/error-modal.component';
 import {ErrorModalService} from './app-components/error-modal-service.compoennt';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import {ErrorModalService} from './app-components/error-modal-service.compoennt'
     ErrorModalComponent
   ],
   imports: [
+    MarkdownModule.forRoot(),
     ModalModule.forRoot(),
     RecaptchaModule.forRoot(),
     BrowserModule,

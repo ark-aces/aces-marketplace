@@ -23,7 +23,10 @@ export class ContractPageComponent implements OnInit, OnDestroy {
   contract: Contract;
   resultRows: Array<ResultRow> = [];
   resultArrays: Array<ResultArray> = [];
-  isLoading = true;
+
+  isLoadingContractForm = true;
+  isLoadingServiceInfo = true;
+  serviceInfo;
 
   interval: any;
 
@@ -39,7 +42,6 @@ export class ContractPageComponent implements OnInit, OnDestroy {
 
       this.checkForUpdates();
       this.interval = setInterval(() => {
-        console.log('checking for updates' + new Date());
         this.checkForUpdates();
       }, 3000);
     });
@@ -49,13 +51,25 @@ export class ContractPageComponent implements OnInit, OnDestroy {
     this.apiClient.getContract(this.id).subscribe(
       (data: Contract ) => {
         this.contract = data;
+
+        this.apiClient.getServiceInfo(data.serviceId).subscribe(
+          serviceInfo => {
+            this.serviceInfo = serviceInfo;
+            this.isLoadingServiceInfo = false;
+          },
+          error => {
+            console.log(error);
+            this.errorModalService.showDefaultError();
+            this.isLoadingServiceInfo = false;
+          });
+
         this.extractResults(data);
-        this.isLoading = false;
+        this.isLoadingContractForm = false;
       },
       error => {
         console.log(error);
         this.errorModalService.showDefaultError();
-        this.isLoading = false;
+        this.isLoadingContractForm = false;
       }
     );
   }
@@ -98,6 +112,10 @@ export class ContractPageComponent implements OnInit, OnDestroy {
     }
     this.resultRows = resultRows;
     this.resultArrays = resultArrays;
+  }
+
+  isLoading() {
+    return this.isLoadingContractForm || this.isLoadingServiceInfo;
   }
 
   ngOnDestroy() {
