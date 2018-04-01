@@ -45,20 +45,23 @@ export class ContractPageComponent implements OnInit {
             if (this.contract.results.hasOwnProperty(key)) {
               const result = this.contract.results[key];
               if (result instanceof Array) {
-                const nestedResultRows: Array<ResultRow> = [];
-                for (const nestedKey in result) {
-                  if (result.hasOwnProperty(nestedKey)) {
-                    const nestedResult = result[nestedKey];
-                    nestedResultRows.push({
-                      name: nestedKey,
-                      value: nestedResult
-                    });
+                for (let i = 0; i < result.length; i++) {
+                  const subResult = result[i];
+                  const nestedResultRows: Array<ResultRow> = [];
+                  for (const nestedKey in subResult) {
+                    if (subResult.hasOwnProperty(nestedKey)) {
+                      const nestedResult = subResult[nestedKey];
+                      nestedResultRows.push({
+                        name: nestedKey,
+                        value: nestedResult
+                      });
+                    }
                   }
+                  this.resultArrays.push({
+                    name: key + '[' + i + ']',
+                    rows: nestedResultRows
+                  });
                 }
-                this.resultArrays.push({
-                  name: key,
-                  rows: nestedResultRows
-                });
               } else {
                 this.resultRows.push({
                   name: key,
@@ -67,7 +70,6 @@ export class ContractPageComponent implements OnInit {
               }
             }
           }
-
           this.isLoading = false;
         },
         error => {
