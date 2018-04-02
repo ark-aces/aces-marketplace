@@ -54,9 +54,7 @@
           <h2 class="title pull-left">Instructions</h2>
         </header>
         <div class="content-body">
-          <markdown>
-            {{serviceInfo.instructions}}
-          </markdown>
+          <markdown [data]="serviceInfo.instructions"></markdown>
         </div>
       </section>
     </div>
