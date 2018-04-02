@@ -51,13 +51,17 @@ export class AuthService implements OnInit {
   checkSession() {
     console.log('checking session');
     if (this.isAuthenticated && ! this.cookieService.get('accessToken')) {
-      this.logout();
-      this.errorModalService.showError(
-        'Session Expired',
-        'Your session token has expired. Please sign in again.'
-        );
-      this.router.navigate(['/sign-in']);
+      this.expireSession();
     }
+  }
+
+  expireSession() {
+    this.logout();
+    this.errorModalService.showError(
+      'Session Expired',
+      'Your session token has expired. Please sign in again.'
+    );
+    this.router.navigate(['/sign-in']);
   }
 
   logout() {

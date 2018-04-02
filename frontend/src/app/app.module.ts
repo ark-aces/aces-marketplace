@@ -8,7 +8,7 @@ import {TopNavComponent} from './top-nav.component';
 import {SidebarMenuComponent} from './sidebar-menu.component';
 import {ServicePageComponent} from './service-page/service-page.component';
 import {DashboardPageComponent} from './dashboard-page/dashboard-page.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ApiClient} from './api-client/api-client.component';
 import {AppConfigModule} from './app-config-module';
 import {ServiceFormComponent} from './service-page/service-form.component';
@@ -36,6 +36,7 @@ import {ModalModule} from 'ngx-bootstrap';
 import {ErrorModalComponent} from './app-components/error-modal.component';
 import {ErrorModalService} from './app-components/error-modal-service.compoennt';
 import { MarkdownModule } from 'ngx-markdown';
+import {TokenInterceptor} from './auth/token-interceptor';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,12 @@ import { MarkdownModule } from 'ngx-markdown';
     ApiClient,
     AuthService,
     CookieService,
-    ErrorModalService
+    ErrorModalService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    }
   ],
   entryComponents: [ErrorModalComponent],
   bootstrap: [AppComponent]
