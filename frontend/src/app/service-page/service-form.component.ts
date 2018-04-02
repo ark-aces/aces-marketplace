@@ -32,6 +32,7 @@ export class ServiceFormComponent implements OnInit {
 
   isSubmitted = false;
   hasErrors = false;
+  errorMessage: string;
 
   formInputs: Array<FormInput> = [];
 
@@ -95,6 +96,7 @@ export class ServiceFormComponent implements OnInit {
           if (error.status === 400) {
             console.log(error);
             const body: ValidationError = error.error;
+            this.errorMessage = body.message;
             this.formInputs.forEach(input => {
               input.fieldErrors = [];
               input.hasErrors = false;

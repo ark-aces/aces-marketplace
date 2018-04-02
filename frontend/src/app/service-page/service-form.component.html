@@ -3,6 +3,9 @@
   <div *ngIf="hasErrors" class="alert alert-error">
     <span class="glyphicon glyphicon-alert alert-icon" aria-hidden="true"></span>
     Please correct the errors below.
+    <ul>
+      <li>{{errorMessage}}</li>
+    </ul>
   </div>
 
   <div class="row">
