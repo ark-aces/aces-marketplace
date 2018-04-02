@@ -25,5 +25,8 @@ by different organizations and use cases.
 The ACES Marketplace tracks and reviews services to establish trust for the consumer.
 
 
-![View Contract Screenshot](screenshot-view-contract.png)
+![List Services Screenshot](images/screenshot-list-services.png)
+
+![View Contract Screenshot](images/screenshot-view-contract.png)
+
 
