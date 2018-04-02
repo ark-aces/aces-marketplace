@@ -327,5 +327,10 @@ p {
 }
 
 .page-title h1 {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+section header .title {
+  margin-top: 0;
+  margin-bottom: 0;
 }
