@@ -325,3 +325,7 @@ h1 .service-version {
 p {
   font-size: 14px;
 }
+
+.page-title h1 {
+  margin-bottom: 5px;
+}
