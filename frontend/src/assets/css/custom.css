@@ -309,3 +309,15 @@ h1 .service-version {
 .modal-title.alert-danger {
   border: none;
 }
+
+.label {
+  padding: 6px 10px;
+  font-weight: 400;
+  color: #fff;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 5px;
+  text-shadow: none;
+  font-size: 0.9em;
+  margin-right: 5px;
+}
