@@ -9,7 +9,7 @@ import {ErrorModalService} from '../app-components/error-modal-service.compoennt
 })
 export class ServicePageComponent implements OnInit {
 
-  isLoading = true;
+  isLoadingService = true;
   serviceId: string;
   service: Service;
 
@@ -97,12 +97,12 @@ export class ServicePageComponent implements OnInit {
       this.apiClient.getService(this.serviceId).subscribe(
         data => {
           this.service = data;
-          this.isLoading = false;
+          this.isLoadingService = false;
         },
         error => {
           console.log(error);
           this.errorModalService.showDefaultError();
-          this.isLoading = false;
+          this.isLoadingService = false;
         }
       );
 
@@ -128,6 +128,10 @@ export class ServicePageComponent implements OnInit {
 
       }
     });
+  }
+
+  isLoading() {
+    return this.isLoadingService || (this.canCreateContracts && this.isLoadingContractForm);
   }
 
 }
