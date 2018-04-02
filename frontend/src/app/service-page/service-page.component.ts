@@ -131,7 +131,11 @@ export class ServicePageComponent implements OnInit {
   }
 
   isLoading() {
-    return this.isLoadingService || (this.canCreateContracts && this.isLoadingContractForm);
+    if (this.canCreateContracts) {
+      return this.isLoadingService || this.isLoadingContractForm;
+    } else {
+      return this.isLoadingService;
+    }
   }
 
 }

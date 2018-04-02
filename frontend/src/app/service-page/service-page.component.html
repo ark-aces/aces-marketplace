@@ -48,7 +48,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div *ngIf="canCreateContracts" class="row">
     <div class="col-xs-12">
       <section class="box ">
         <header class="panel_header">
@@ -66,9 +66,6 @@
   <div class="row">
     <div class="col-xs-12">
       <section class="box ">
-        <header class="panel_header">
-        </header>
-
         <div class="content-body" *ngIf="! canCreateContracts">
           To submit contracts, please <a routerLink="/sign-in">sign in</a>.
         </div>
@@ -78,7 +75,7 @@
             <i class='fa fa-circle-o-notch fa-spin'></i>
             Loading...
           </div>
-          <app-service-form *ngIf="! isLoadingContractForm" [serviceId]="serviceId" [serviceInfo]="serviceInfo"></app-service-form>
+          <app-service-form [serviceId]="serviceId" [serviceInfo]="serviceInfo"></app-service-form>
         </div>
 
       </section>

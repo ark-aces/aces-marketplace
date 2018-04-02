@@ -103,20 +103,19 @@ section header {
   min-height: 0;
 }
 
-
 section header .title, section .content-body {
-  padding-left: 30px;
-  padding-top: 20px;
+  padding-left: 20px;
+}
+section header .title {
+  padding-top: 5px;
+  margin-top: 15px;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 section .content-body {
   padding-bottom: 20px;
+  padding-top: 15px;
 }
-
-section header .title {
-  margin-top: 10px;
-  margin-bottom: 0;
-}
-
 
 
 .btn-primary.active.focus,
@@ -324,13 +323,9 @@ h1 .service-version {
 
 p {
   font-size: 14px;
+  margin: 10px 0;
 }
 
 .page-title h1 {
   margin-bottom: 10px;
-}
-
-section header .title {
-  margin-top: 0;
-  margin-bottom: 0;
 }
