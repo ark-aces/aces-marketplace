@@ -37,6 +37,7 @@ import {ErrorModalComponent} from './app-components/error-modal.component';
 import {ErrorModalService} from './app-components/error-modal-service.compoennt';
 import { MarkdownModule } from 'ngx-markdown';
 import {TokenInterceptor} from './auth/token-interceptor';
+import {ClipboardModule} from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import {TokenInterceptor} from './auth/token-interceptor';
     ErrorModalComponent
   ],
   imports: [
+    ClipboardModule,
     MarkdownModule.forRoot(),
     ModalModule.forRoot(),
     RecaptchaModule.forRoot(),

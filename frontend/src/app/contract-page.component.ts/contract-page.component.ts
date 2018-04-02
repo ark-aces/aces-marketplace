@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ApiClient, Contract} from '../api-client/api-client.component';
 import {ErrorModalService} from '../app-components/error-modal-service.compoennt';
-import {Subject} from 'rxjs/Subject';
 
 class ResultRow {
   name: string;
@@ -12,6 +11,12 @@ class ResultRow {
 class ResultArray {
   name: string;
   rows: Array<ResultRow>;
+}
+
+class ArkPaymentParams {
+  arkSmartBridge: string;
+  serviceArkAddress: string;
+  requiredArk: string;
 }
 
 @Component({
@@ -29,6 +34,9 @@ export class ContractPageComponent implements OnInit, OnDestroy {
   serviceInfo;
 
   interval: any;
+
+  isArkPayable = false;
+  arkPaymentParams: ArkPaymentParams;
 
   constructor(
     private route: ActivatedRoute,
@@ -55,6 +63,21 @@ export class ContractPageComponent implements OnInit, OnDestroy {
         this.apiClient.getServiceInfo(data.serviceId).subscribe(
           serviceInfo => {
             this.serviceInfo = serviceInfo;
+
+            // todo: replace with service interface arkSmartBridgePayable
+            const outputProperties = this.serviceInfo.outputSchema.properties;
+            this.isArkPayable = outputProperties.hasOwnProperty('arkSmartBridge')
+              && outputProperties.hasOwnProperty('serviceArkAddress')
+              && outputProperties.hasOwnProperty('requiredArk');
+
+            if (this.isArkPayable) {
+              this.arkPaymentParams = {
+                arkSmartBridge: data.results['arkSmartBridge'],
+                serviceArkAddress: data.results['serviceArkAddress'],
+                requiredArk: data.results['requiredArk']
+              };
+            }
+
             this.isLoadingServiceInfo = false;
           },
           error => {
@@ -115,7 +138,7 @@ export class ContractPageComponent implements OnInit, OnDestroy {
   }
 
   isLoading() {
-    return this.isLoadingContractForm || this.isLoadingServiceInfo;
+    return  this.isLoadingContractForm || this.isLoadingServiceInfo;
   }
 
   ngOnDestroy() {

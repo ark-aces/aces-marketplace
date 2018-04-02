@@ -25,6 +25,7 @@
     "core-js": "^2.4.1",
     "ng-recaptcha": "^3.0.3",
     "ngx-bootstrap": "^2.0.3",
+    "ngx-clipboard": "^10.0.0",
     "ngx-cookie-service": "^1.0.10",
     "ngx-markdown": "^1.5.2",
     "ngx-webstorage": "^2.0.1",

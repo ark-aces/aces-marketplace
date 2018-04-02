@@ -9,6 +9,13 @@
     </div>
   </div>
 
+  <div *ngIf="contract.status == 'pendingPayment'" class="alert alert-warning" role="alert">
+    <p>
+      <span class="glyphicon glyphicon-alert alert-icon" aria-hidden="true"></span>
+      Payment Required
+    </p>
+  </div>
+
   <div class="row">
     <div class="col-xs-12">
       <section class="box ">
@@ -16,7 +23,7 @@
           <div class="row">
             <div class="col-lg-4">
               <h4>Status</h4>
-              <p>{{contract.status | titlecase}}</p>
+              <p>{{contract.status}}</p>
             </div>
             <div class="col-lg-4">
               <h4>Created At</h4>
@@ -28,6 +35,30 @@
             </div>
           </div>
         </div>
+      </section>
+    </div>
+  </div>
+
+  <div *ngIf="isArkPayable && contract.status === 'pendingPayment'" class="row">
+    <div class="col-xs-12">
+      <section class="box ">
+        <div class="content-body">
+            <h4>Ark Payment Required</h4>
+            <p>Execute your contract by sending an Ark transaction of the required amount to the Service Ark Address,
+              including the SmartBridge Text to identify this contract:</p>
+
+            <p><strong>Service Ark Address:</strong><br />
+            {{ arkPaymentParams.serviceArkAddress }}
+            <a class="btn btn-xs btn-default copy-button" ngxClipboard [cbContent]="arkPaymentParams.serviceArkAddress">Copy</a></p>
+
+            <p><strong>Required Ark Amount:</strong><br />
+            {{ arkPaymentParams.requiredArk }}
+            <a class="btn btn-xs btn-default copy-button" ngxClipboard [cbContent]="arkPaymentParams.requiredArk">Copy</a></p>
+
+            <p><strong>SmartBridge Text:</strong><br />
+            {{ arkPaymentParams.arkSmartBridge }}
+            <a class="btn btn-xs btn-default copy-button" ngxClipboard [cbContent]="arkPaymentParams.arkSmartBridge">Copy</a></p>
+          </div>
       </section>
     </div>
   </div>
