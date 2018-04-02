@@ -27,4 +27,11 @@ public class ValidationException extends RuntimeException {
         this.message = message;
         this.fieldErrors = fieldErrors;
     }
+
+    public ValidationException(String code, String message, List<FieldError> fieldErrors) {
+        super(message);
+        this.code = code;
+        this.message = message;
+        this.fieldErrors = fieldErrors;
+    }
 }

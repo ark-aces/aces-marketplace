@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ApiClient, FieldError} from '../api-client/api-client.component';
+import {ApiClient, FieldError, ValidationError} from '../api-client/api-client.component';
 import {Router} from '@angular/router';
 import {ErrorModalService} from '../app-components/error-modal-service.compoennt';
+import {HttpErrorResponse} from '@angular/common/http';
 
 class FormInput {
   public id: string;
@@ -90,10 +91,25 @@ export class ServiceFormComponent implements OnInit {
         data => {
           this.router.navigate(['/contracts', data.id]);
         },
-        error => {
-          // todo: report server timeout errors more specifically
-          console.log(error);
-          this.errorModalService.showDefaultError();
+        (error: HttpErrorResponse) => {
+          if (error.status === 400) {
+            console.log(error);
+            const body: ValidationError = error.error;
+            this.formInputs.forEach(input => {
+              input.fieldErrors = [];
+              input.hasErrors = false;
+              body.fieldErrors.forEach((fieldError: FieldError) => {
+                if (input.id === fieldError.field) {
+                  input.fieldErrors.push(fieldError);
+                  input.hasErrors = true;
+                }
+              });
+            });
+          } else {
+            // todo: report server timeout errors more specifically
+            console.log(error);
+            this.errorModalService.showDefaultError();
+          }
           this.hasErrors = true;
           this.isSubmitted = false;
         }
