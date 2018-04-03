@@ -47,15 +47,15 @@
             <p>Execute your contract by sending an Ark transaction of the required amount to the Service Ark Address,
               including the SmartBridge Text to identify this contract:</p>
 
-            <p><strong>Service Ark Address:</strong><br />
+            <p><strong>Service Ark Address:</strong>
             {{ arkPaymentParams.serviceArkAddress }}
             <a class="btn btn-xs btn-default copy-button" ngxClipboard [cbContent]="arkPaymentParams.serviceArkAddress">Copy</a></p>
 
-            <p><strong>Required Ark Amount:</strong><br />
+            <p><strong>Required Ark Amount:</strong>
             {{ arkPaymentParams.requiredArk }}
             <a class="btn btn-xs btn-default copy-button" ngxClipboard [cbContent]="arkPaymentParams.requiredArk">Copy</a></p>
 
-            <p><strong>SmartBridge Text:</strong><br />
+            <p><strong>SmartBridge Text:</strong>
             {{ arkPaymentParams.arkSmartBridge }}
             <a class="btn btn-xs btn-default copy-button" ngxClipboard [cbContent]="arkPaymentParams.arkSmartBridge">Copy</a></p>
           </div>
