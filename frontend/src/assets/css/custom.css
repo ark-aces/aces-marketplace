@@ -114,7 +114,7 @@ section header .title {
 }
 section .content-body {
   padding-bottom: 20px;
-  padding-top: 15px;
+  padding-top: 25px;
 }
 
 
@@ -323,7 +323,7 @@ h1 .service-version {
 
 p {
   font-size: 14px;
-  margin: 10px 0;
+  margin: 0 0;
 }
 
 .page-title h1 {
