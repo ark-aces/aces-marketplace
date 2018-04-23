@@ -24,6 +24,7 @@ export class ServicesComponent implements OnInit {
       .subscribe(
         response => {
           // todo: pagination
+          console.log(response);
           this.services = response.items;
           this.loading = false;
         },

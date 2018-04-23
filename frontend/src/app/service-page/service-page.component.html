@@ -35,6 +35,51 @@
     </div>
   </div>
 
+
+
+  <div class="row">
+    <div class="col-xs-4">
+      <section class="box">
+        <header class="panel_header">
+          <h2 class="title pull-left">
+            Flat Fee
+          </h2>
+        </header>
+        <div class="div content-body panel panel-default">
+          {{service.flatFee}}
+        </div>
+      </section>
+    </div>
+
+    <div class="col-xs-4">
+      <section class="box">
+        <header class="panel_header">
+          <h2 class="title pull-left">
+            Percent Fee
+          </h2>
+        </header>
+        <div class="div content-body">
+          {{service.percentFee}}%
+        </div>
+      </section>
+    </div>
+
+    <div class="col-xs-4">
+      <section class="box">
+        <header class="panel_header">
+          <h2 class="title pull-left">
+            Capacity
+          </h2>
+        </header>
+        <div class="div content-body" *ngFor="let capacity of service.capacities">
+            {{ capacity.value }}
+            {{ capacity.unit }}
+        </div>
+      </section>
+    </div>
+  </div>
+
+
   <div class="row">
     <div class="col-xs-12">
       <section class="box ">
@@ -60,6 +105,9 @@
       </section>
     </div>
   </div>
+
+
+
 
   <h3>Create Contract</h3>
 

@@ -3,6 +3,11 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {APP_CONFIG, AppConfig} from '../app-config-module';
 import {AuthService} from '../auth/auth-service.component';
 
+export interface Capacity {
+  unit: string;
+  value: number;
+}
+
 export interface Service {
   id: string;
   url: string;
@@ -10,7 +15,11 @@ export interface Service {
   version: string;
   description: string;
   websiteUrl: string;
+  isTestnet: boolean;
   createdAt: string;
+  capacities: Array<Capacity>;
+  flatFee: number;
+  percentFee: number;
 }
 
 export interface ServicesResponse {

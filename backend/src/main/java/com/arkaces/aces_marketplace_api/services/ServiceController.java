@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ServiceController {
 
     private final ServiceRepository serviceRepository;
-    private final ModelMapper modelMapper;
+    private final ServiceMapper serviceMapper;
     private final PageViewMapper pageViewMapper;
     private final ServiceClient serviceClient;
     
@@ -30,7 +30,7 @@ public class ServiceController {
         int pageSize = 20;
         PageRequest queryPageRequest = new PageRequest(pageable.getPageNumber(), pageSize);
         Page<Service> page = serviceRepository.findAll(queryPageRequest)
-            .map(serviceEntity -> modelMapper.map(serviceEntity, Service.class));
+            .map(serviceMapper::map);
         return pageViewMapper.map(page, Service.class);
     }
 
@@ -40,7 +40,7 @@ public class ServiceController {
         if (serviceEntity == null) {
             throw new NotFoundException(ErrorCodes.NOT_FOUND, "Service not found.");
         }
-        return modelMapper.map(serviceEntity, Service.class);
+        return serviceMapper.map(serviceEntity);
     }
     
     @GetMapping("/services/{id}/info")

@@ -1,6 +1,10 @@
 package com.arkaces.aces_marketplace_api.services;
 
+import com.arkaces.aces_marketplace_api.service_client.Capacity;
 import lombok.Data;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 public class Service {
@@ -11,4 +15,8 @@ public class Service {
     private String description;
     private String websiteUrl;
     private String createdAt;
+    private Boolean isTestnet;
+    private List<Capacity> capacities;
+    private BigDecimal flatFee;
+    private BigDecimal percentFee;
 }

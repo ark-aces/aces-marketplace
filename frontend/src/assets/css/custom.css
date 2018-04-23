@@ -328,3 +328,47 @@ p {
 .page-title h1 {
   margin-bottom: 10px;
 }
+
+.capacity-box {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.capacity-box .panel-heading {
+}
+
+.capacity-box .panel-body {
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+}
+
+.service-title {
+  font-weight: bold;
+}
+
+.service-listing a:hover, .service-listing a:focus {
+  text-decoration: none !important;
+}
+
+.service-description {
+  margin-left: 5px;
+  text-decoration: none !important;
+  color: #555;
+}
+
+.fees-box {
+  margin-top: 10px;
+  text-align: center;
+  color: #555;
+}
+
+.fees-box .panel-heading {
+
+}
+
+.fees-box .panel-body {
+  font-size: 18px;
+  font-weight: bold;
+}
+

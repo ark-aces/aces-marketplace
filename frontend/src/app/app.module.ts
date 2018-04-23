@@ -38,6 +38,10 @@ import {ErrorModalService} from './app-components/error-modal-service.compoennt'
 import { MarkdownModule } from 'ngx-markdown';
 import {TokenInterceptor} from './auth/token-interceptor';
 import {ClipboardModule} from 'ngx-clipboard';
+import {ServiceCapacityBoxComponent} from './app-components/service-capacity-box.component';
+import {ServiceFeesBoxComponent} from './app-components/service-fees-box.component';
+import {ServicePercentFeesBoxComponent} from './app-components/service-percent-fees-box.component';
+
 
 @NgModule({
   declarations: [
@@ -63,6 +67,9 @@ import {ClipboardModule} from 'ngx-clipboard';
     ResetPasswordFormComponent,
     ResetPasswordRequestFormComponent,
     ServiceFormComponent,
+    ServiceCapacityBoxComponent,
+    ServiceFeesBoxComponent,
+    ServicePercentFeesBoxComponent,
     FormOptionalComponent,
     ErrorModalComponent
   ],
