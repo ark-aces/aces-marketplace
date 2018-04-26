@@ -16,11 +16,23 @@
           <label for="{{formInput.id}}">{{formInput.label}}:</label>
           <app-form-optional *ngIf="formInput.isOptional"></app-form-optional>
 
-          <textarea *ngSwitchCase="'text'" [(ngModel)]="formInput.value" id="{{formInput.id}}" name="{{formInput.id}}"
-                 class="form-control" placeholder="{{formInput.placeholder}}"></textarea>
+          <textarea
+            *ngSwitchCase="'text'"
+            [(ngModel)]="formInput.value"
+            id="{{formInput.id}}"
+            name="{{formInput.id}}"
+            class="form-control"
+            placeholder="{{formInput.placeholder}}">
+          </textarea>
 
-          <input *ngSwitchDefault [(ngModel)]="formInput.value" id="{{formInput.id}}" name="{{formInput.id}}"
-                 class="form-control" type="{{formInput.type}}" placeholder="{{formInput.placeholder}}"/>
+          <input
+            *ngSwitchDefault
+            [(ngModel)]="formInput.value"
+            id="{{formInput.id}}"
+            name="{{formInput.id}}"
+            class="form-control"
+            type="{{formInput.type}}"
+            placeholder="{{formInput.placeholder}}"/>
 
           <ul class="validation-errors" *ngIf="formInput.hasErrors">
             <li *ngFor="let fieldError of formInput.fieldErrors">

@@ -115,10 +115,10 @@
     <div class="col-xs-12">
       <section class="box ">
         <div class="content-body" *ngIf="! canCreateContracts">
-          To submit contracts, please <a routerLink="/sign-in">sign in</a>.
+          To view submitted contracts, please <a routerLink="/sign-in">sign in</a>.
         </div>
 
-        <div class="content-body" *ngIf="canCreateContracts">
+        <div class="content-body">
           <div *ngIf="isLoadingContractForm" class="loading-indicator">
             <i class='fa fa-circle-o-notch fa-spin'></i>
             Loading...

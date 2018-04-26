@@ -136,21 +136,20 @@ export class ApiClient {
   }
 
   createContract(serviceId: string, createContractRequest: CreateContractRequest) {
-    return this.http.post<Contract>(this.config.apiEndpoint + '/services/' + serviceId + '/contracts', createContractRequest,
-      {
+    let options = {};
+    if (this.authService.isAuthenticated) {
+      options = {
         headers: new HttpHeaders({
           'Authorization': 'Bearer ' + this.authService.accessToken
         })
-      });
+      };
+    }
+      return this.http.post<Contract>(this.config.apiEndpoint + '/services/' + serviceId + '/contracts', createContractRequest,
+        options);
   }
 
   getContract(contractId: string) {
-    return this.http.get<Contract>(this.config.apiEndpoint + '/account/contracts/' + contractId,
-      {
-        headers: new HttpHeaders({
-          'Authorization': 'Bearer ' + this.authService.accessToken
-        })
-      });
+    return this.http.get<Contract>(this.config.apiEndpoint + '/contracts/' + contractId);
   }
 
   getContracts(queryParams) {

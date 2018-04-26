@@ -13,7 +13,6 @@ export class ServicePageComponent implements OnInit {
   serviceId: string;
   service: Service;
 
-  canCreateContracts = false;
   isLoadingContractForm = false;
   serviceInfo;
 
@@ -106,8 +105,6 @@ export class ServicePageComponent implements OnInit {
         }
       );
 
-      if (this.authService.isAuthenticated) {
-        this.canCreateContracts = true;
         this.isLoadingContractForm = true;
 
         if (this.useStubData === true) {
@@ -126,16 +123,12 @@ export class ServicePageComponent implements OnInit {
           );
         }
 
-      }
+
     });
   }
 
   isLoading() {
-    if (this.canCreateContracts) {
       return this.isLoadingService || this.isLoadingContractForm;
-    } else {
-      return this.isLoadingService;
-    }
   }
 
 }
