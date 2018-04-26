@@ -12,18 +12,18 @@ import com.arkaces.aces_marketplace_api.services.ServiceRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
+import javax.validation.constraints.Null;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ContractController {
@@ -43,7 +43,13 @@ public class ContractController {
         @PathVariable String serviceId,
         @RequestBody CreateContractRequest createContractRequest
     ) {
-        AccountEntity accountEntity = accountRepository.findOne(authenticatedUser.getAccountPid());
+
+        AccountEntity accountEntity = null;
+
+        if(authenticatedUser != null){
+            accountEntity = accountRepository.findOne(authenticatedUser.getAccountPid());
+        }
+
 
         ServiceEntity serviceEntity = serviceRepository.findOneById(serviceId);
         if (serviceEntity == null) {
@@ -93,6 +99,36 @@ public class ContractController {
         contractEntity.setRemoteContractId(remoteContractResponse.getId());
         contractEntity.setStatus(remoteContractResponse.getStatus());
         contractRepository.save(contractEntity);
+
+        return contractMapper.map(contractEntity, remoteContractResponse);
+    }
+
+    @GetMapping("/contracts/{contractId}")
+    public Contract getContract(
+            @PathVariable String contractId
+    ) {
+        ContractEntity contractEntity = contractRepository.findOneById(contractId);
+        if (contractEntity == null) {
+            throw new NotFoundException(ErrorCodes.NOT_FOUND, "Contract not found");
+        }
+
+        String serviceUrl = contractEntity.getServiceEntity().getUrl();
+        String url = serviceUrl + "/contracts/" + contractEntity.getRemoteContractId();
+
+        RemoteContractResponse remoteContractResponse;
+        try {
+            remoteContractResponse = serviceClient.getContract(url);
+        } catch (Exception e) {
+            throw new ValidationException(ErrorCodes.SERVICE_CONTRACT_REQUEST_FAILED, "Failed to get service contract", e);
+        }
+
+        // update status if changed
+        if (! remoteContractResponse.getStatus().equals(contractEntity.getStatus())) {
+            log.info("Updating contract status for contract id " + contractId + " from "
+                    + contractEntity.getStatus() + " to " + remoteContractResponse.getStatus());
+            contractEntity.setStatus(remoteContractResponse.getStatus());
+            contractRepository.save(contractEntity);
+        }
 
         return contractMapper.map(contractEntity, remoteContractResponse);
     }

@@ -15,4 +15,5 @@ public interface ContractRepository extends JpaRepository<ContractEntity, Long>,
     )
     ContractEntity findOne(@Param("accountPid") Long accountPid, @Param("contractId") String contractId);
 
+    ContractEntity findOneById(String id);
 }
