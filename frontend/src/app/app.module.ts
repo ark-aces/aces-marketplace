@@ -41,7 +41,6 @@ import {ClipboardModule} from 'ngx-clipboard';
 import {ServiceCapacityBoxComponent} from './app-components/service-capacity-box.component';
 import {ServiceFeesBoxComponent} from './app-components/service-fees-box.component';
 import {ServicePercentFeesBoxComponent} from './app-components/service-percent-fees-box.component';
-import { SidebarHighlightDirective } from './directives/sidebar-highlight.directive';
 
 
 @NgModule({
@@ -73,7 +72,6 @@ import { SidebarHighlightDirective } from './directives/sidebar-highlight.direct
     ServicePercentFeesBoxComponent,
     FormOptionalComponent,
     ErrorModalComponent,
-    SidebarHighlightDirective
   ],
   imports: [
     ClipboardModule,

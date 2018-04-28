@@ -372,3 +372,6 @@ p {
   font-weight: bold;
 }
 
+li:hover{
+  background: #dddddd;
+}

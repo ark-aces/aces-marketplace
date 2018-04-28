@@ -2,7 +2,7 @@
   <div class="page-sidebar-wrapper" id="main-menu-wrapper">
 
     <ul style="padding-top:1em">
-      <li appSidebarHighlight routerLinkActive="open">
+      <li routerLinkActive="open">
         <a routerLink="/dashboard" routerLinkActive="active">
           <i class="fa fa-dashboard"></i>
           <span class="title" class="hidden-xs">Dashboard</span>
@@ -10,7 +10,7 @@
       </li>
 
 
-      <li appSidebarHighlight routerLinkActive="open">
+      <li routerLinkActive="open">
         <a routerLink="/services/browse" routerLinkActive="active">
           <i class="fa fa-gears"></i>
           <span class="title" class="hidden-xs">Services</span>
@@ -18,7 +18,7 @@
         </a>
       </li>
       <li *ngIf="this.topLevelRoute === 'services'"
-          appSidebarHighlight class="sub-menu" routerLinkActive="open">
+          class="sub-menu" routerLinkActive="open">
         <a routerLink="/services/browse" routerLinkActive="active">
           <i class="fa fa-eye"></i>
           <span class="hidden-xs">Browse</span>
@@ -36,7 +36,7 @@
 
 
       <li *ngIf="authService.isAuthenticated"
-          appSidebarHighlight routerLinkActive="open">
+          routerLinkActive="open">
         <a routerLink="/contracts" routerLinkActive="active">
           <i class="fa fa-file"></i>
           <span class="title">Contracts</span>
@@ -44,18 +44,18 @@
         </a>
         <!-- Show sub-menu only when top-level route is 'contracts' -->
         <ul *ngIf="this.topLevelRoute === 'contracts'" class="sub-menu" routerLinkActive="open">
-          <li appSidebarHighlight>
+          <li>
             <a [routerLink]="['/contracts']" routerLinkActive="active">Browse</a>
           </li>
-          <li appSidebarHighlight>
+          <li>
             <a [routerLink]="['/contracts']" [queryParams]="{ status: 'pending'}" routerLinkActive="active">Pending</a>
             <!--<span class="arrow "></span>-->
             <!--<span class="label label-accent">4</span>-->
           </li>
-          <li appSidebarHighlight>
+          <li>
             <a routerLink="/contracts" [queryParams]="{ status: 'executed'}" routerLinkActive="active">Executed</a>
           </li>
-          <li appSidebarHighlight>
+          <li>
             <a routerLink="/contracts" [queryParams]="{ status: 'failed'}" routerLinkActive="active">Failed</a>
           </li>
         </ul>
@@ -63,7 +63,7 @@
 
 
       <li *ngIf="authService.isAuthenticated"
-          appSidebarHighlight routerLinkActive="open">
+          routerLinkActive="open">
         <a routerLink="/settings" routerLinkActive="active">
           <i class="fa fa-gear"></i>
           <span class="title">Settings</span>
