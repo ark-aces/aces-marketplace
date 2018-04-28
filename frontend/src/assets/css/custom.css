@@ -343,10 +343,6 @@ p {
   color: #555;
 }
 
-.service-title {
-  font-weight: bold;
-}
-
 .service-listing a:hover, .service-listing a:focus {
   text-decoration: none !important;
 }
