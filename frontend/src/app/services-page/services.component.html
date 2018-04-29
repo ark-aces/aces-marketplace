@@ -18,7 +18,7 @@
             <h4 class="service-title title">
               <span *ngIf="service.isTestnet === true" class="label label-warning">TestNet</span>
               <span *ngIf="service.isTestnet === false" class="label label-default">MainNet</span>
-              {{service.name}}
+              <span>{{service.name}}</span>
             </h4>
         <hr>
         <div class="service-description">
