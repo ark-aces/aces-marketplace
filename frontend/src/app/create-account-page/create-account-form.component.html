@@ -48,7 +48,7 @@
         <label>Ark Wallet Address:</label>
         <app-form-optional></app-form-optional>
         <input [(ngModel)]="model.arkWalletAddress" id="arkWalletAddress" name="arkWalletAddress"
-             class="form-control" type="text" placeholder="Enter your password"/>
+             class="form-control" type="text" placeholder="Enter your ARK public address"/>
         <ul class="validation-errors" *ngIf="arkWalletAddressHasError">
           <li *ngFor="let fieldError of arkWalletAddressFieldErrors">
             {{fieldError.message}}

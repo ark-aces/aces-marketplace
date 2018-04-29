@@ -61,8 +61,8 @@ export class SignInPageComponent implements OnInit {
               userError => {
                 console.log(userError);
                 this.errorModalService.showError(
-                  'Unexpected Error',
-                  'An unexpected error occurred getting current user information. Please try again later.'
+                  'Account not found',
+                  'The email address used was not found. Please create an account or try again.'
                 );
                 this.isSuccess = false;
                 this.isSubmitted = false;
