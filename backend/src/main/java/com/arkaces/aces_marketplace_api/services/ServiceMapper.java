@@ -1,5 +1,6 @@
 package com.arkaces.aces_marketplace_api.services;
 
+import com.arkaces.aces_marketplace_api.service_category.ServiceCategory;
 import com.arkaces.aces_marketplace_api.service_client.Capacity;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -18,6 +19,9 @@ public class ServiceMapper {
         Service service = modelMapper.map(serviceEntity, Service.class);
         service.setCapacities(serviceEntity.getServiceCapacityEntities().stream()
             .map(x -> modelMapper.map(x, Capacity.class))
+            .collect(Collectors.toList()));
+        service.setServiceCategories(serviceEntity.getServiceCategoryLinkEntities().stream()
+            .map(x -> modelMapper.map(x.getServiceCategoryEntity(), ServiceCategory.class))
             .collect(Collectors.toList()));
         return service;
     }
