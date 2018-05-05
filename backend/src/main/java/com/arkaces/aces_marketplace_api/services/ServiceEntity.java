@@ -41,4 +41,7 @@ public class ServiceEntity {
 
     @OneToMany(mappedBy = "serviceEntity", cascade = CascadeType.ALL)
     private List<ServiceCapacityEntity> serviceCapacityEntities;
+    
+    @OneToMany(mappedBy = "serviceEntity", cascade = CascadeType.ALL)
+    private List<ServiceCategoryLinkEntity> serviceCategoryLinkEntities;
 }

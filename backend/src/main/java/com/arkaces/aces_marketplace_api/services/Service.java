@@ -1,5 +1,6 @@
 package com.arkaces.aces_marketplace_api.services;
 
+import com.arkaces.aces_marketplace_api.service_category.ServiceCategory;
 import com.arkaces.aces_marketplace_api.service_client.Capacity;
 import lombok.Data;
 
@@ -19,4 +20,5 @@ public class Service {
     private List<Capacity> capacities;
     private BigDecimal flatFee;
     private BigDecimal percentFee;
+    private List<ServiceCategory> serviceCategories;
 }
