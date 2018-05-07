@@ -22,6 +22,12 @@ export interface Service {
   percentFee: number;
 }
 
+export interface ServiceCategory {
+  name: string;
+  position: number;
+  isSelected: boolean;
+}
+
 export interface ServicesResponse {
   pageSize: number;
   page: number;
@@ -123,12 +129,18 @@ export class ApiClient {
     });
   }
 
-  getServices() {
-    return this.http.get<ServicesResponse>(this.config.apiEndpoint + '/services');
+  getServices(queryParams) {
+    return this.http.get<ServicesResponse>(this.config.apiEndpoint + '/services', {
+      params: queryParams
+    });
   }
 
   getService(id: string) {
     return this.http.get<Service>(this.config.apiEndpoint + '/services/' + id);
+  }
+
+  getServiceCategories() {
+    return this.http.get<Array<ServiceCategory>>(this.config.apiEndpoint + '/serviceCategories');
   }
 
   getServiceInfo(id: string) {

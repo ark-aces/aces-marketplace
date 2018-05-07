@@ -1,5 +1,37 @@
 /* ServicesComponent's private CSS styles */
 
+.caret-up {
+  transform: rotate(180deg);
+}
+
+.fetching-services, .no-services-found {
+  margin: 0;
+  padding: 20px;
+}
+
+.remove-min-capacity {
+  color: white;
+  padding-left: 2px;
+
+  &:focus, &:hover {
+    text-decoration: none;
+  }
+}
+
+.reset-search {
+  line-height: 34px;
+
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+.search-filters {
+  display: inline-block;
+  margin-left: 15px;
+  padding: 3px 0;
+}
+
 .service-title {
   font-weight: bold;
   line-height: 1.5;

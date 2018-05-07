@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {AuthService} from './auth/auth-service.component';
 
-
 @Component({
   selector: 'app-sidebar-menu',
   templateUrl: 'sidebar-menu.component.html'
@@ -21,8 +20,6 @@ export class SidebarMenuComponent implements OnInit {
 
   ngOnInit(){
     // Optional console log for parentRoute
-    console.log(this.topLevelRoute);
+    // console.log(this.topLevelRoute);
   }
-
-
 }

@@ -334,6 +334,19 @@ p {
   text-align: center;
 }
 
+.panel {
+  padding-bottom: 6px;
+}
+
+.input-group-btn .btn {
+  padding: 20px 10px;
+}
+
+.input-group-btn .btn .glyphicon {
+  top: -8px;
+  font-size: 1.2em;
+}
+
 .capacity-box .panel-heading {
 }
 

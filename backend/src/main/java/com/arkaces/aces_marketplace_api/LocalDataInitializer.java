@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.util.Collections;
 
 @Profile("dev")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -37,7 +37,6 @@ public class LocalDataInitializer implements ApplicationRunner{
             createRegistrationRequest.setUserPassword("password");
             RegistrationEntity registrationEntity = registrationService.createRegistration(createRegistrationRequest);
             registrationRepository.save(registrationEntity);
-
 
             for (int i = 0; i < 5; i++) {
                 String id = identifierGenerator.generate();
@@ -60,7 +59,7 @@ public class LocalDataInitializer implements ApplicationRunner{
                 serviceCapacityEntity.setUnit("ARK");
                 serviceCapacityEntity.setValue(new BigDecimal("5000"));
 
-                serviceEntity.setServiceCapacityEntities(Arrays.asList(serviceCapacityEntity));
+                serviceEntity.setServiceCapacityEntities(Collections.singletonList(serviceCapacityEntity));
 
                 serviceRepository.save(serviceEntity);
             }
