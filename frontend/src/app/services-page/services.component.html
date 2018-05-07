@@ -54,12 +54,10 @@
           <div class="form-group">
             <label>Max Flat Fee</label>
             <input class="form-control" type="number" placeholder="Enter max flat fee..." [(ngModel)]="maxFlatFee" (ngModelChange)="maxFlatFeeChanged.next($event)">
-            <p class="error" [hidden]="!maxFlatFee || maxFlatFee.match('\\d')">Please enter a valid number.</p>
           </div>
           <div class="form-group">
             <label>Max Percent Fee</label>
             <input class="form-control" type="number" placeholder="Enter max percent fee..." [(ngModel)]="maxPercentFee" (ngModelChange)="maxPercentFeeChanged.next($event)">
-            <p class="error" [hidden]="!maxPercentFee || maxPercentFee.match('\\d')">Please enter a valid number.</p>
           </div>
         </div>
         <div class="col-md-3">
