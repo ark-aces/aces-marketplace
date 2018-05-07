@@ -11,19 +11,26 @@
 
   <div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-5">
         <div class="form-group">
-          <input type="text" class="form-control col-xs-12" placeholder="Search for services... (i.e. name, description, url)" [(ngModel)]="search" (ngModelChange)="searchChanged.next($event)">
+          <div class="input-group">
+            <input type="text" class="form-control col-xs-12" placeholder="Search for services... (i.e. name, description, url)" [(ngModel)]="search" (ngModelChange)="searchChanged.next($event)">
+            <span class="input-group-btn">
+                <button class="btn btn-default">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+          </div>
         </div>
       </div>
       <div class="search-filters">
         <div class="form-group">
-          <button class="btn btn-default dropdown-toggle" data-toggle="collapse" data-target="#search_filters" (click)="isFiltersDivExpanded = !filtersExpanded">
+          <button class="btn btn-default dropdown-toggle" data-toggle="collapse" data-target="#search_filters" (click)="isFiltersDivExpanded = !isFiltersDivExpanded">
             Filters <span class="caret" [ngClass]="{ 'caret-up': isFiltersDivExpanded }"></span>
           </button>
         </div>
       </div>
-      <div class="search-filters">
+      <div *ngIf="isFiltersDivExpanded" class="search-filters">
         <div class="form-group">
           <a class="reset-search" href="javascript:void(0);" (click)="resetSearch()">Reset</a>
         </div>
