@@ -34,7 +34,7 @@ export class ServicesComponent implements OnInit {
   sortDirections: Array<Object> = ['Ascending', 'Descending'];
   sortDirectionChanged: Subject<String> = new Subject<String>();
   sort: any = { property: 'Relevance', direction: 'Ascending' };
-  debounceTime: number = 500;
+  debounceTime: number = 100;
 
   constructor(
     private apiClient: ApiClient,
