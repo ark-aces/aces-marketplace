@@ -1,4 +1,4 @@
-<div *ngIf="!loading">
+<div>
   <div class="row">
     <div class="col-xs-12">
       <div class="page-title">
@@ -9,40 +9,142 @@
     </div>
   </div>
 
-
-
-<div class="container-fluid panel service-listing" *ngFor="let service of services">
-  <a [routerLink]="['/services', service.id]">
-  <div class="row">
+  <div>
+    <div class="row">
       <div class="col-md-6">
-            <h4 class="service-title title">
-              <span *ngIf="service.isTestnet === true" class="label label-warning">TestNet</span>
-              <span *ngIf="service.isTestnet === false" class="label label-default">MainNet</span>
-              <span>{{service.name}}</span>
-            </h4>
-        <hr>
-        <div class="service-description">
-          {{service.description}}
+        <div class="form-group">
+          <input type="text" class="form-control col-xs-12" placeholder="Search for services... (i.e. name, description, url)" [(ngModel)]="search" (ngModelChange)="searchChanged.next($event)">
         </div>
       </div>
-
-      <div class="col-md-2">
-        <app-service-fees-box [flatFee]="service.flatFee"></app-service-fees-box>
+      <div class="search-filters">
+        <div class="form-group">
+          <button class="btn btn-default dropdown-toggle" data-toggle="collapse" data-target="#search_filters" (click)="isFiltersDivExpanded = !filtersExpanded">
+            Filters <span class="caret" [ngClass]="{ 'caret-up': isFiltersDivExpanded }"></span>
+          </button>
+        </div>
       </div>
-
-      <div class="col-md-2">
-        <app-service-percent-fees-box [percentFee]="service.percentFee"></app-service-percent-fees-box>
+      <div class="search-filters">
+        <div class="form-group">
+          <a class="reset-search" href="javascript:void(0);" (click)="resetSearch()">Reset</a>
+        </div>
       </div>
+    </div>
 
-
-      <div class="col-md-2">
-        <app-service-capacity-box [capacities]="service.capacities"></app-service-capacity-box>
+    <div id="search_filters" class="collapse">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group">
+            <h4>Service Category</h4>
+            <div class="row">
+              <div class="col-sm-3" *ngFor="let category of categories">
+                <div class="form-check">
+                  <label>
+                    <input type="checkbox" class="form-check-input" [(ngModel)]="category.isSelected" (ngModelChange)="categoriesChanged.next({ name: category.name, isSelected: $event })">
+                    {{ category.name }}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-
+      <div class="row">
+        <div class="col-md-3">
+          <h4>Fees</h4>
+          <div class="form-group">
+            <label>Max Flat Fee</label>
+            <input class="form-control" type="number" placeholder="Enter max flat fee..." [(ngModel)]="maxFlatFee" (ngModelChange)="maxFlatFeeChanged.next($event)">
+            <p class="error" [hidden]="!maxFlatFee || maxFlatFee.match('\\d')">Please enter a valid number.</p>
+          </div>
+          <div class="form-group">
+            <label>Max Percent Fee</label>
+            <input class="form-control" type="number" placeholder="Enter max percent fee..." [(ngModel)]="maxPercentFee" (ngModelChange)="maxPercentFeeChanged.next($event)">
+            <p class="error" [hidden]="!maxPercentFee || maxPercentFee.match('\\d')">Please enter a valid number.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <h4>Capacity</h4>
+          <div class="form-group">
+            <label>Min Capacity</label>
+            <div class="form-group" style="max-width: 300px">
+              <input class="form-control" type="text" placeholder="Enter min capacity..." [(ngModel)]="minCapacity" (keydown.enter)="minCapacityChanged.next($event.target.value)">
+              <p class="error" [hidden]="!minCapacity || minCapacity.match('\\d \\w')">Please enter a valid min capacity. (i.e. 1000 ARK)</p>
+            </div>
+          </div>
+          <div *ngFor="let minCapacity of minCapacities">
+            <span>
+              <span class="badge">
+                {{ minCapacity.value }} {{ minCapacity.unit }}
+                <a class="remove-min-capacity" href="javascript:void(0);" (click)="removeMinCapacity(minCapacity)">x</a>
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <h4>Sort By</h4>
+            <div class="form-check" *ngFor="let sortProperty of sortProperties">
+              <label>
+                <input type="radio" class="form-check-input" name="properties" [value]="sortProperty" [(ngModel)]="sort.property" (ngModelChange)="sortPropertyChanged.next($event)">
+                {{ sortProperty }}
+              </label>
+            </div>
+            <h4>Sort Direction</h4>
+            <div class="form-check" *ngFor="let sortDirection of sortDirections">
+              <label>
+                <input type="radio" class="form-check-input" name="directions" [value]="sortDirection" [(ngModel)]="sort.direction" (ngModelChange)="sortDirectionChanged.next($event)">
+                {{ sortDirection }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  </a>
-</div>
 
+  <div *ngIf="!isLoading">
+    <div *ngIf="services.length">
+      <div class="container-fluid panel service-listing" *ngFor="let service of services">
+        <a [routerLink]="['/services', service.id]">
+          <div class="row">
+              <div class="col-md-6">
+                    <h4 class="service-title title">
+                      <span *ngIf="service.isTestnet === true" class="label label-warning">TestNet</span>
+                      <span *ngIf="service.isTestnet === false" class="label label-default">MainNet</span>
+                      <span>{{ service.name }}</span>
+                    </h4>
+                <hr>
+                <div class="service-description">
+                  {{ service.description }}
+                </div>
+              </div>
 
+              <div class="col-md-2">
+                <app-service-fees-box [flatFee]="service.flatFee"></app-service-fees-box>
+              </div>
+
+              <div class="col-md-2">
+                <app-service-percent-fees-box [percentFee]="service.percentFee"></app-service-percent-fees-box>
+              </div>
+
+              <div class="col-md-2">
+                <app-service-capacity-box [capacities]="service.capacities"></app-service-capacity-box>
+              </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div *ngIf="!services.length">
+      <div class="container-fluid panel service-listing text-center">
+        <p class="no-services-found">No Services Found</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isLoading">
+    <div class="container-fluid panel service-listing text-center">
+      <p class="fetching-services">Fetching Services...</p>
+    </div>
+  </div>
+
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="timer"></ngx-spinner>
 </div>

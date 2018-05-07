@@ -41,6 +41,8 @@ import {ClipboardModule} from 'ngx-clipboard';
 import {ServiceCapacityBoxComponent} from './app-components/service-capacity-box.component';
 import {ServiceFeesBoxComponent} from './app-components/service-fees-box.component';
 import {ServicePercentFeesBoxComponent} from './app-components/service-percent-fees-box.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import "rxjs/Rx";
 
 
 @NgModule({
@@ -85,6 +87,7 @@ import {ServicePercentFeesBoxComponent} from './app-components/service-percent-f
     AppConfigModule,
     RecaptchaFormsModule,
     Ng2Webstorage,
+    NgxSpinnerModule
   ],
   providers: [
     ApiClient,
