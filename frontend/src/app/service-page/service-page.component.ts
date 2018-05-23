@@ -130,9 +130,9 @@ export class ServicePageComponent implements OnInit {
   }
 
   updateCapacity() {
-    this.apiClient.getService(this.serviceId).subscribe(
+    this.apiClient.getServiceInfo(this.serviceId).subscribe(
       data => {
-        this.service = data;
+        this.serviceInfo = data;
       },
       error => {
         console.log(error);
