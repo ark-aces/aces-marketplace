@@ -53,9 +53,11 @@ public class ServiceController {
         
         // update capacity value
         for (ServiceCapacityEntity serviceCapacityEntity : serviceEntity.getServiceCapacityEntities()) {
-            for (Capacity capacity : serviceResponse.getCapacities()) {
-                if (serviceCapacityEntity.getUnit().equals(capacity.getUnit())) {
-                    serviceCapacityEntity.setValue(capacity.getValue());
+            if (serviceResponse.getCapacities() != null) {
+                for (Capacity capacity : serviceResponse.getCapacities()) {
+                    if (serviceCapacityEntity.getUnit().equals(capacity.getUnit())) {
+                        serviceCapacityEntity.setValue(capacity.getValue());
+                    }
                 }
             }
         }
