@@ -12,7 +12,7 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-3">
       <section class="box ">
         <header class="panel_header">
           <h2 class="title pull-left">Service URL</h2>
@@ -23,7 +23,7 @@
       </section>
     </div>
 
-    <div class="col-xs-6">
+    <div class="col-xs-3">
       <section class="box ">
         <header class="panel_header">
           <h2 class="title pull-left">Website URL</h2>
@@ -33,12 +33,8 @@
         </div>
       </section>
     </div>
-  </div>
 
-
-
-  <div class="row">
-    <div class="col-xs-4">
+    <div class="col-xs-2">
       <section class="box">
         <header class="panel_header">
           <h2 class="title pull-left">
@@ -51,7 +47,7 @@
       </section>
     </div>
 
-    <div class="col-xs-4">
+    <div class="col-xs-2">
       <section class="box">
         <header class="panel_header">
           <h2 class="title pull-left">
@@ -64,7 +60,7 @@
       </section>
     </div>
 
-    <div class="col-xs-4">
+    <div class="col-xs-2">
       <section class="box">
         <header class="panel_header">
           <h2 class="title pull-left">
@@ -72,13 +68,12 @@
           </h2>
         </header>
         <div class="div content-body" *ngFor="let capacity of service.capacities">
-            {{ capacity.value }}
-            {{ capacity.unit }}
+          {{ capacity.value }}
+          {{ capacity.unit }}
         </div>
       </section>
     </div>
   </div>
-
 
   <div class="row">
     <div class="col-xs-12">

@@ -123,8 +123,21 @@ export class ServicePageComponent implements OnInit {
           );
         }
 
-
+      this.interval = setInterval(() => {
+        this.updateCapacity();
+      }, 3000);
     });
+  }
+
+  updateCapacity() {
+    this.apiClient.getService(this.serviceId).subscribe(
+      data => {
+        this.service = data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   isLoading() {
