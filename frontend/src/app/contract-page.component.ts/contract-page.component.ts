@@ -49,9 +49,11 @@ export class ContractPageComponent implements OnInit, OnDestroy {
       this.id = params['id'];
 
       this.checkForUpdates();
-      this.interval = setInterval(() => {
-        this.checkForUpdates();
-      }, 3000);
+
+      // todo: re-enable real-time update when refresh is fixed
+      // this.interval = setInterval(() => {
+      //   this.checkForUpdates();
+      // }, 3000);
     });
   }
 
