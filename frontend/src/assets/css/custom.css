@@ -114,9 +114,8 @@ section header .title {
 }
 section .content-body {
   padding-bottom: 20px;
-  padding-top: 25px;
+  padding-top: 10px;
 }
-
 
 .btn-primary.active.focus,
 .btn-primary.active:focus,

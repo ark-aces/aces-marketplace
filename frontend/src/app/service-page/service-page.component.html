@@ -67,7 +67,7 @@
             Capacity
           </h2>
         </header>
-        <div class="div content-body" *ngFor="let capacity of service.capacities">
+        <div class="div content-body" *ngFor="let capacity of serviceInfo.capacities">
           {{ capacity.value }}
           {{ capacity.unit }}
         </div>
@@ -109,7 +109,7 @@
   <div class="row">
     <div class="col-xs-12">
       <section class="box ">
-        <div class="content-body" *ngIf="! canCreateContracts">
+        <div class="content-body" *ngIf="false">
           To view submitted contracts, please <a routerLink="/sign-in">sign in</a>.
         </div>
 

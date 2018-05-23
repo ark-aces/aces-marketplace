@@ -101,7 +101,7 @@ export class ServiceFormComponent implements OnInit {
               input.fieldErrors = [];
               input.hasErrors = false;
               body.fieldErrors.forEach((fieldError: FieldError) => {
-                if (input.id === fieldError.field) {
+                if ('arguments.' + input.id === fieldError.field) {
                   input.fieldErrors.push(fieldError);
                   input.hasErrors = true;
                 }
