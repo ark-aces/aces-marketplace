@@ -123,7 +123,7 @@ export class ServicePageComponent implements OnInit {
           );
         }
 
-      this.interval = setInterval(() => {
+      setInterval(() => {
         this.updateCapacity();
       }, 3000);
     });
