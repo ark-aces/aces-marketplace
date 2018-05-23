@@ -4,6 +4,7 @@ import com.arkaces.aces_marketplace_api.common.PageView;
 import com.arkaces.aces_marketplace_api.common.PageViewMapper;
 import com.arkaces.aces_marketplace_api.error.ErrorCodes;
 import com.arkaces.aces_marketplace_api.error.NotFoundException;
+import com.arkaces.aces_marketplace_api.service_client.Capacity;
 import com.arkaces.aces_marketplace_api.service_client.ServiceClient;
 import com.arkaces.aces_marketplace_api.service_client.ServiceResponse;
 import lombok.RequiredArgsConstructor;
@@ -43,10 +44,23 @@ public class ServiceController {
     @GetMapping("/services/{id}/info")
     public ServiceResponse getServiceInfo(@PathVariable String id) {
         ServiceEntity serviceEntity = serviceRepository.findOneById(id);
+        
         if (serviceEntity == null) {
             throw new NotFoundException(ErrorCodes.NOT_FOUND, "Service not found.");
         }
         String baseUrl = serviceEntity.getUrl();
-        return serviceClient.getServiceInfo(baseUrl);
+        ServiceResponse serviceResponse = serviceClient.getServiceInfo(baseUrl);
+        
+        // update capacity value
+        for (ServiceCapacityEntity serviceCapacityEntity : serviceEntity.getServiceCapacityEntities()) {
+            for (Capacity capacity : serviceResponse.getCapacities()) {
+                if (serviceCapacityEntity.getUnit().equals(capacity.getUnit())) {
+                    serviceCapacityEntity.setValue(capacity.getValue());
+                }
+            }
+        }
+        serviceRepository.save(serviceEntity);
+        
+        return serviceResponse;
     }
 }
