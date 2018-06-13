@@ -41,6 +41,12 @@ export class AdminUpdateServiceFormComponent implements OnInit {
   urlHasError = false;
   urlFieldErrors: Array<FieldError> = [];
 
+  serviceCategoriesHasError = false;
+  serviceCategoriesFieldErrors: Array<FieldError> = [];
+
+  isTestnetHasError = false;
+  isTestnetFieldErrors: Array<FieldError> = [];
+
   constructor(
     private router: Router,
     private apiClient: ApiClient,
