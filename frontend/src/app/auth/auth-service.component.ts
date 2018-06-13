@@ -49,7 +49,6 @@ export class AuthService implements OnInit {
   }
 
   checkSession() {
-    console.log('checking session');
     if (this.isAuthenticated && ! this.cookieService.get('accessToken')) {
       this.expireSession();
     }

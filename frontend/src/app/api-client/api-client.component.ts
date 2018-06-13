@@ -13,6 +13,7 @@ export interface Service {
   url: string;
   name: string;
   version: string;
+  status: string;
   description: string;
   websiteUrl: string;
   isTestnet: boolean;
@@ -20,9 +21,11 @@ export interface Service {
   capacities: Array<Capacity>;
   flatFee: number;
   percentFee: number;
+  serviceCategories: Array<ServiceCategory>;
 }
 
 export interface ServiceCategory {
+  id: number;
   name: string;
   position: number;
   isSelected: boolean;
@@ -43,6 +46,21 @@ export interface CreateAccountRequest {
   arkWalletAddress: string;
   agreeToTerms: boolean;
   recaptchaCode: string;
+}
+
+export interface CreateServiceRequest {
+  label: string;
+  url: string;
+  categoryPids: Array<number>;
+  isTestnet: boolean;
+}
+
+export interface UpdateServiceRequest {
+  label?: string;
+  url?: string;
+  categoryPids?: Array<number>;
+  isTestnet?: boolean;
+  status?: string;
 }
 
 export interface EmailVerificationRequest {
@@ -135,6 +153,23 @@ export class ApiClient {
     });
   }
 
+  getAccountServices(queryParams) {
+    return this.http.get<ServicesResponse>(this.config.apiEndpoint + '/account/services', {
+      params: queryParams,
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + this.authService.accessToken
+      })
+    });
+  }
+
+  getAccountService(id: string) {
+    return this.http.get<Service>(this.config.apiEndpoint + '/account/services/' + id, {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + this.authService.accessToken
+      })
+    });
+  }
+
   getService(id: string) {
     return this.http.get<Service>(this.config.apiEndpoint + '/services/' + id);
   }
@@ -174,8 +209,34 @@ export class ApiClient {
       });
   }
 
+  getProvidedContracts(queryParams) {
+    return this.http.get<ContractsResponse>(this.config.apiEndpoint + '/account/providedContracts',
+      {
+        params: queryParams,
+        headers: new HttpHeaders({
+          'Authorization': 'Bearer ' + this.authService.accessToken
+        })
+      });
+  }
+
   postAccount(createAccountRequest: CreateAccountRequest) {
     return this.http.post(this.config.apiEndpoint + '/registrations', createAccountRequest);
+  }
+
+  postService(createServiceRequest: CreateServiceRequest) {
+    return this.http.post(this.config.apiEndpoint + '/account/services', createServiceRequest, {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + this.authService.accessToken
+      })
+    });
+  }
+
+  updateService(serviceId: string, updateServiceRequest: UpdateServiceRequest) {
+    return this.http.post(this.config.apiEndpoint + '/account/services/' + serviceId, updateServiceRequest, {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + this.authService.accessToken
+      })
+    });
   }
 
   postEmailVerification(emailVerificationRequest: EmailVerificationRequest) {

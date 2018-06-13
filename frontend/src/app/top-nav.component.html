@@ -2,7 +2,7 @@
   <div class='quick-area'>
     <div class='pull-left'>
       <ul class="info-menu left-links list-inline list-unstyled">
-        <a href="#" style="text-decoration:none; text-transform: none">
+        <a href="/dashboard" style="text-decoration:none; text-transform: none">
           <img src="/assets/images/logo-red.png" class="d-none d-lg-inline mr-2" style="width: 40px">
           <span style="margin-right: 2em; margin-left: 0.5em; font-size: 18px; font-weight: bold; color: white;">ACES Marketplace</span>
         </a>
@@ -19,6 +19,11 @@
       <ul *ngIf="authService.user" class="info-menu right-links list-inline list-unstyled">
         <li class="username">
             {{authService.user.name}}
+        </li>
+        <li>
+          <a class="btn btn-primary" routerLink="/admin/dashboard">
+            Provider Admin
+          </a>
         </li>
         <li class="profile">
           <a class="btn btn-primary" routerLink="/sign-out">

@@ -1,0 +1,46 @@
+<div *ngIf="! isLoading">
+  <h3>Provided Services</h3>
+
+  <section class="box ">
+    <div class="content-body">
+      <table *ngIf="services.length > 0" class="table table-sm">
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>Url</th>
+            <th>Status</th>
+            <th>Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let service of services">
+
+            <td *ngIf="service.label">
+              <a [routerLink]="['/admin/services', service.id]">{{service.label}}</a>
+            </td>
+            <td *ngIf="! service.label">
+              <a [routerLink]="['/admin/services', service.id]">{{service.id}}</a>
+            </td>
+            <td>
+              {{service.url}}
+            </td>
+            <td>
+              {{service.status}}
+            </td>
+            <td>
+              {{service.createdAt}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="services.length == 0">
+        <p>No registered services.</p>
+        <p>
+          <a class="btn btn-primary" [routerLink]="['/admin/services/register-service']">Register Service</a>
+        </p>
+      </div>
+
+    </div>
+  </section>
+</div>

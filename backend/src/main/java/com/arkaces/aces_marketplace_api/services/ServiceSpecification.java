@@ -21,6 +21,7 @@ public class ServiceSpecification implements Specification<ServiceEntity> {
     @Override
     public Predicate toPredicate(Root<ServiceEntity> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
         List<Predicate> predicates = new ArrayList<>();
+        predicates.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get(ServiceEntity_.status)), ServiceStatus.ACTIVE));
         if (criteria != null) {
             if (criteria.getSearch() != null) {
                 List<Predicate> searchPredicates = new ArrayList<>();

@@ -1,0 +1,36 @@
+<div class='page-topbar '>
+  <div class='quick-area'>
+    <div class='pull-left'>
+      <ul class="info-menu left-links list-inline list-unstyled">
+        <a href="/admin/dashboard" style="text-decoration:none; text-transform: none">
+          <img src="/assets/images/logo-red.png" class="d-none d-lg-inline mr-2" style="width: 40px">
+          <span style="margin-right: 2em; margin-left: 0.5em; font-size: 18px; font-weight: bold; color: white;">ACES Marketplace Provider Admin</span>
+        </a>
+      </ul>
+    </div>
+    <div class='pull-right'>
+      <ul *ngIf="! authService.isAuthenticated" class="info-menu right-links list-inline list-unstyled">
+        <li class="profile">
+          <a  class="btn btn-primary" routerLink="/sign-in">
+            Sign In
+          </a>
+        </li>
+      </ul>
+      <ul *ngIf="authService.user" class="info-menu right-links list-inline list-unstyled">
+        <li class="username">
+            {{authService.user.name}}
+        </li>
+        <li class="profile">
+          <a  class="btn btn-primary" routerLink="/">
+            Marketplace
+          </a>
+        </li>
+        <li class="profile">
+          <a class="btn btn-primary" routerLink="/sign-out">
+            Sign Out
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

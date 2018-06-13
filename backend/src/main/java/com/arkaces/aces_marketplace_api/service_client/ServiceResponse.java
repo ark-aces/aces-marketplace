@@ -11,7 +11,6 @@ public class ServiceResponse {
     private String description;
     private String version;
     private String websiteUrl;
-    private Boolean isTestNet;
     private String instructions;
     private List<Capacity> capacities;
     private String flatFee;

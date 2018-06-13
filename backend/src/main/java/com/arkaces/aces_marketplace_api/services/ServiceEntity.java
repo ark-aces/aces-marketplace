@@ -7,6 +7,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -20,7 +21,10 @@ public class ServiceEntity {
 
     private Boolean isTestnet = true;
     
+    private String status;
+    
     private String id;
+    private String label;
     private String url;
     private String name;
     private String version;
@@ -39,9 +43,10 @@ public class ServiceEntity {
     @OneToMany(mappedBy = "serviceEntity")
     private List<ContractEntity> contractEntities;
 
-    @OneToMany(mappedBy = "serviceEntity", cascade = CascadeType.ALL)
-    private List<ServiceCapacityEntity> serviceCapacityEntities;
+    @OneToMany(mappedBy = "serviceEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ServiceCapacityEntity> serviceCapacityEntities = new ArrayList<>();
     
-    @OneToMany(mappedBy = "serviceEntity", cascade = CascadeType.ALL)
-    private List<ServiceCategoryLinkEntity> serviceCategoryLinkEntities;
+    @OneToMany(mappedBy = "serviceEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ServiceCategoryLinkEntity> serviceCategoryLinkEntities = new ArrayList<>();
+    
 }

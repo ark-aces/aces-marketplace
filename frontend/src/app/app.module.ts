@@ -42,8 +42,21 @@ import {ServiceCapacityBoxComponent} from './app-components/service-capacity-box
 import {ServiceFeesBoxComponent} from './app-components/service-fees-box.component';
 import {ServicePercentFeesBoxComponent} from './app-components/service-percent-fees-box.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import "rxjs/Rx";
-
+import 'rxjs/Rx';
+import {AdminDashboardPageComponent} from './admin/dashboard/admin-dashboard-page.component';
+import {AdminLayoutComponent} from './admin/admin-layout.component';
+import {ConsumerLayoutComponent} from './consumer-layout.component';
+import {AdminTopNavComponent} from './admin/admin-top-nav.component';
+import {AdminSidebarMenuComponent} from './admin/admin-sidebar-menu.component';
+import {AdminServicesPageComponent} from './admin/services-page/admin-services-page.component';
+import {AdminServiceLauncherPageComponent} from './admin/service-launcher/admin-service-launcher-page.component';
+import {AdminCreateServicePageComponent} from './admin/create-service-page/admin-create-service-page.component';
+import {AdminCreateServiceFormComponent} from './admin/create-service-page/admin-create-service-form.component';
+import {AdminSettingsPageComponent} from './admin/settings-page/admin-settings-page.component';
+import {AdminUsersPageComponent} from './admin/users-page/admin-users-page.component';
+import {AdminServicePageComponent} from './admin/service-page/admin-service-page.component';
+import {ProvidedContractsPageComponent} from './admin/contracts-page/provided-contracts-page.component';
+import {AdminUpdateServiceFormComponent} from './admin/service-page/admin-update-service-form.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +87,20 @@ import "rxjs/Rx";
     ServicePercentFeesBoxComponent,
     FormOptionalComponent,
     ErrorModalComponent,
+    ConsumerLayoutComponent,
+    AdminLayoutComponent,
+    AdminDashboardPageComponent,
+    AdminTopNavComponent,
+    AdminSidebarMenuComponent,
+    AdminServicesPageComponent,
+    AdminServiceLauncherPageComponent,
+    AdminCreateServicePageComponent,
+    AdminCreateServiceFormComponent,
+    AdminSettingsPageComponent,
+    AdminUsersPageComponent,
+    AdminServicePageComponent,
+    ProvidedContractsPageComponent,
+    AdminUpdateServiceFormComponent
   ],
   imports: [
     ClipboardModule,

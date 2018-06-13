@@ -12,4 +12,6 @@ public class FieldErrorCodes {
     public static final String MUST_AGREE_TO_TERMS = "mustAgreeToTerms";
     public static final String INVALID_RECAPTCHA_CODE = "invalidRecaptchaCode";
     public static final String USER_NOT_FOUND_WITH_EMAIL_ADDRESS = "userNotFoundWithEmailAddress";
+    public static final String INVALID_URL = "invalidUrl";
+    public static final String INVALID_SERVICE_STATUS = "invalidServiceStatus";
 }

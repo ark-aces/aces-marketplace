@@ -383,3 +383,20 @@ p {
 .page-sidebar li:hover{
   background: #dddddd;
 }
+
+.content-body p:first-of-type {
+  padding-top: 1em;
+}
+
+.content-body .form-group p:first-of-type {
+  padding-top: 0;
+}
+
+.standalone-checkbox label {
+  font-weight: normal;
+}
+
+.standalone-checkbox .form-check-input {
+  margin-right: 5px;
+}
+

@@ -1,0 +1,101 @@
+<form *ngIf="!isSuccess" (ngSubmit)="onSubmit()" #createServiceForm="ngForm">
+
+  <p>Register a remote ACES Service node onto the ACES Marketplace.</p>
+
+  <div *ngIf="hasErrors" class="alert alert-error">
+    <span class="glyphicon glyphicon-alert alert-icon" aria-hidden="true"></span>
+    Please correct the errors below.
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-error">
+    {{errorMessage}}
+  </div>
+
+
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="form-group" [class.has-error]="labelHasError">
+        <label>Label:</label>
+        <input [(ngModel)]="model.label" id="label" name="label"
+            class="form-control" type="text" placeholder="Enter service label"
+            required />
+        <ul class="validation-errors" *ngIf="labelHasError">
+          <li *ngFor="let fieldError of labelFieldErrors">
+            {{fieldError.message}}
+          </li>
+        </ul>
+        <p class="help-block">Enter a label to help identify this service.</p>
+      </div>
+
+      <div class="form-group" [class.has-error]="urlHasError">
+        <label>Service Url:</label>
+        <input [(ngModel)]="model.url" id="url" name="url"
+               class="form-control" type="text" placeholder="Enter service url"
+               required />
+        <ul class="validation-errors" *ngIf="urlHasError">
+          <li *ngFor="let fieldError of urlFieldErrors">
+            {{fieldError.message}}
+          </li>
+        </ul>
+        <p class="help-block">Enter remote service URL.</p>
+      </div>
+
+      <div class="form-group" [class.has-error]="serviceCategoriesHasError">
+        <label>Service Categories:</label>
+
+        <div class="row">
+          <div class="col-sm-3" *ngFor="let serviceCategory of serviceCategories">
+            <div class="form-check">
+              <label>
+                <input type="checkbox" class="form-check-input"  (change)="categoryChanged(serviceCategory, $event.target.checked)">
+                {{ serviceCategory.name }}
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <ul class="validation-errors" *ngIf="serviceCategoriesHasError">
+          <li *ngFor="let fieldError of serviceCategoriesFieldErrors">
+            {{fieldError.message}}
+          </li>
+        </ul>
+        <p class="help-block">Choose service categories to list service under.</p>
+      </div>
+
+      <div class="form-group" [class.has-error]="isTestnetHasError">
+        <label>Testnet Status:</label>
+
+        <div class="standalone-checkbox">
+          <label>
+            <input [(ngModel)]="model.isTestnet" id="isTestnet" name="isTestnet" class="form-check-input"
+                   type="checkbox" value="" required/>
+            This is a testnet service
+          </label>
+        </div>
+
+        <ul class="validation-errors" *ngIf="isTestnetHasError">
+          <li *ngFor="let fieldError of isTestnetFieldErrors">
+            {{fieldError.message}}
+          </li>
+        </ul>
+        <p class="help-block">Services marked as testnet services can be filtered from searches by users.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <button *ngIf="!isSubmitted" type="submit" class="btn btn-primary">
+    Register Service
+  </button>
+  <button *ngIf="isSubmitted" type="submit" class="btn btn-primary" disabled>
+    <i class='fa fa-circle-o-notch fa-spin'></i>
+    Registering Service...
+  </button>
+
+</form>
+
+<div *ngIf="isSuccess">
+  <h4>Success</h4>
+  <p>The service has been successfully registered.</p>
+  <p><a class="btn btn-default" [routerLink]="['/admin/services/', createdId]">View Service</a></p>
+</div>

@@ -1,0 +1,68 @@
+<div *ngIf="! isLoading">
+  <h3>
+    <a [routerLink]="['/admin/services']">Provided Services</a> /
+    <span *ngIf="service.label">{{service.label}}</span>
+    <span *ngIf="! service.label">{{service.id}}</span>
+    <!--<span style="color: #aaa">({{service.id}})</span>-->
+  </h3>
+
+  <section class="box ">
+    <div class="content-body">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>Service ID</th>
+            <th>Label</th>
+            <th>Url</th>
+            <th>Status</th>
+            <th>Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              {{service.id}}
+            </td>
+            <td>
+              <span *ngIf="service.label">{{service.label}}</span>
+              <span *ngIf="! service.label" style="font-style: italic">none</span>
+            </td>
+            <td>
+              {{service.url}}
+            </td>
+            <td>
+              {{service.status}}
+            </td>
+            <td>
+              {{service.createdAt}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div>
+        <a [routerLink]="['/services/', service.id]" class="btn btn-primary">View in Marketplace</a>
+
+        <button *ngIf="service.status == 'active' && ! isDeactivating" class="btn btn-primary" (click)="deactivateService()">Deactivate</button>
+        <button *ngIf="service.status == 'active' && isDeactivating" type="submit" class="btn btn-primary" disabled>
+          <i class='fa fa-circle-o-notch fa-spin'></i>
+          Deactivating...
+        </button>
+
+        <button *ngIf="service.status == 'inactive' && ! isActivating" class="btn btn-primary" (click)="activateService()">Activate</button>
+        <button *ngIf="service.status == 'inactive' && isActivating" type="submit" class="btn btn-primary" disabled>
+          <i class='fa fa-circle-o-notch fa-spin'></i>
+          Activating...
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="box">
+    <div class="content-body">
+      <app-admin-update-service-form [(service)]="service" [serviceCategories]="serviceCategories"></app-admin-update-service-form>
+    </div>
+  </section>
+</div>

@@ -16,14 +16,13 @@
           <span class="title" class="hidden-xs">Services</span>
           <span class="arrow "></span>
         </a>
+        <ul *ngIf="this.topLevelRoute === 'services'" class="sub-menu" routerLinkActive="open">
+          <li>
+            <a routerLink="/services/browse" routerLinkActive="active">Browse</a>
+          </li>
+        </ul>
       </li>
-      <li *ngIf="this.topLevelRoute === 'services'"
-          class="sub-menu" routerLinkActive="open">
-        <a routerLink="/services/browse" routerLinkActive="active">
-          <i class="fa fa-eye"></i>
-          <span class="hidden-xs">Browse</span>
-        </a>
-      </li>
+
         <!-- Show sub-menu only when top-level parent route is 'services' -->
         <!--<ul *ngIf="this.topLevelRoute === 'services'" class="sub-menu" routerLinkActive="open">-->
           <!--<li>-->

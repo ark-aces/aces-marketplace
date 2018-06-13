@@ -21,7 +21,11 @@ public class ServiceMapper {
             .map(x -> modelMapper.map(x, Capacity.class))
             .collect(Collectors.toList()));
         service.setServiceCategories(serviceEntity.getServiceCategoryLinkEntities().stream()
-            .map(x -> modelMapper.map(x.getServiceCategoryEntity(), ServiceCategory.class))
+            .map(x -> {
+                ServiceCategory serviceCategory = modelMapper.map(x.getServiceCategoryEntity(), ServiceCategory.class);
+                serviceCategory.setId(x.getServiceCategoryEntity().getPid());
+                return serviceCategory;
+            })
             .collect(Collectors.toList()));
         return service;
     }

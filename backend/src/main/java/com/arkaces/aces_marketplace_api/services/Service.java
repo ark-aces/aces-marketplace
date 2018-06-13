@@ -10,6 +10,8 @@ import java.util.List;
 @Data
 public class Service {
     private String id;
+    private String status;
+    private String label;
     private String url;
     private String name;
     private String version;

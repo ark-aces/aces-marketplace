@@ -1,0 +1,33 @@
+<h3 class="title">Provided Contracts</h3>
+
+<section class="box ">
+  <div class="content-body">
+    <table *ngIf="contracts.length > 0" class="table table-sm">
+      <thead>
+        <tr>
+          <th>Contract ID</th>
+          <th>Status</th>
+          <th>Created At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contract of contracts">
+          <td>
+            <a [routerLink]="['/contracts', contract.id]">{{contract.id}}</a>
+          </td>
+          <td>
+            {{contract.status}}
+          </td>
+          <td>
+            {{contract.createdAt}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p *ngIf="contracts.length == 0">
+      No matching contracts.
+    </p>
+
+  </div>
+</section>

@@ -21,7 +21,11 @@ public class ServiceCategoryController {
     public List<ServiceCategory> listAllSortedByOrder() {
         Sort sort = new Sort(new Sort.Order(Sort.Direction.ASC, "position"));
         List<ServiceCategoryEntity> categoryEntityList = serviceCategoryRepository.findAll(sort);
-        return categoryEntityList.stream().map(x ->  modelMapper.map(x, ServiceCategory.class))
-            .collect(Collectors.toList());
+        return categoryEntityList.stream().map(x -> {
+            ServiceCategory serviceCategory = modelMapper.map(x, ServiceCategory.class);
+            serviceCategory.setId(x.getPid());
+            return serviceCategory;
+        })
+        .collect(Collectors.toList());
     }
 }

@@ -3,7 +3,7 @@
     <div class="col-xs-12">
       <div class="page-title">
         <h1 class="title">
-          <span class="label label-warning">Testnet</span>
+          <span *ngIf="service.isTestnet" class="label label-warning">Testnet</span>
           {{service.name}}
           <span class="service-version">{{service.version}}</span>
         </h1>

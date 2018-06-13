@@ -1,0 +1,76 @@
+<div class="page-sidebar fixedscroll">
+  <div class="page-sidebar-wrapper" id="main-menu-wrapper">
+
+    <ul style="padding-top:1em">
+      <li routerLinkActive="open">
+        <a routerLink="/admin/dashboard" routerLinkActive="active">
+          <i class="fa fa-dashboard"></i>
+          <span class="title" class="hidden-xs">Provider Dashboard</span>
+        </a>
+      </li>
+
+      <li routerLinkActive="open">
+        <a routerLink="/admin/services/browse" routerLinkActive="active">
+          <i class="fa fa-gears"></i>
+          <span class="title" class="hidden-xs">Provided Services</span>
+          <span class="arrow "></span>
+        </a>
+
+        <ul *ngIf="this.topLevelRoute === 'services'" class="sub-menu" routerLinkActive="open">
+          <li>
+            <a routerLink="/admin/services/browse" routerLinkActive="active">Browse</a>
+          </li>
+          <li>
+            <a routerLink="/admin/services/register-service" routerLinkActive="active">Register Service</a>
+          </li>
+        </ul>
+      </li>
+
+      <li routerLinkActive="open">
+        <a routerLink="/admin/contracts" routerLinkActive="active">
+          <i class="fa fa-file"></i>
+          <span class="title">Provided Contracts</span>
+          <span class="arrow "></span>
+        </a>
+        <!-- Show sub-menu only when top-level route is 'contracts' -->
+        <ul *ngIf="this.topLevelRoute === 'contracts'" class="sub-menu" routerLinkActive="open">
+          <li>
+            <a [routerLink]="['/admin/contracts']" routerLinkActive="active">Browse</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/contracts']" [queryParams]="{ status: 'pending'}" routerLinkActive="active">Pending</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/contracts']" [queryParams]="{ status: 'executed'}" routerLinkActive="active">Executed</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/contracts']" [queryParams]="{ status: 'failed'}" routerLinkActive="active">Failed</a>
+          </li>
+        </ul>
+      </li>
+
+      <li page-sidebar routerLinkActive="open">
+        <a routerLink="/admin/service-launcher" routerLinkActive="active">
+          <i class="fa fa-rocket"></i>
+          <span class="title" class="hidden-xs">Service Launcher</span>
+        </a>
+      </li>
+
+      <li routerLinkActive="open">
+        <a routerLink="/admin/users" routerLinkActive="active">
+          <i class="fa fa-users"></i>
+          <span class="title">Account Users</span>
+        </a>
+      </li>
+
+      <li routerLinkActive="open">
+        <a routerLink="/admin/settings" routerLinkActive="active">
+          <i class="fa fa-gear"></i>
+          <span class="title">Account Settings</span>
+        </a>
+      </li>
+    </ul>
+
+  </div>
+
+</div>

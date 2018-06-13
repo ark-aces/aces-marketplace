@@ -10,7 +10,9 @@ import com.arkaces.aces_marketplace_api.service_client.ServiceResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +30,8 @@ public class ServiceController {
     @GetMapping("/services")
     public PageView<Service> getServices(ServiceSearchCriteria searchCriteria, @PageableDefault(size = 20) Pageable pageable) {
         ServiceSpecification specification = new ServiceSpecification(searchCriteria);
-        Page<Service> servicePage = serviceRepository.findAll(specification, pageable).map(serviceMapper::map);
+        PageRequest pageRequest = new PageRequest(0, 20, new Sort(Sort.Direction.DESC, "createdAt"));
+        Page<Service> servicePage = serviceRepository.findAll(specification, pageRequest).map(serviceMapper::map);
         return pageViewMapper.map(servicePage, Service.class);
     }
 

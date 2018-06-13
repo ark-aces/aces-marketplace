@@ -51,6 +51,25 @@ public class AccountContractController {
         return pageViewMapper.map(page, ContractListView.class);
     }
 
+    @GetMapping("/account/providedContracts")
+    public PageView<ContractListView> getProvidedContracts(
+        @AuthenticationPrincipal AuthenticatedUser authenticatedUser,
+        @RequestParam(required = false) String status,
+        Pageable pageable
+    ) {
+        AccountEntity accountEntity = accountRepository.findOne(authenticatedUser.getAccountPid());
+
+        ProvidedContractSpecificationCriteria criteria = new ProvidedContractSpecificationCriteria();
+        criteria.setAccountEntity(accountEntity);
+        criteria.setStatus(status);
+        ProvidedContractSpecification contractSpecification = new ProvidedContractSpecification(criteria);
+
+        Page<ContractListView> page = contractRepository.findAll(contractSpecification, pageable)
+            .map(contractEntity -> modelMapper.map(contractEntity, ContractListView.class));
+
+        return pageViewMapper.map(page, ContractListView.class);
+    }
+
     @GetMapping("/account/contracts/{contractId}")
     public Contract getContract(
         @AuthenticationPrincipal AuthenticatedUser authenticatedUser,

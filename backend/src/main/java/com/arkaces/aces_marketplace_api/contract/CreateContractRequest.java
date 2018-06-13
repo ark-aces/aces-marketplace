@@ -6,5 +6,6 @@ import java.util.Map;
 
 @Data
 public class CreateContractRequest {
+    private String label;
     private Map<String, Object> arguments;
 }
