@@ -20,7 +20,7 @@ public class Service {
     private String createdAt;
     private Boolean isTestnet;
     private List<Capacity> capacities;
-    private BigDecimal flatFee;
+    private String flatFee;
     private BigDecimal percentFee;
     private List<ServiceCategory> serviceCategories;
 }

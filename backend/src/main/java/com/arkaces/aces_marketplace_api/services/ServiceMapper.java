@@ -16,7 +16,11 @@ public class ServiceMapper {
     private final ModelMapper modelMapper;
 
     public Service map(ServiceEntity serviceEntity) {
+        String flatFeeUnit = serviceEntity.getFlatFeeUnit() == null ? "" : serviceEntity.getFlatFeeUnit();
+        String flatFeeString = (serviceEntity.getFlatFee().stripTrailingZeros().toPlainString()  + " " + flatFeeUnit).trim();
+
         Service service = modelMapper.map(serviceEntity, Service.class);
+        service.setFlatFee(flatFeeString);
         service.setCapacities(serviceEntity.getServiceCapacityEntities().stream()
             .map(x -> modelMapper.map(x, Capacity.class))
             .collect(Collectors.toList()));

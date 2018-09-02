@@ -32,6 +32,7 @@ public class ServiceEntity {
     private String websiteUrl;
 
     private BigDecimal flatFee;
+    private String flatFeeUnit;
     private BigDecimal percentFee;
 
     private LocalDateTime createdAt;

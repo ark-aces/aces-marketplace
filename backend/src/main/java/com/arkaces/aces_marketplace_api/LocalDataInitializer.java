@@ -52,6 +52,7 @@ public class LocalDataInitializer implements ApplicationRunner{
                 serviceEntity.setAccountEntity(registrationEntity.getAccountEntity());
                 serviceEntity.setIsTestnet(i % 2 == 0);
                 serviceEntity.setFlatFee(new BigDecimal("1.00"));
+                serviceEntity.setFlatFeeUnit("ARK");
                 serviceEntity.setPercentFee(new BigDecimal("2.25"));
 
                 ServiceCapacityEntity serviceCapacityEntity = new ServiceCapacityEntity();

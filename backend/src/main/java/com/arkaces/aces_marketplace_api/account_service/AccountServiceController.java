@@ -174,7 +174,13 @@ public class AccountServiceController {
         serviceEntity.setVersion(serviceResponse.getVersion());
         serviceEntity.setWebsiteUrl(serviceResponse.getWebsiteUrl());
         if (serviceResponse.getFlatFee() != null) {
-            serviceEntity.setFlatFee(new BigDecimal(serviceResponse.getFlatFee()));
+            if (serviceResponse.getFlatFee().contains(" ")) {
+                String[] parts = serviceResponse.getFlatFee().split(" ");
+                serviceEntity.setFlatFee(new BigDecimal(parts[0]));
+                serviceEntity.setFlatFeeUnit(parts[1]);
+            } else {
+                serviceEntity.setFlatFee(new BigDecimal(serviceResponse.getFlatFee()));
+            }
         } else {
             serviceEntity.setFlatFee(BigDecimal.ZERO);
         }
