@@ -376,7 +376,7 @@ p {
 }
 
 .fees-box .panel-body {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
 }
 
@@ -404,4 +404,8 @@ p {
 
 section header .title {
   font-size: 14px;
+}
+
+.page-sub-title {
+  margin-top: 40px;
 }

@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
     <div class="fees-box panel panel-default">
       <div class="panel-heading">Percent Fee</div>
       <div class="panel-body">
-        {{ percentFee }}%
+        {{ percentFee | number:'1.0-2' }}%
       </div>
     </div>
   `

@@ -2,12 +2,91 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="page-title">
+        <h1 class="title">
+          <span *ngIf="serviceInfo.isTestnet" class="label label-warning">Testnet</span>
+          {{serviceInfo.name}}
+          <span class="service-version">{{serviceInfo.version}}</span>
+        </h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <section class="box ">
+        <header class="panel_header">
+          <h2 class="title pull-left">Website URL</h2>
+        </header>
+        <div class="content-body">
+          <a href="{{serviceInfo.websiteUrl}}">{{serviceInfo.websiteUrl}}</a>
+        </div>
+      </section>
+    </div>
+
+    <div class="col-lg-2">
+      <section class="box">
+        <header class="panel_header">
+          <h2 class="title pull-left">
+            Flat Fee
+          </h2>
+        </header>
+        <div class="div content-body panel panel-default">
+          {{serviceInfo.flatFee}}
+        </div>
+      </section>
+    </div>
+
+    <div class="col-lg-2">
+      <section class="box">
+        <header class="panel_header">
+          <h2 class="title pull-left">
+            Percent Fee
+          </h2>
+        </header>
+        <div class="div content-body">
+          {{serviceInfo.percentFee | number:'1.0-2'}}%
+        </div>
+      </section>
+    </div>
+
+    <div class="col-lg-2">
+      <section class="box">
+        <header class="panel_header">
+          <h2 class="title pull-left">
+            Capacity
+          </h2>
+        </header>
+        <div class="div content-body" *ngFor="let capacity of serviceInfo.capacities">
+          {{ capacity.value | number:'1.0-3' }}
+          {{ capacity.unit }}
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <section class="box ">
+        <header class="panel_header">
+          <h2 class="title pull-left">Description</h2>
+        </header>
+        <div class="content-body">
+          {{serviceInfo.description}}
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="page-title page-sub-title">
         <div class="pull-left">
-          <h1 class="title">Contract {{id}}</h1>
+          <h1 class="title">Contract: {{id}}</h1>
         </div>
       </div>
     </div>
   </div>
+
 
   <div *ngIf="contract.status == 'pendingPayment'" class="alert alert-warning" role="alert">
     <p>

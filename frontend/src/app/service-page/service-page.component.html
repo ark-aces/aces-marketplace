@@ -44,7 +44,7 @@
           </h2>
         </header>
         <div class="div content-body">
-          {{service.percentFee}}%
+          {{service.percentFee | number:'1.0-2'}}%
         </div>
       </section>
     </div>
@@ -57,7 +57,7 @@
           </h2>
         </header>
         <div class="div content-body" *ngFor="let capacity of serviceInfo.capacities">
-          {{ capacity.value }}
+          {{ capacity.value | number:'1.0-3' }}
           {{ capacity.unit }}
         </div>
       </section>
@@ -89,9 +89,7 @@
       </section>
     </div>
   </div>
-
-
-
+  
 
   <h3>Create Contract</h3>
 
