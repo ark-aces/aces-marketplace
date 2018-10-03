@@ -350,7 +350,7 @@ p {
 }
 
 .capacity-box .panel-body {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
   color: #555;
 }
@@ -400,3 +400,8 @@ p {
   margin-right: 5px;
 }
 
+
+
+section header .title {
+  font-size: 14px;
+}

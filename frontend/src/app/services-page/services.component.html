@@ -112,7 +112,7 @@
       <div class="container-fluid panel service-listing" *ngFor="let service of services">
         <a [routerLink]="['/services', service.id]">
           <div class="row">
-              <div class="col-md-6">
+              <div class="col-lg-6">
                     <h4 class="service-title title">
                       <span *ngIf="service.isTestnet === true" class="label label-warning">TestNet</span>
                       <span *ngIf="service.isTestnet === false" class="label label-default">MainNet</span>
@@ -124,15 +124,15 @@
                 </div>
               </div>
 
-              <div class="col-md-2">
+              <div class="col-lg-2">
                 <app-service-fees-box [flatFee]="service.flatFee"></app-service-fees-box>
               </div>
 
-              <div class="col-md-2">
+              <div class="col-lg-2">
                 <app-service-percent-fees-box [percentFee]="service.percentFee"></app-service-percent-fees-box>
               </div>
 
-              <div class="col-md-2">
+              <div class="col-lg-2">
                 <app-service-capacity-box [capacities]="service.capacities"></app-service-capacity-box>
               </div>
           </div>

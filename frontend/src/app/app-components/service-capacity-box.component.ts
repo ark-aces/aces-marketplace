@@ -7,7 +7,7 @@ import {Capacity} from '../api-client/api-client.component';
     <div class="capacity-box panel panel-default" *ngFor="let capacity of capacities">
       <div class="panel-heading">Capacity</div>
       <div class="panel-body">
-        {{ capacity.value }}
+        {{ capacity.value | number:'1.0-3'}}
         {{ capacity.unit }}
       </div>
     </div>
