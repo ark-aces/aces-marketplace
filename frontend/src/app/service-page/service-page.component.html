@@ -1,4 +1,4 @@
-<div *ngIf="! isLoading()">
+<div *ngIf="! isLoading() && ! isFailed">
   <div class="row">
     <div class="col-xs-12">
       <div class="page-title">
@@ -112,4 +112,17 @@
     </div>
   </div>
 
+</div>
+
+<div *ngIf="! isLoading() && isFailed">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="page-title">
+        <h1 class="title">
+          Failed
+        </h1>
+        <p>Failed to get service info from remote service. Please try again later.</p>
+      </div>
+    </div>
+  </div>
 </div>

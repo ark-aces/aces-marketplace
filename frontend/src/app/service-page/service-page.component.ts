@@ -10,6 +10,7 @@ import {ErrorModalService} from '../app-components/error-modal-service.compoennt
 export class ServicePageComponent implements OnInit, OnDestroy {
 
   isLoadingService = true;
+  isFailed = false;
   serviceId: string;
   service: Service;
 
@@ -125,6 +126,7 @@ export class ServicePageComponent implements OnInit, OnDestroy {
                 'This may be because the service is currently down or temporarily unavailable.\n' +
                 'Please try again later or contact the service provider.'
                 )
+              this.isFailed = true;
               this.isLoadingContractForm = false;
             }
           );

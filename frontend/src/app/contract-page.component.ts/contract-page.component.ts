@@ -32,6 +32,7 @@ export class ContractPageComponent implements OnInit, OnDestroy {
   isLoadingContractForm = true;
   isLoadingServiceInfo = true;
   serviceInfo;
+  isFailed = false;
 
   interval: any;
 
@@ -84,17 +85,31 @@ export class ContractPageComponent implements OnInit, OnDestroy {
           },
           error => {
             console.log(error);
-            this.errorModalService.showDefaultError();
+            this.errorModalService.showError(
+              'Service Unavailable',
+              'Failed to fetch service info from remote service provider. ' +
+              'This may be because the service is currently down or temporarily unavailable.\n' +
+              'Please try again later or contact the service provider.'
+            );
+            this.isFailed = true;
             this.isLoadingServiceInfo = false;
           });
 
         this.extractResults(data);
         this.isLoadingContractForm = false;
+        this.isLoadingServiceInfo = false;
       },
       error => {
         console.log(error);
-        this.errorModalService.showDefaultError();
+        this.errorModalService.showError(
+          'Contract Unavailable',
+          'Failed to fetch contract info from remote service provider. ' +
+          'This may be because the service is currently down or the contract is no longer available.\n' +
+          'Please try again later or contact the service provider.'
+        );
+        this.isFailed = true;
         this.isLoadingContractForm = false;
+        this.isLoadingServiceInfo = false;
       }
     );
   }
@@ -140,7 +155,7 @@ export class ContractPageComponent implements OnInit, OnDestroy {
   }
 
   isLoading() {
-    return  this.isLoadingContractForm || this.isLoadingServiceInfo;
+    return this.isLoadingContractForm || this.isLoadingServiceInfo;
   }
 
   ngOnDestroy() {
