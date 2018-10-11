@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ApiClient, Service} from '../api-client/api-client.component';
 import {AuthService} from '../auth/auth-service.component';
@@ -7,7 +7,7 @@ import {ErrorModalService} from '../app-components/error-modal-service.compoennt
 @Component({
   templateUrl: './service-page.component.html'
 })
-export class ServicePageComponent implements OnInit {
+export class ServicePageComponent implements OnInit, OnDestroy {
 
   isLoadingService = true;
   serviceId: string;
@@ -15,6 +15,8 @@ export class ServicePageComponent implements OnInit {
 
   isLoadingContractForm = false;
   serviceInfo;
+
+  updater;
 
   private useStubData = false;
   private stub = {
@@ -117,16 +119,28 @@ export class ServicePageComponent implements OnInit {
             },
             error => {
               console.log(error);
-              this.errorModalService.showDefaultError();
+              this.errorModalService.showError(
+                'Service Unavailable',
+                'Failed to fetch service info from remote service provider. ' +
+                'This may be because the service is currently down or temporarily unavailable.\n' +
+                'Please try again later or contact the service provider.'
+                )
               this.isLoadingContractForm = false;
             }
           );
         }
 
-      setInterval(() => {
-        this.updateCapacity();
-      }, 3000);
+        if (this.updater == null) {
+          this.updater = setInterval(() => {
+            this.updateCapacity();
+          }, 3000);
+        }
+
     });
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.updater);
   }
 
   updateCapacity() {
