@@ -33,3 +33,6 @@ recaptcha:
 email:
   fromName: "ACES Marketplace"
   fromEmailAddress: "support@arkaces.com"
+
+# Time interval between service info syncing
+syncIntervalSec: 10 # 5 min

@@ -14,6 +14,7 @@ public class ServiceResponse {
     private String instructions;
     private List<Capacity> capacities;
     private String flatFee;
+    private String flatFeeUnit;
     private String percentFee;
     private JsonNode inputSchema;
     private JsonNode outputSchema;

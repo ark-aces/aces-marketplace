@@ -40,7 +40,6 @@ public class AccountServiceController {
     
     private final AccountRepository accountRepository;
     private final ServiceRepository serviceRepository;
-    private final ServiceClient serviceClient;
     private final ModelMapper modelMapper;
     private final IdentifierGenerator identifierGenerator;
     private final ServiceMapper serviceMapper;
@@ -49,6 +48,8 @@ public class AccountServiceController {
     private final ServiceCategoryRepository serviceCategoryRepository;
     private final CreateServiceRequestValidator createServiceRequestValidator;
     private final UpdateServiceRequestValidator updateServiceRequestValidator;
+
+    private final AccountServiceService accountServiceService;
     
     @Transactional
     @PostMapping("/account/services")
@@ -76,11 +77,12 @@ public class AccountServiceController {
         }
 
         serviceEntity.setUrl(createServiceRequest.getUrl());
-        setRemoteServiceData(serviceEntity, createServiceRequest.getUrl());
         setServiceCategoryLinkEntities(serviceEntity, createServiceRequest.getCategoryPids());
 
         serviceEntity = serviceRepository.save(serviceEntity);
-        
+
+        accountServiceService.syncToRemote(serviceEntity.getId(), createServiceRequest.getUrl());
+
         return modelMapper.map(serviceEntity, Service.class);
     }
 
@@ -107,7 +109,7 @@ public class AccountServiceController {
 
         if (updateServiceRequest.getUrl() != null) {
             serviceEntity.setUrl(updateServiceRequest.getUrl());
-            setRemoteServiceData(serviceEntity, updateServiceRequest.getUrl());
+            accountServiceService.syncToRemote(serviceEntity.getId(), updateServiceRequest.getUrl());
         }
         
         if (updateServiceRequest.getLabel() != null) {
@@ -161,53 +163,6 @@ public class AccountServiceController {
         return serviceEntity;
     }
 
-    private void setRemoteServiceData(ServiceEntity serviceEntity, String serviceUrl) {
-        ServiceResponse serviceResponse;
-        try {
-            serviceResponse = serviceClient.getServiceInfo(serviceUrl);
-        } catch (Exception e) {
-            throw new ValidationException(ErrorCodes.SERVICE_INFO_REQUEST_FAILED, "Failed to get Service Info from the given URL", e);
-        }
-
-        serviceEntity.setName(serviceResponse.getName());
-        serviceEntity.setDescription(serviceResponse.getDescription());
-        serviceEntity.setVersion(serviceResponse.getVersion());
-        serviceEntity.setWebsiteUrl(serviceResponse.getWebsiteUrl());
-        if (serviceResponse.getFlatFee() != null) {
-            if (serviceResponse.getFlatFee().contains(" ")) {
-                String[] parts = serviceResponse.getFlatFee().split(" ");
-                serviceEntity.setFlatFee(new BigDecimal(parts[0]));
-                serviceEntity.setFlatFeeUnit(parts[1]);
-            } else {
-                serviceEntity.setFlatFee(new BigDecimal(serviceResponse.getFlatFee()));
-            }
-        } else {
-            serviceEntity.setFlatFee(BigDecimal.ZERO);
-        }
-        if (serviceResponse.getPercentFee() != null) {
-            serviceEntity.setPercentFee(new BigDecimal(serviceResponse.getPercentFee().replace("%", "")));
-        } else {
-            serviceEntity.setPercentFee(BigDecimal.ZERO);
-        }
-
-        if (serviceEntity.getServiceCapacityEntities() != null) {
-            Iterator<ServiceCapacityEntity> it = serviceEntity.getServiceCapacityEntities().iterator();
-            while (it.hasNext()) {
-                ServiceCapacityEntity serviceCapacityEntity = it.next();
-                serviceCapacityEntity.setServiceEntity(null);
-                it.remove();
-            }
-        }
-        
-        for (Capacity capacity : serviceResponse.getCapacities()) {
-            ServiceCapacityEntity serviceCapacityEntity = new ServiceCapacityEntity();
-            serviceCapacityEntity.setServiceEntity(serviceEntity);
-            serviceCapacityEntity.setUnit(capacity.getUnit());
-            serviceCapacityEntity.setValue(capacity.getValue());
-            serviceEntity.getServiceCapacityEntities().add(serviceCapacityEntity);
-        }
-    }
-
     private void setServiceCategoryLinkEntities(ServiceEntity serviceEntity, Set<Long> categoryPids) {
         Set<Long> newCategoryPids = new HashSet<>(categoryPids);
         Set<Long> existingCategoryPids = new HashSet<>();
@@ -239,6 +194,5 @@ public class AccountServiceController {
             serviceEntity.getServiceCategoryLinkEntities().add(serviceCategoryLinkEntity);
         }
     }
-
 
 }
