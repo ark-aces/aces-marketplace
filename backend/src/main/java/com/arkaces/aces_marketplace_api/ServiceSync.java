@@ -29,7 +29,7 @@ public class ServiceSync {
                     log.info("Syncing service " + serviceEntity.getId() + " to url " + serviceEntity.getUrl());
                     accountServiceService.syncToRemote(serviceEntity.getId(), serviceEntity.getUrl());
                 } catch (Exception e) {
-                    log.error("Failed to sync service " + serviceEntity.getId(), e);
+                    log.info("Failed to sync service " + serviceEntity.getId() + ": " + e.getMessage());
                 }
             }
         } catch (Exception e) {
