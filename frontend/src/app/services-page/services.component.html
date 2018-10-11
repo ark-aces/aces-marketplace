@@ -59,9 +59,13 @@
         <div class="col-md-3">
           <h4>Fees</h4>
           <div class="form-group">
-            <label>Max Flat Fee</label>
-            <input class="form-control" type="number" placeholder="Enter max flat fee..." [(ngModel)]="maxFlatFee" (ngModelChange)="maxFlatFeeChanged.next($event)">
+            <label>Max Percent Fee</label>
+            <input class="form-control" type="number" placeholder="Enter max percent fee..." [(ngModel)]="maxPercentFee" (ngModelChange)="maxPercentFeeChanged.next($event)">
           </div>
+        </div>
+
+        <div class="col-md-3">
+          <h4>&nbsp;</h4>
           <div class="form-group">
             <label>Max Percent Fee</label>
             <input class="form-control" type="number" placeholder="Enter max percent fee..." [(ngModel)]="maxPercentFee" (ngModelChange)="maxPercentFeeChanged.next($event)">
@@ -69,10 +73,21 @@
         </div>
         <div class="col-md-3">
           <h4>Capacity</h4>
+
           <div class="form-group">
             <label>Min Capacity</label>
             <div class="form-group" style="max-width: 300px">
-              <input class="form-control" type="text" placeholder="Enter min capacity..." [(ngModel)]="minCapacity" (keydown.enter)="minCapacityChanged.next($event.target.value)">
+
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Enter min capacity..."
+                       [(ngModel)]="minCapacity" (keydown.enter)="minCapacityChanged.next($event.target.value)" />
+                <span class="input-group-btn">
+                  <button class="btn btn-sm" type="button" (click)="minCapacityChanged.next(minCapacity)">
+                      <span class="glyphicon glyphicon-plus-sign"></span>
+                  </button>
+                </span>
+              </div>
+
               <p class="error" [hidden]="!minCapacity || minCapacity.match('\\d \\w')">Please enter a valid min capacity. (i.e. 1000 ARK)</p>
             </div>
           </div>
@@ -85,6 +100,7 @@
             </span>
           </div>
         </div>
+
         <div class="col-md-3">
           <div class="form-group">
             <h4>Sort By</h4>
@@ -92,13 +108,6 @@
               <label>
                 <input type="radio" class="form-check-input" name="properties" [value]="sortProperty" [(ngModel)]="sort.property" (ngModelChange)="sortPropertyChanged.next($event)">
                 {{ sortProperty }}
-              </label>
-            </div>
-            <h4>Sort Direction</h4>
-            <div class="form-check" *ngFor="let sortDirection of sortDirections">
-              <label>
-                <input type="radio" class="form-check-input" name="directions" [value]="sortDirection" [(ngModel)]="sort.direction" (ngModelChange)="sortDirectionChanged.next($event)">
-                {{ sortDirection }}
               </label>
             </div>
           </div>
