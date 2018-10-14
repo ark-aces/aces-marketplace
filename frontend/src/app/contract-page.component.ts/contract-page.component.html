@@ -147,7 +147,7 @@
   <div class="row">
     <div class="col-xs-12">
       <section class="box ">
-        <div class="content-body" style="overflow: scroll">
+        <div class="content-body">
           <table class="table">
             <thead>
               <tr>
@@ -159,29 +159,31 @@
 
             </tbody>
               <tr *ngFor="let row of resultRows">
-                <td>{{row.name}}</td>
-                <td>{{row.value}}</td>
-              </tr>
-
-              <tr *ngFor="let resultArray of resultArrays">
-                <td>{{resultArray.name}}</td>
-                <td>
-                  <div *ngIf="resultArray.rows.length == 0">
-                    None
-                  </div>
-                  <table class="table">
-                    <tbody>
-                      <tr *ngFor="let row of resultArray.rows">
-                        <td>{{row.name}}</td>
-                        <td>{{row.value}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
+                <td>{{row.title}}</td>
+                <td style="overflow: scroll">{{row.value}}</td>
               </tr>
             </tbody>
           </table>
 
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="row" *ngFor="let resultArray of resultArrays">
+    <div class="col-xs-12">
+      <h4>Transfers</h4>
+
+      <section class="box ">
+        <div class="content-body">
+          <table class="table">
+            <tbody>
+            <tr *ngFor="let row of resultArray.rows">
+              <td>{{row.title}}</td>
+              <td style="overflow: scroll">{{row.value}}</td>
+            </tr>
+            </tbody>
+          </table>
         </div>
       </section>
     </div>

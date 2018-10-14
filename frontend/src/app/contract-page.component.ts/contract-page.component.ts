@@ -5,6 +5,8 @@ import {ErrorModalService} from '../app-components/error-modal-service.compoennt
 
 class ResultRow {
   name: string;
+  title?: string;
+  description?: string;
   value: object;
 }
 
@@ -81,6 +83,9 @@ export class ContractPageComponent implements OnInit, OnDestroy {
               };
             }
 
+            this.extractResults(data, serviceInfo);
+            this.isLoadingContractForm = false;
+            this.isLoadingServiceInfo = false;
             this.isLoadingServiceInfo = false;
           },
           error => {
@@ -95,9 +100,7 @@ export class ContractPageComponent implements OnInit, OnDestroy {
             this.isLoadingServiceInfo = false;
           });
 
-        this.extractResults(data);
-        this.isLoadingContractForm = false;
-        this.isLoadingServiceInfo = false;
+
       },
       error => {
         console.log(error);
@@ -114,7 +117,7 @@ export class ContractPageComponent implements OnInit, OnDestroy {
     );
   }
 
-  private extractResults(data: Contract) {
+  private extractResults(data: Contract, serviceInfo) {
     // Extract results into our view data structure for rendering
     // todo: use labels from output schema instead of property name
     // todo: add support for multiple levels deep?
@@ -130,11 +133,25 @@ export class ContractPageComponent implements OnInit, OnDestroy {
             const nestedResultRows: Array<ResultRow> = [];
             for (const nestedKey in subResult) {
               if (subResult.hasOwnProperty(nestedKey)) {
+                const parentSchema = serviceInfo.outputSchema.properties[key];
                 const nestedResult = subResult[nestedKey];
-                nestedResultRows.push({
-                  name: nestedKey,
-                  value: nestedResult
-                });
+                if (parentSchema.properties.hasOwnProperty(nestedKey)) {
+                  const nestedSchema = parentSchema.properties[nestedKey];
+                  nestedResultRows.push({
+                    name: nestedKey,
+                    title: nestedSchema.title,
+                    description: nestedSchema.description,
+                    value: nestedResult
+                  });
+                } else {
+                  nestedResultRows.push({
+                    name: nestedKey,
+                    title: nestedKey,
+                    description: nestedKey,
+                    value: nestedResult
+                  });
+                }
+
               }
             }
             resultArrays.push({
@@ -143,8 +160,11 @@ export class ContractPageComponent implements OnInit, OnDestroy {
             });
           }
         } else {
+          const fieldProperties = serviceInfo.outputSchema.properties[key];
           resultRows.push({
             name: key,
+            title: fieldProperties.title,
+            description: fieldProperties.description,
             value: result
           });
         }

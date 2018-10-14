@@ -8,6 +8,7 @@ import com.arkaces.aces_marketplace_api.registration.RegistrationService;
 import com.arkaces.aces_marketplace_api.services.ServiceCapacityEntity;
 import com.arkaces.aces_marketplace_api.services.ServiceEntity;
 import com.arkaces.aces_marketplace_api.services.ServiceRepository;
+import com.arkaces.aces_marketplace_api.services.ServiceStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -43,6 +44,8 @@ public class LocalDataInitializer implements ApplicationRunner{
 
                 ServiceEntity serviceEntity = new ServiceEntity();
                 serviceEntity.setId(id);
+                serviceEntity.setLabel("Service Label" + i);
+                serviceEntity.setStatus(ServiceStatus.ACTIVE);
                 serviceEntity.setUrl("http://localhost:9999/service-" + i);
                 serviceEntity.setCreatedAt(LocalDateTime.now());
                 serviceEntity.setName("Service " + i);
