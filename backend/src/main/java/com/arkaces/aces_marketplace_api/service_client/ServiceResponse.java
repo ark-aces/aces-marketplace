@@ -18,6 +18,8 @@ public class ServiceResponse {
     private String percentFee;
     private JsonNode inputSchema;
     private JsonNode outputSchema;
+    private String exchangeRateHref;
+    private List<UrlTemplate> outputSchemaUrlTemplates;
 }
 
 

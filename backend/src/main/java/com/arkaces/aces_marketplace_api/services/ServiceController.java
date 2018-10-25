@@ -68,4 +68,14 @@ public class ServiceController {
         
         return serviceResponse;
     }
+
+    @GetMapping("/services/{id}/exchangeRate")
+    public ExchangeRate getExchangeRate(@PathVariable String id) {
+        ServiceEntity serviceEntity = serviceRepository.findOneById(id);
+
+        if (serviceEntity == null) {
+            throw new NotFoundException(ErrorCodes.NOT_FOUND, "Service not found.");
+        }
+        return serviceClient.getServiceExchangeRate(serviceEntity.getUrl(), "/exchangeRate");
+    }
 }

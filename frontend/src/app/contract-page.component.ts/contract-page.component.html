@@ -31,7 +31,7 @@
           </h2>
         </header>
         <div class="div content-body panel panel-default">
-          {{serviceInfo.flatFee}}
+          {{serviceInfo.flatFee}} {{serviceInfo.flatFeeUnit}}
         </div>
       </section>
     </div>
@@ -44,7 +44,7 @@
           </h2>
         </header>
         <div class="div content-body">
-          {{serviceInfo.percentFee}}
+          {{serviceInfo.percentFee}}%
         </div>
       </section>
     </div>
@@ -65,13 +65,28 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-12">
+    <div [ngClass]="hasExchangeRate ? 'col-lg-10' : 'col-lg-12'">
       <section class="box ">
         <header class="panel_header">
           <h2 class="title pull-left">Description</h2>
         </header>
         <div class="content-body">
           {{serviceInfo.description}}
+        </div>
+      </section>
+    </div>
+    <div *ngIf="hasExchangeRate" class="col-lg-2">
+      <section class="box ">
+        <header class="panel_header">
+          <h2 class="title pull-left">Exchange Rate</h2>
+        </header>
+        <div class="content-body">
+          <div *ngIf="isLoadingExchangeRate" class="loading-indicator">
+            <i class='fa fa-circle-o-notch fa-spin'></i>
+            &nbsp;
+          </div>
+          <span *ngIf="! isLoadingExchangeRate" title="Exchange rate estimate may be different at time contract is executed."
+          >{{ exchangeRate | number:'1.0-4' }} {{exchangeToSymbol}}/{{exchangeFromSymbol}}*</span>
         </div>
       </section>
     </div>
@@ -160,7 +175,11 @@
             </tbody>
               <tr *ngFor="let row of resultRows">
                 <td>{{row.title}}</td>
-                <td style="overflow: scroll">{{row.value}}</td>
+                <td *ngIf="! row.href">{{row.value}}</td>
+                <td *ngIf="row.href">
+                  <a target="_blank" href="{{row.href}}">{{row.value}} <i class="fa fa-external-link"></i></a>
+                  <a class="btn btn-xs btn-default copy-button" style="margin-left: 0.5em" ngxClipboard [cbContent]="row.value">Copy</a>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -177,10 +196,20 @@
       <section class="box ">
         <div class="content-body">
           <table class="table">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+            </thead>
             <tbody>
             <tr *ngFor="let row of resultArray.rows">
               <td>{{row.title}}</td>
-              <td style="overflow: scroll">{{row.value}}</td>
+              <td *ngIf="! row.href">{{row.value}}</td>
+              <td *ngIf="row.href">
+                <a target="_blank" href="{{row.href}}">{{row.value}} <i class="fa fa-external-link"></i></a>
+                <a class="btn btn-xs btn-default copy-button" style="margin-left: 0.5em" ngxClipboard [cbContent]="row.value">Copy</a>
+              </td>
             </tr>
             </tbody>
           </table>

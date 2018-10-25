@@ -6,21 +6,7 @@ This application is the API backend for the ACES Marketplace.
 
 ### Database
 
-Database configurations can be set in the `application.yml` config file.
-
-Local File database (H2):
-
-```
-spring:
-  datasource:
-    url: "jdbc:h2:/tmp/marketplace.db;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE"
-    driver-class-name: "org.h2.Driver"
-  jpa:
-    hibernate:
-      ddl-auto: "update"
-```
-
-Local Postgres database using Docker:
+Create a local Postgres database using Docker:
 
 ```
 docker run -d -p 15432:5432 \
@@ -30,6 +16,8 @@ docker run -d -p 15432:5432 \
 -e POSTGRES_DB=aces_marketplace \
 postgres:9.6.1
 ```
+
+Database configurations can be set in the `application.yml` config file.
 
 ```
 spring:

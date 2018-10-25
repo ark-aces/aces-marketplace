@@ -12,10 +12,16 @@ export class ServicePageComponent implements OnInit, OnDestroy {
   isLoadingService = true;
   isFailed = false;
   serviceId: string;
-  service: Service;
+  service;
 
   isLoadingContractForm = false;
   serviceInfo;
+
+  hasExchangeRate = false;
+  isLoadingExchangeRate = false;
+  exchangeFromSymbol: string;
+  exchangeToSymbol: string;
+  exchangeRate: number;
 
   updater;
 
@@ -96,9 +102,26 @@ export class ServicePageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.serviceId = params['id'];
-      this.apiClient.getService(this.serviceId).subscribe(
-        data => {
-          this.service = data;
+      this.apiClient.getServiceInfo(this.serviceId).subscribe(
+        response => {
+          this.service = response;
+          if (response['exchangeRateHref'] != null) {
+            this.hasExchangeRate = true;
+            this.isLoadingExchangeRate = true;
+            this.apiClient.getExchangeRate(this.serviceId).subscribe(
+              exchangeRateResponse => {
+                this.exchangeFromSymbol = exchangeRateResponse['from'];
+                this.exchangeToSymbol = exchangeRateResponse['to'];
+                this.exchangeRate = exchangeRateResponse['rate'];
+                this.isLoadingExchangeRate = false;
+              },
+              error => {
+                console.log(error);
+                this.isLoadingExchangeRate = false;
+              }
+            );
+          }
+
           this.isLoadingService = false;
         },
         error => {

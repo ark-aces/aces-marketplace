@@ -8,6 +8,11 @@ export interface Capacity {
   value: number;
 }
 
+export interface UrlTemplate {
+  property: string;
+  urlTemplate: string;
+}
+
 export interface Service {
   id: string;
   url: string;
@@ -22,6 +27,8 @@ export interface Service {
   flatFee: number;
   percentFee: number;
   serviceCategories: Array<ServiceCategory>;
+  exchangeRateHref?: string;
+  outputSchemaUrlTemplates?: Array<UrlTemplate>;
 }
 
 export interface ServiceCategory {
@@ -180,6 +187,10 @@ export class ApiClient {
 
   getServiceInfo(id: string) {
     return this.http.get(this.config.apiEndpoint + '/services/' + id + '/info');
+  }
+
+  getExchangeRate(serviceId: string) {
+    return this.http.get(this.config.apiEndpoint + '/services/' + serviceId + '/exchangeRate');
   }
 
   createContract(serviceId: string, createContractRequest: CreateContractRequest) {

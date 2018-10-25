@@ -21,6 +21,7 @@ public class Service {
     private Boolean isTestnet;
     private List<Capacity> capacities;
     private String flatFee;
+    private String flatFeeUnit;
     private BigDecimal percentFee;
     private List<ServiceCategory> serviceCategories;
 }

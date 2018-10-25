@@ -31,7 +31,7 @@
           </h2>
         </header>
         <div class="div content-body panel panel-default">
-          {{service.flatFee}}
+          {{service.flatFee}} {{service.flatFeeUnit}}
         </div>
       </section>
     </div>
@@ -65,13 +65,28 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-12">
+    <div [ngClass]="hasExchangeRate ? 'col-lg-10' : 'col-lg-12'">
       <section class="box ">
         <header class="panel_header">
           <h2 class="title pull-left">Description</h2>
         </header>
         <div class="content-body">
           {{service.description}}
+        </div>
+      </section>
+    </div>
+    <div *ngIf="hasExchangeRate" class="col-lg-2">
+      <section class="box ">
+        <header class="panel_header">
+          <h2 class="title pull-left">Exchange Rate</h2>
+        </header>
+        <div class="content-body">
+          <div *ngIf="isLoadingExchangeRate" class="loading-indicator">
+            <i class='fa fa-circle-o-notch fa-spin'></i>
+            &nbsp;
+          </div>
+          <span *ngIf="! isLoadingExchangeRate" title="Exchange rate estimate may be different at time contract is executed."
+            >{{ exchangeRate | number:'1.0-4' }} {{exchangeToSymbol}}/{{exchangeFromSymbol}}*</span>
         </div>
       </section>
     </div>
@@ -89,7 +104,7 @@
       </section>
     </div>
   </div>
-  
+
 
   <h3>Create Contract</h3>
 

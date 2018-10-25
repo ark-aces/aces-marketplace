@@ -8,6 +8,7 @@ class ResultRow {
   title?: string;
   description?: string;
   value: object;
+  href?: string;
 }
 
 class ResultArray {
@@ -41,6 +42,12 @@ export class ContractPageComponent implements OnInit, OnDestroy {
   isArkPayable = false;
   arkPaymentParams: ArkPaymentParams;
 
+  hasExchangeRate = false;
+  isLoadingExchangeRate = false;
+  exchangeFromSymbol: string;
+  exchangeToSymbol: string;
+  exchangeRate: number;
+
   constructor(
     private route: ActivatedRoute,
     private apiClient: ApiClient,
@@ -68,6 +75,23 @@ export class ContractPageComponent implements OnInit, OnDestroy {
         this.apiClient.getServiceInfo(data.serviceId).subscribe(
           serviceInfo => {
             this.serviceInfo = serviceInfo;
+
+            if (serviceInfo['exchangeRateHref'] != null) {
+              this.hasExchangeRate = true;
+              this.isLoadingExchangeRate = true;
+              this.apiClient.getExchangeRate(data.serviceId).subscribe(
+                exchangeRateResponse => {
+                  this.exchangeFromSymbol = exchangeRateResponse['from'];
+                  this.exchangeToSymbol = exchangeRateResponse['to'];
+                  this.exchangeRate = exchangeRateResponse['rate'];
+                  this.isLoadingExchangeRate = false;
+                },
+                error => {
+                  console.log(error);
+                  this.isLoadingExchangeRate = false;
+                }
+              );
+            }
 
             // todo: replace with service interface arkSmartBridgePayable
             const outputProperties = this.serviceInfo.outputSchema.properties;
@@ -118,9 +142,22 @@ export class ContractPageComponent implements OnInit, OnDestroy {
   }
 
   private extractResults(data: Contract, serviceInfo) {
+
     // Extract results into our view data structure for rendering
-    // todo: use labels from output schema instead of property name
     // todo: add support for multiple levels deep?
+
+    // Get the url from template if defined in outputSchemaUrlTemplates
+    const getUrl = function (key, value) {
+      if (serviceInfo.outputSchemaUrlTemplates instanceof Array) {
+        for (let i = 0; i < serviceInfo.outputSchemaUrlTemplates.length; i++) {
+          const item = serviceInfo.outputSchemaUrlTemplates[i];
+          if (item.property === key) {
+            return item.urlTemplate.replace('{value}', value);
+          }
+        }
+      }
+      return null;
+    };
 
     const resultRows: Array<ResultRow> = [];
     const resultArrays: Array<ResultArray> = [];
@@ -141,14 +178,16 @@ export class ContractPageComponent implements OnInit, OnDestroy {
                     name: nestedKey,
                     title: nestedSchema.title,
                     description: nestedSchema.description,
-                    value: nestedResult
+                    value: nestedResult,
+                    href: getUrl(key + '.' + nestedKey, nestedResult)
                   });
                 } else {
                   nestedResultRows.push({
                     name: nestedKey,
                     title: nestedKey,
                     description: nestedKey,
-                    value: nestedResult
+                    value: nestedResult,
+                    href: getUrl(key + '.' + nestedKey, nestedResult)
                   });
                 }
 
@@ -161,12 +200,24 @@ export class ContractPageComponent implements OnInit, OnDestroy {
           }
         } else {
           const fieldProperties = serviceInfo.outputSchema.properties[key];
-          resultRows.push({
-            name: key,
-            title: fieldProperties.title,
-            description: fieldProperties.description,
-            value: result
-          });
+          if (fieldProperties !== undefined) {
+            resultRows.push({
+              name: key,
+              title: fieldProperties.title,
+              description: fieldProperties.description,
+              value: result,
+              href: getUrl(key, result)
+            });
+          } else {
+            resultRows.push({
+              name: key,
+              title: key,
+              description: key,
+              value: result,
+              href: getUrl(key, result)
+            });
+          }
+
         }
       }
     }
